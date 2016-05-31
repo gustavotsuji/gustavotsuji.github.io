@@ -1,0 +1,177 @@
+\documentclass[a4paper,10pt]{article}
+
+%A Few Useful Packages
+\usepackage{marvosym}
+\usepackage{fontspec}           %for loading fonts
+\usepackage{xunicode,xltxtra,url,parskip}   %other packages for formatting
+\RequirePackage{color,graphicx}
+\usepackage[usenames,dvipsnames]{xcolor}
+\usepackage[big]{layaureo}        %better formatting of the A4 page
+% an alternative to Layaureo can be ** \usepackage{fullpage} **
+\usepackage{supertabular}         %for Grades
+\usepackage{titlesec}         %custom \section
+
+%Setup hyperref package, and colours for links
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}
+
+%FONTS
+\defaultfontfeatures{Mapping=tex-text}
+%\setmainfont[SmallCapsFont = Fontin SmallCaps]{Fontin}
+%%% modified for Karol Kozioł for ShareLaTeX use
+
+%CV Sections inspired by: 
+%http://stefano.italians.nl/archives/26
+\titleformat{\section}{\Large\scshape\raggedright}{}{0em}{}[\titlerule]
+\titlespacing{\section}{0pt}{3pt}{3pt}
+%Tweak a bit the top margin
+%\addtolength{\voffset}{-1.3cm}
+
+%Italian hyphenation for the word: ''corporations''
+\hyphenation{im-pre-se}
+
+%-------------WATERMARK TEST [**not part of a CV**]---------------
+\usepackage[absolute]{textpos}
+
+\setlength{\TPHorizModule}{30mm}
+\setlength{\TPVertModule}{\TPHorizModule}
+\textblockorigin{2mm}{0.65\paperheight}
+\setlength{\parindent}{0pt}
+
+%--------------------BEGIN DOCUMENT----------------------
+\begin{document}
+
+%WATERMARK TEST [**not part of a CV**]---------------
+%\font\wm=''Baskerville:color=787878'' at 8pt
+%\font\wmweb=''Baskerville:color=FF1493'' at 8pt
+%{\wm 
+% \begin{textblock}{1}(0,0)
+%   \rotatebox{-90}{\parbox{500mm}{
+%     Typeset by Alessandro Plasmati with \XeTeX\  \today\ for 
+%     {\wmweb \href{http://www.aleplasmati.comuv.com}{aleplasmati.comuv.com}}
+%   }
+% }
+% \end{textblock}
+%}
+
+\pagestyle{empty} % non-numbered pages
+
+\font\fb=''[cmr10]'' %for use with \LaTeX command
+
+%--------------------TITLE-------------
+\par{\centering
+    {\Huge Gustavo Kendi \textsc{Tsuji}
+  }\bigskip\par}
+
+%--------------------SECTIONS-----------------------------------
+%Section: Personal Data
+\section{Personal Data}
+
+\begin{tabular}{rl}
+  \textsc{About me:}   & 30 years and engaged. I enjoy learning anything new. Now, I'm studying \\
+    &Spark, R, Angular2 and RabbitMQ. I would like to  be a developer team\\
+    & leader in a few years\\
+    \textsc{Address:}   & 199 Prof. Gioia Martin, Apt 43A, 05632020, São Paulo, São Paulo, Brazil \\
+    \textsc{Phone:}     & +55 (11)99416-8215\\
+    \textsc{email:}     & \href{mailto:gustavokt@gmail.com}{gustavokt@gmail.com}
+\end{tabular}
+
+%Section: Work Experience at the top
+\section{Work Experience}
+\begin{tabular}{r|p{11cm}}
+ \emph{Current} & Senior Fullstack Developer at \textsc{B2W} \\\textsc{Apr 2015}&\emph{Brazilian leadership at online commerce }\\&\footnotesize{
+  Supported Site Blindado portal, backoffice web system and some integration scripts\newline
+  Developed a new version to backoffice system\newline
+    Introduced agile concepts to developers such as tests with coverage, good coding practices and conventions, CI environment to our projects, log stack (ELK) to a better applications monitoring\newline
+    Proccessed logs in EMR\newline    
+\textbf{Technologies used:} Python/Django, DRF, AngularJS 1.5, Gulp, Sass, unittest, selenium, pylint, cobertura, JQuery, Kibana, Logstash, ElasticSearch, Jenkins, Gitflow, Git, MySql, Postgres\newline
+\textbf{Services used:} AWS (EC2, S3, Route53, EMR, RDS, DynamoDB, SQS, SES),SendGrid, Mailchimp Mandrill}\\\multicolumn{2}{c}{} \\
+ \textsc{Sep 2014} & .NET Fullstack Developer at \textsc{FIA} \\&\emph{Education}\\&\footnotesize{Implement some features to government projects\newline
+\textbf{Technologies used:} .NET 4.5 
+ }\\\multicolumn{2}{c}{} \\
+ \textsc{Jul 2014} & Java Fullstack Developer at \textsc{Airu} \\\textsc{June 2013}&\emph{Rocket Internet Marketplace Startup}\\&\footnotesize{ Supported Airu site\newline
+    Worked with marketing team improving SEO, creating tags at sendgrid to a better email marketing tracking, integrating third party services to monitoring our sales\newline
+    Responsable for bug tracking\newline
+    Migrate data from zendesk to salesforce using rest API\newline
+\textbf{Technologies used:} JavaEE, Spring, Hibernate, Solr, Stripes, Postgres, Git\newline
+\textbf{Services used:} Salesforce, Zendesk, MOIP 
+ }\\\multicolumn{2}{c}{} \\
+\textsc{June 2013} & Tech Leader at \textsc{InfoXYZ} \\\textsc{Dec 2011}&\emph{Software}\\&\footnotesize{  Coordinated and developed OtecWeb and Ninive\newline
+
+\textbf{Technologies used:} JavaEE, Spring, Hibernate, MySQL, SenchaJS, Git
+ }\\\multicolumn{2}{c}{} \\
+\textsc{Dec 2011} & Java Fullstack Developer at \textsc{Techne} \\\textsc{Nov 2009}&\emph{Software}\\&\footnotesize{  Supported Cronos framework\newline
+                          Develop loading and unit tests \newline
+Technologies used: JavaEE, ExtJS, SQL Server, Oracle, Jmeter, Junit, Subversion
+ }
+
+ 
+ \end{tabular}
+ \newpage
+\begin{tabular}{r|p{11cm}}
+\textsc{Apr 2009} & Java Fullstack Developer at \textsc{Fujitsu do Brasil} \\&\emph{Software}\\&\footnotesize{  Supported Tokio Marine web application
+                          Develop automated tasks to CI \newline
+\textbf{Technologies used:} JavaEE, JSP, Struts 1.x, EJB 3.0, Dojo, Maven2, Apache Ant, Oracle, Selenium Subversion
+ }\\\multicolumn{2}{c}{} \\ 
+ \textsc{Dec 2008} & Java Fullstack Developer at \textsc{IMEUSP} \\\textsc{Mar 2008} &\emph{Education}\\&\footnotesize{ Supported Colmeia web application
+                          Redone database model\newline
+\textbf{Technologies used:} JavaEE, Velocity, Struts 1.x, ExtJS, Hibernate, Hibernate Seach, Subversion
+ }\\\multicolumn{2}{c}{} \\
+ 
+\textsc{Jul 2008} & .NET Developer at \textsc{Yellow Box} \\&\emph{Software}\\&\footnotesize{ Aided to design and develop Arquivo Seguro, a software/service like DropBox\newline
+   Developed setup project to install the application at windows\newline
+   Created libraries to iterate with system tray icons\newline
+\textbf{Technologies used:} .NET 2.0, WPF, SVN
+ }\\\multicolumn{2}{c}{} \\
+ \textsc{Feb 2007} & .NET Developer at \textsc{PR\&A} \\&\emph{Financial}\\&\footnotesize{  Supported a web system developed to BASA (Banco da Amazônia) \newline
+\textbf{Technologies used:} .NET 1.1 and 2.0, SVN, SqlServer
+ }
+\end{tabular}
+
+%Section: Education
+\section{Education}
+\begin{tabular}{rl} 
+ \textsc{Dec} 2016 & Bacharelor in \textsc{Administration}, \textbf{São Paulo University}\\
+&\\
+\textsc{Dec} 2008& Bacharelor in \textsc{Science Computer}, \textbf{São Paulo University}\\
+& Thesis: ``Integrando recuperação de informação em banco de dados com \\
+& Hibernate Search'' | \small Advisor: João Eduardo \textsc{Ferreira}\\
+\end{tabular}
+
+%Section: Scholarships and additional info
+\section{Scholarships and Certificates}
+\begin{tabular}{rl}
+ \textsc{Nov} 2012 & JSF2 and JPA2 for Web Applications\\
+\textsc{Sep} 2012 & ASP.NET MVC\\
+\textsc{Oct} 2012 & Persisting with JPA and Hibernate\\
+\end{tabular}
+
+%Section: Volunteer
+\section{Volunteer}
+\begin{tabular}{r|p{11cm}}
+  \textsc{Dec} 2014 & Coordinator at \textsc{Cursinho FEAUSP} \\\textsc{Jul 2012}&\emph{Non profit university organization}\\&\footnotesize{
+ Aided needy students to attend a university
+ }
+
+\end{tabular}
+
+%Section: Languages
+\section{Languages}
+\begin{tabular}{rl}
+ \textsc{Portuguese:}&Fluent\\
+\textsc{English:}&Advanced\\
+\textsc{Japanese:}&Intermediate\\
+\end{tabular}
+
+\section{Interests and Activities}
+Marketing, Statistics, Economy, Programming, UX\\
+Cycling, Running, Anime, Movies\\
+
+\newpage
+%\newpage
+%\hypertarget{gmat}{\textsc{Gmat}\setmainfont{LMRoman10 Regular}\textregistered\setmainfont[SmallCapsFont=Fontin-SmallCaps]{Fontin-Regular}}
+
+%\XeTeXpdffile ''GMAT.pdf'' page 1 scaled 800
+
+\end{document}
