@@ -1,0 +1,70 @@
+% ---
+\section{Regressão logística}
+% ---
+A regressão logística é um modelo matemático de predição de eventos para um conjunto de variáveis independentes de entradas, baseando-se nas probabilidades de ocorrência desses eventos. ***As ocorrências desses eventos, por sua vez, são  variáveis binárias dependentes.*** Dessa forma, a regressão logística viabiliza a classificação das observações por meio da probabilidade estimada na categoria estudada.
+
+A variável dependente na regressão logística segue uma distribuição Bernoulli com uma probabilidade p desconhecida
+
+Assim, a regressão logística tem como propósito estimar a probabilidade p desconhecida para uma certo conjunto de variáveis independentes.
+
+Para estimar essa probabilidades, a regressão logística se utiliza da função logit.
+
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    logit(p) &= ln\left ( \frac{p}{1-p} \right )
+  \end{aligned}  
+\end{equation}
+
+A função logit se baseia no conceito de chances. As chances é dada pela equação:
+
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    OR &= \frac{p}{1-p} (1)
+  \end{aligned}
+\end{equation}
+
+onde p é a probabilidade de sucesso para a ocorrência do evento x, 1-p é probabilidade de fracasso e x é um evento que segue a distribuição Bernoulli
+
+Portanto, OR representa a razão entre as probabilidades de sucesso e fracasso de um determinado evento. 
+
+Utilizando inferência de estatística, podemos aplicar log em (1), ficando com:
+
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    logit(p) &= ln\left ( \frac{p}{1-p} \right )
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    logit^{-1}(\alpha) &= \frac{1}{1+e^{-\alpha}} &= \frac{e^{\alpha}}{1+e^{\alpha}}
+  \end{aligned}
+\end{equation}
+
+O modelo de regressão logística tem a forma:
+
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    \log\left ( \frac{P(G = 1 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{10}+\beta_{1}^{T}x\\
+    \log\left ( \frac{P(G = 2 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{20}+\beta_{2}^{T}x\\
+    \log\left ( \frac{P(G = K-1 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{(k-1)0}+\beta_{k-1}^{T}x
+  \end{aligned}
+\end{equation}
+
+Onde o modelo \cite{HASTIE} é composto por K classes, e K - 1 transformações logit. * A transformação logit se faz necessária para que a restrição da soma de todas as probabilidades seja igual a 1. Utilizando a inversa da logit, temos:
+
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    P(G = k | X = x) &= \frac{\exp \left ( \beta_{k0}+\beta_{k}^{T}x \right )}{1 + \sum_{\ell=1}^{K - 1}\exp \left ( \beta_{\ell0}+\beta_{\ell}^{T}x \right )}, k = 1, ..., K - 1\\
+    P(G = K | X = x) &= \frac{1}{1 + \sum_{\ell=1}^{K - 1}\exp \left ( \beta_{\ell0}+\beta_{\ell}^{T}x \right )}
+  \end{aligned}
+\end{equation}
+
+
+\includegraphics[width=\textwidth]{gantt}

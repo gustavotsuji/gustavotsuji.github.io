@@ -3,7 +3,7 @@
 \setlength{\labelsep}{0pt}\begin{thebibliography}{}
 \providecommand{\abntrefinfo}[3]{}
 \providecommand{\abntbstabout}[1]{}
-\abntbstabout{v-1.9.2 }
+\abntbstabout{v-1.9.6 }
 
 \bibitem[Araujo 2015]{abntex2classe}
 \abntrefinfo{Araujo}{ARAUJO}{2015a}
@@ -38,12 +38,27 @@ Dispon{\'\i}vel em:
   apresenta{\c c}{\~a}o.
 Rio de Janeiro, 2003. 2~p.}
 
+\bibitem[Associa{\c c}\~ao Brasileira de Normas T\'ecnicas 2005]{NBR14724:2005}
+\abntrefinfo{ABNT}{ABNT}{2005}
+{ASSOCIA{\c C}\~AO BRASILEIRA DE NORMAS T\'ECNICAS. \emph{{NBR} 14724}:
+  Informa{\c c}\~ao e documenta{\c c}\~ao --- trabalhos acad\^emicos ---
+  apresenta{\c c}\~ao.
+Rio de Janeiro, 2005. 9~p.}
+
 \bibitem[Associa{\c c}\~ao Brasileira de Normas T\'ecnicas 2011]{NBR14724:2011}
 \abntrefinfo{ABNT}{ABNT}{2011}
 {ASSOCIA{\c C}\~AO BRASILEIRA DE NORMAS T\'ECNICAS. \emph{{NBR} 14724}:
   Informa{\c c}\~ao e documenta{\c c}\~ao --- trabalhos acad\^emicos ---
   apresenta{\c c}\~ao.
 Rio de Janeiro, 2011. 15~p. Substitui a Ref.~\citeonline{NBR14724:2005}.}
+
+\bibitem[Hastie, Tibshirani e Friedman 2011]{HASTIE}
+\abntrefinfo{Hastie, Tibshirani e Friedman}{HASTIE; TIBSHIRANI; FRIEDMAN}{2011}
+{HASTIE, T.; TIBSHIRANI, R.; FRIEDMAN, J. \emph{The Elements of Statistical
+  Learning: Data Mining, Inference, and Prediction, Second Edition (Springer
+  Series in Statistics)}. Springer, 2011.
+ISBN 0387848576. Dispon{\'\i}vel em:
+  \url{http://www.amazon.com/Elements-Statistical-Learning-Prediction-Statistics/dp/0387848576\%3FSubscriptionId\%3D0JYN1NVW651KCA56C102\%26tag\%3Dtechkie-20\%26linkCode\%3Dxm2\%26camp\%3D2025\%26creative\%3D165953\%26creativeASIN\%3D0387848576}.}
 
 \bibitem[Wilson e Madsen 2010]{memoir}
 \abntrefinfo{Wilson e Madsen}{WILSON; MADSEN}{2010}
