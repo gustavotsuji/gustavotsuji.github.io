@@ -1,0 +1,15 @@
+O k médias, formulado por MacQueen, é um algoritmo de machine learning não supervisionado relativamente simples, podendo ser utilizado para resolver problemas de clusterização. Segundo o autor, trata-se de um método que tem, a princípio, para uma quantidade k de clusters pré definida, o objetivo de definir k centróides, um para cada cluster, tal que o conjunto de dados possa ser repartido de forma eficiente. Para um conjunto de observações (x_{1}, x_{2}, ..., x_{n}), onde 
+
+\underset{S}{\arg\max} \sum_{i=1}^{k} \sum_{x \in S_{i}}\left \| x - \mu_{i} \right \|^{2}
+
+A localização desses centróides deve ser o mais afastado entre si possível. A partir de uma posição inicial dos centróides, o próximo passo é, então, associar todos pontos do conjunto de dados com o centróide mais próximo. Com os pontos associados, recalcula-se k novos centróides como baricentros dos clusters anteriores, repetindo esses passos até que os novos centróides sejam gerados muito próximos do passo anterior. 
+
+onde \mu_{i} é a média dos pontos em S_{i}
+
+Dessa forma, o algoritmo minimiza a função objetiva usando o princípio dos mínimos quadrados. 
+
+
+
+
+
+\usepackage{algorithm,algorithmic,mathtools}
