@@ -1,10 +1,7 @@
-\backcite {NBR14724:2011}{{3}{(document)}{Doc-Start}}
-\backcite {NBR6028:2003}{{13}{(document)}{Doc-Start}}
-\backcite {abntex2classe}{{27}{(document)}{Doc-Start}}
-\backcite {abntex2-wiki-como-customizar}{{27}{(document)}{Doc-Start}}
-\backcite {abntex2classe,abntex2cite,abntex2cite-alf}{{27}{(document)}{Doc-Start}}
-\backcite {abntex2classe,abntex2cite,abntex2cite-alf}{{27}{(document)}{Doc-Start}}
-\backcite {abntex2classe,abntex2cite,abntex2cite-alf}{{27}{(document)}{Doc-Start}}
-\backcite {memoir}{{27}{(document)}{Doc-Start}}
+\backcite {NBR6028:2003}{{11}{(document)}{Doc-Start}}
+\backcite {GOO01}{{25}{(document)}{Doc-Start}}
+\backcite {FAC01}{{25}{(document)}{Doc-Start}}
+\backcite {BAEZA}{{25}{(document)}{Doc-Start}}
 \backcite {HASTIE}{{34}{1.2}{equation.1.2.5}}
-\backcite {NBR14724:2005}{{45}{4}{section*.22}}
+\backcite {HASTIE}{{35}{1.3}{section.1.3}}
+\backcite {HASTIE}{{35}{1.3}{section.1.3}}
