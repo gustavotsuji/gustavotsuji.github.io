@@ -2,4 +2,17 @@
 \section{K Médias}
 % ---
 
-\lipsum[2-3]
+O K Médias é um algoritmo de machine learning não supervisionado relativamente simples, podendo ser utilizado para resolver problemas de clusterização. Para \citeonline{MacQueen}, trata-se de um método que tem, a princípio, para uma quantidade k de clusters pré definida, o objetivo de definir k centróides, um para cada cluster, tal que o conjunto de dados possa ser repartido de forma eficiente. Para um conjunto de observações \begin{math}(x_{1}, x_{2}, ..., x_{n})\end{math}, onde 
+
+\begin{equation}
+\label{eq:media}
+\underset{S}{\arg\max} \sum_{i=1}^{k} \sum_{x \in S_{i}}\left \| x - \mu_{i} \right \|^{2}
+\end{equation}
+
+onde \begin{math}\mu_{i}\end{math} é a média dos pontos em \begin{math}S_{i}\end{math}
+
+
+A localização desses centróides deve ser o mais afastado entre si possível. A partir de uma posição inicial dos centróides, o próximo passo é, então, associar todos pontos do conjunto de dados com o centróide mais próximo. Com os pontos associados, recalcula-se k novos centróides como baricentros dos clusters anteriores, repetindo esses passos até que os novos centróides sejam gerados muito próximos do passo anterior. 
+
+
+Dessa forma, o algoritmo minimiza a função objetiva usando o princípio dos mínimos quadrados. 
