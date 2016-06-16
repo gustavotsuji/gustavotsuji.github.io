@@ -18,6 +18,8 @@ Trata-se de uma representação de regras que dividem as observações em grupos
   dummy/.style    = {circle,draw}
 }
 
+\begin{figure}
+\centering
 \begin{tikzpicture}
   [
     grow                    = down,
@@ -45,10 +47,10 @@ Trata-se de uma representação de regras que dividem as observações em grupos
                 {first left,\\centered,}
               node [below] {last right}}
               edge from parent node [above] {não} };
-\end{tikzpicture}
 
-//legenda
-Cada nó representa um atributo de um elemento da amostra. As folhas são consideradas a representação da classe a que uma observação pertence. Já o ramo é um conjunto de valores que reflete todas suas características e detalhes de um elemento.
+\end{tikzpicture}
+\caption{Cada nó representa um atributo de um elemento da amostra. As folhas são consideradas a representação da classe a que uma observação pertence. Já o ramo é um conjunto de valores que reflete todas suas características e detalhes de um elemento}
+\end{figure}
 
 Árvores de classificação
 
