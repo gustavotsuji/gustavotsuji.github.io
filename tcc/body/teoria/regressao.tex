@@ -1,9 +1,23 @@
 % ---
-\section{Regressão logística}
+\section{Aprendizagem supervisionada}
 % ---
-A regressão logística é um modelo matemático de predição de eventos para um conjunto de variáveis independentes de entradas, baseando-se nas probabilidades de ocorrência desses eventos. ***As ocorrências desses eventos, por sua vez, são  variáveis binárias dependentes.*** Dessa forma, a regressão logística viabiliza a classificação das observações por meio da probabilidade estimada na categoria estudada.
+A aprendizagem supervisionada é um modelo preditivo que ao receberem um conjunto de dados, 
 
-A variável dependente na regressão logística segue uma distribuição Bernoulli com uma probabilidade p desconhecida
+
+
+\subsection{Regressão Linear}
+
+
+A regressão linear é uma modelagem matemática \footnotemark \footnotetext{modelagem matemática é uma representação em fórmulas matemáticas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos} que permite descrever variáveis em função de outras. 
+
+
+
+
+\subsection{Regressão Logística}
+
+A regressão logística, assim como a regressão linear, é um modelo matemático de predição de eventos para um conjunto de variáveis independentes de entradas, baseando-se nas probabilidades de ocorrência desses eventos. \begin{comment}***As ocorrências desses eventos, por sua vez, são  variáveis binárias dependentes.***\end{comment} Dessa forma, a regressão logística viabiliza a classificação das observações por meio da probabilidade estimada na categoria estudada.
+
+A variável dependente na regressão logística segue uma distribuição Bernoulli com uma probabilidade p desconhecida.
 
 Assim, a regressão logística tem como propósito estimar a probabilidade p desconhecida para uma certo conjunto de variáveis independentes.
 
@@ -16,7 +30,7 @@ Para estimar essa probabilidades, a regressão logística se utiliza da função
   \end{aligned}  
 \end{equation}
 
-A função logit se baseia no conceito de chances. As chances é dada pela equação:
+A função logit se baseia no conceito de chances ou odds ratio (OR). As chances é dada pela equação:
 
 \begin{equation}
   \label{eq:t}
