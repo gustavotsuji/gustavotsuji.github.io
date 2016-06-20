@@ -43,8 +43,8 @@
 	english,			% idioma adicional para hifenização
 	french,				% idioma adicional para hifenização
 	spanish,			% idioma adicional para hifenização
-	brazil				% o último idioma é o principal do documento
-	]{abntex2}
+	brazil,				% o último idioma é o principal do documento
+	12pt]{abntex2}
 
 % ---
 % Pacotes básicos 
@@ -86,8 +86,10 @@
 \definecolor{groupblue}{RGB}{51,102,254}
 \definecolor{linkred}{RGB}{165,0,33}
 
+\usepackage{amssymb}
 \usepackage{uarial}
 
+\usepackage[font=footnotesize,labelfont=bf]{caption}
 % --- 
 % CONFIGURAÇÕES DE PACOTES
 % --- 
@@ -211,9 +213,9 @@
 
 \input{body/teoria/referencias.tex}
 
-\input{body/resultados/main.tex}
+%\input{body/resultados/main.tex}
 
-\input{body/conclusao/main.tex}
+%\input{body/conclusao/main.tex}
 
 
 % ----------------------------------------------------------

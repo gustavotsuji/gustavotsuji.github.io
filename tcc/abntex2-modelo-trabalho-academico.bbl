@@ -3,13 +3,7 @@
 \setlength{\labelsep}{0pt}\begin{thebibliography}{}
 \providecommand{\abntrefinfo}[3]{}
 \providecommand{\abntbstabout}[1]{}
-\abntbstabout{v-1.9.2 }
-
-\bibitem[Associa{\c c}\~ao Brasileira de Normas T\'ecnicas 2003]{NBR6028:2003}
-\abntrefinfo{ABNT}{ABNT}{2003}
-{ASSOCIA{\c C}\~AO BRASILEIRA DE NORMAS T\'ECNICAS. \emph{{NBR} 6028}: Resumo -
-  apresenta{\c c}{\~a}o.
-Rio de Janeiro, 2003. 2~p.}
+\abntbstabout{v-1.9.6 }
 
 \bibitem[Baeza-Yates e Ribeiro-Neto 1999]{BAEZA}
 \abntrefinfo{Baeza-Yates e Ribeiro-Neto}{BAEZA-YATES; RIBEIRO-NETO}{1999}
@@ -31,6 +25,13 @@ ISBN 0387848576.}
   \url{https://projecteuclid.org/download/pdf\_1/euclid.bsmsp/1200512992}.
   Acesso em: 16 jun 2016.}
 
+\bibitem[Mayer-Schönberger e Cukier 2013]{CUKIER}
+\abntrefinfo{Mayer-Schönberger e Cukier}{MAYER-SCHöNBERGER; CUKIER}{2013}
+{MAYER-SCHöNBERGER, V.; CUKIER, K. \emph{Big Data: A Revolution That Will
+  Transform How We Live, Work, and Think}. [S.l.]: Eamon Dolan/Houghton Mifflin
+  Harcourt, 2013.
+ISBN 0544002695.}
+
 \bibitem[Smith 2016]{GOO01}
 \abntrefinfo{Smith}{SMITH}{2016}
 {SMITH, C. \emph{By the numbers: a gigantic list of google stats and facts}.
@@ -46,5 +47,12 @@ Dispon{\'\i}vel em:
 Dispon{\'\i}vel em:
   \url{https://code.facebook.com/posts/229861827208629/scaling-the-facebook-data-warehouse-to-300-pb/}.
   Acesso em: 07 jun 2016.}
+
+\bibitem[Zikopoulos e Eaton 2011]{ZIKO}
+\abntrefinfo{Zikopoulos e Eaton}{ZIKOPOULOS; EATON}{2011}
+{ZIKOPOULOS, P.; EATON, C. \emph{Understanding Big Data: Analytics for
+  Enterprise Class Hadoop and Streaming Data}. [S.l.]: McGraw-Hill Osborne
+  Media, 2011.
+ISBN 0071790535.}
 
 \end{thebibliography}
