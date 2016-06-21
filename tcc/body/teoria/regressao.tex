@@ -38,8 +38,9 @@ onde \begin{math} X \in \mathbb{R}^{N,p} \end{math} X representando uma matriz c
 Com a definição de \begin{math}\hat{\beta}\end{math}, é possível determinar uma reta que separa o conjunto de dad
 
 \begin{figure}[!ht]
+\caption{Exemplo de classificação em 2 dimensões.}
 \centerline{\includegraphics[width=0.5\textwidth]{img/hiperplano}}
-\caption{Exemplo de classificação em 2 dimensões. Fonte: \cite{HASTIE}}
+\fonte{Extraído de \cite{HASTIE}}
 \end{figure}
 
 
@@ -50,7 +51,7 @@ Com a definição de \begin{math}\hat{\beta}\end{math}, é possível determinar 
 
 A regressão logística, assim como a regressão linear, também é um modelo matemático de predição de eventos usada para descrever dados e explicar a relação entre um conjunto de variáveis independentes e uma variável dependente. Contudo, enquanto na regressão linear a variável dependente é contínua, na regressão logística, ela é considerada uma variável categórica. Ela segue uma distribuição Bernoulli\footnotemark \footnotetext{distribuição de Bernoulli é uma modelagem de probabilidade que representa eventos binários cujas ocorrências são tratados como sucesso ou falha. Considerando que a probabilidade de ocorrer um sucesso é \begin{math}p\end{math}, então a probabilidade de ocorrer uma falha é \begin{math}1-p\end{math} } com uma probabilidade \begin{math}p\end{math} desconhecida. Assim, a regressão logística tem como objetivo estimar essa probabilidade \begin{math}p\end{math} desconhecida.
 
-Para estimar essa probabilidade, a regressão logística usa as chances do evento ocorrer em cada variável independente, calculando a taxa dessas chances, dada pela equação:
+Para estimar essa probabilidade, a regressão logística usa as chances (\emph{odds}) do evento ocorrer em cada variável independente, calculando a taxa dessas chances, dada pela equação:
 
 \begin{equation}
   \label{eq:OR}
@@ -69,7 +70,7 @@ Utilizando inferência de estatística, podemos aplicar log em \ref{eq:OR}, fica
   \end{aligned}
 \end{equation}
 
-Tal transformação recebe o nome de logit. Ela é ajustada a função de predição, como numa análise de regressão linear, visto anteriormente. The predicted value of the logit is converted back into predicted odds via the inverse of the natural logarithm, namely the exponential function.
+Tal transformação recebe o nome de logit. Ela é ajustada a função de predição, como numa análise de regressão linear, visto anteriormente. O valor final obtido a partir da função logit é convertido novamente para as chances via a função inversa do logaritmo natural (ou uma função exponencial).
 
 \begin{equation}
   \label{eq:t}
@@ -99,18 +100,14 @@ onde o modelo é composto por K classes e K - 1 transformações logit. Utilizan
   \end{aligned}
 \end{equation}
 
-
-Thus, although the observed dependent variable in logistic regression is a zero-or-one variable, the logistic regression estimates the odds, as a continuous variable, that the dependent variable is a success (a case). In some applications the odds are all that is needed. In others, a specific yes-or-no prediction is needed for whether the dependent variable is or is not a case; this categorical prediction can be based on the computed odds of a success, with predicted odds above some chosen cutoff value being translated into a prediction of a success.
-
+Dessa forma, temos que a regressão logística estima as changes (odds) como uma variável contínua, mesmo quando a variável dependente que está sendo o objeto de estudo seja uma variável binária. 
 
 
 
 \begin{comment} 
 \begin{citacao} 
 \cite{HASTIE} \end{citacao}
-
-
 , mas que leva em consideração as probabilidades de ocorrência desses eventos.
 \end{comment}
 
-Dessa forma, a regressão logística viabiliza a classificação das observações por meio da probabilidade estimada na categoria estudada.
+Assim, a regressão logística viabiliza a classificação das observações por meio da probabilidade estimada na categoria estudada.

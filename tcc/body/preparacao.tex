@@ -6,13 +6,13 @@
 
 \chapter{Objetivo}
 
-Este trabalho se baseia em um experimento quantitativo sobre problemas relacionados a segmentação e classificação de dados de uma base de dados grande, utilizando algoritmos de K médias para segmentação e regressão logística e random forest para classificação. Serão feitas interpretações, análises e comparações, levantando aspectos positivos e negativos de cada metodologia.
+Este trabalho se baseia em um experimento quantitativo sobre problemas relacionados a segmentação e classificação de dados de uma base de dados grande, utilizando algoritmos de aprendizagem supervisionada e não supervisionada. Para resolver o problema de segmentação, este trabalho irá abordar o algoritmo de K Médias (não supervisionado) e para os casos de classificação, regressão logística e random forest (supervisionados). Também serão feitas interpretações, análises e comparações, levantando aspectos positivos e negativos de cada metodologia.
 
 \chapter{Cronograma}
 
 \section{Primeiro semestre}
 
-Para este período, ficou decidido estudar o contexto atual de como as empresas estão lidando com os horizontes abertos pelo Big Data e seus desafios. Também foi definido que é necessário estudar sobre princípios básicos de Machine Learning para a resolução de problemas de clusterização e classificação, aprofundando sobre detalhes conceitos por trás dos algoritmos.
+Para este período, ficou decidido estudar o contexto atual de como as empresas estão lidando com os horizontes abertos pelo \emph{Big Data} e seus desafios. Também foi definido que é necessário estudar sobre princípios básicos de \emph{Machine Learning} para a resolução de problemas de clusterização e classificação, aprofundando sobre detalhes dos conceitos por trás dos algoritmos e de sua implementação.
 
 \begin{ganttchart}[
     canvas/.append style={fill=none, draw=black!5, line width=.75pt},
@@ -56,16 +56,23 @@ Para este período, ficou decidido estudar o contexto atual de como as empresas 
   ]{Big Data}{1}{3} \\
   \ganttbar[
     name=WBS1A
+  ]{Machine Learning}{2}{4} \\
+  \ganttbar[
+    name=WBS1A
   ]{Regress\~ao Log\'istica}{4}{7} \\
   \ganttbar[
      name=WBS1B
-  ]{Random Forest}{8}{11} \\
+  ]{Random Forest}{7}{11} \\
   \ganttbar[
     name=WBS1C
-  ]{K M\'edias}{12}{15} \\
+  ]{K M\'edias}{11}{15} \\[grid]
+  \ganttgroup[]{Monografia}{15}{18} \\
   \ganttbar[
     name=WBS1D
-  ]{Ajustes no texto}{16}{18} \\[grid]
+  ]{Elaboração do modelo}{15}{16}\\
+  \ganttbar[
+    name=WBS1D
+  ]{Ajustes no texto}{16}{18}
   % \ganttgroup[]{Desenvolvimento}{20}{40} \\
   % \ganttbar[]{Estudos com Spark}{20}{28} \\
   % \ganttbar[]{Comparac\~ao entre modelos}{26}{31} \\
@@ -75,7 +82,7 @@ Para este período, ficou decidido estudar o contexto atual de como as empresas 
 
 \section{Segundo semestre}
 
-Para este período, será feito uma revisão sobre o conteúdo apresentado na primeira versão da monografia, ajustes em relação a proposta do trabalho e aplicação dos algoritmos. A infraestrutura e tecnologia a serem utlizadas serão pensados e revistos durante o segundo semestre, visto que a execução sobre uma grande base de dados é complexa e custosa.
+Para este período, será feito uma revisão sobre o conteúdo apresentado na primeira versão da monografia, ajustes em relação a proposta do trabalho e aplicação dos algoritmos. A infraestrutura e tecnologia a serem utlizadas serão pensados e revistos durante o segundo semestre, visto que a execução sobre uma grande base de dados é complexa e custosa. Também iremos escolher uma base grande apropriada para a execução dos algoritmos.
 
 \begin{ganttchart}[
     canvas/.append style={fill=none, draw=black!5, line width=.75pt},
@@ -113,21 +120,44 @@ Para este período, será feito uma revisão sobre o conteúdo apresentado na pr
     title label node/.append style={below left=7pt and -3pt}
   ]{SEMANAS:\quad1}{1}
   \gantttitlelist{2,...,18}{1} \\
-  \ganttgroup[]{Código dos algoritmos}{1}{18} \\
+  \ganttgroup[]{Algoritmos}{1}{10} \\
   \ganttbar[
     name=WBS1A
-  ]{Escrever (Python ou Scala)}{1}{3} \\
+  ]{Escrever código}{1}{2} \\
   \ganttbar[
     name=WBS1A
-  ]{Testar em m\'aquina local'}{4}{7} \\
-  \ganttgroup[]{Definir infraestrutura}{1}{18} \\
+  ]{Estudar Spark}{1}{4} \\
   \ganttbar[
     name=WBS1A
-  ]{Estudar AWS}{1}{3} \\
+  ]{Testes}{4}{7} \\
   \ganttbar[
     name=WBS1A
-  ]{Levantar m\'aquinas remotas}{4}{7} \\
-  [grid]
+  ]{Execução}{7}{10} \\[grid]
+  \ganttgroup[]{Infraestrutura}{7}{10} \\
+  \ganttbar[
+    name=WBS1A
+  ]{Estudar alternativas}{7}{8} \\
+  \ganttbar[
+    name=WBS1A
+  ]{M\'aquinas remotas}{8}{9} \\
+  \ganttbar[
+    name=WBS1A
+  ]{Criar um protótipo}{9}{10}\\[grid]
+  \ganttgroup[]{Monografia}{9}{18} \\
+  \ganttbar[
+    name=WBS1D
+  ]{Revisão do orientador}{9}{10}\\
+  \ganttbar[
+    name=WBS1D
+  ]{Resultados}{9}{12}
+  \\
+  \ganttbar[
+    name=WBS1D
+  ]{Conclusão}{12}{15}
+  \\
+  \ganttbar[
+    name=WBS1D
+  ]{Ajuste final}{15}{18}
   % \ganttgroup[]{Desenvolvimento}{20}{40} \\
   % \ganttbar[]{Estudos com Spark}{20}{28} \\
   % \ganttbar[]{Comparac\~ao entre modelos}{26}{31} \\
