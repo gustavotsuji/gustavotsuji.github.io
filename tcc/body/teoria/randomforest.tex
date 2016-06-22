@@ -107,3 +107,7 @@ Mas como visto em \ref{eq:media}, temos que para qualquer $j$ e $s$, a minimiza�
 \end{equation} 
 
 Este processo é repetido até que todas as regiões sejam descobertas.
+
+\subsection{\emph{Bagging}}
+
+As árvores vistas anteriormente são modelos interessantes de classificação mas possuem um problema: o resultado gerado por elas em geral possuem uma acurácia muito baixa. Dessa forma, uma solução para contornar esse problema foi a adaptação de uma técnica chamada \emph{bootstraping aggregating}, que constrói uma árvore de classificação repetidamente usando amostras aleatórias do conjunto de dados. Por fim, o modelo final é recalculado.
