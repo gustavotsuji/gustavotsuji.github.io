@@ -1,14 +1,13 @@
 % ---
 \section{Random Forest}
 
-\begin{mdframed}[backgroundcolor=blue!20] 
-        Pensei em explicar um pouco sobre árvore de decisão (não pretendo passar de 2 páginas contando com algumas ilustrações) antes de falar sobre o Random Forest. Também pensei em falar um pouco sobre o bagging e por fim, como o Random Forest consegue fazer a classificação.
-\end{mdframed}
 
-\subsection{Árvores de classificação}
+
+
+\subsection{Árvores}
 
 % ---
-Árvores são modelos presentes tanto em computação como estrutura de dados e em estatística como estrutura para tomadas de decisão. No contexto de machine learning, a árvore de decisão refere-se a uma estrutura de modelo preditivo, um método de aprendizagem supervisionada não parametrizada utilizada para classificação e regressão (CART). Para \citeonline{HASTIE}, as árvores permitem um particionamento do espaço em um conjunto de retângulos com um modelo simple em cada. 
+Árvores são modelos presentes tanto em computação como estrutura de dados e em estatística como estrutura para tomadas de decisão. No contexto de machine learning, a árvore de decisão refere-se a uma estrutura de modelo preditivo, um método de aprendizagem supervisionada não parametrizada utilizada para classificação (para variáveis categóricas) e regressão (variáveis mpetricas). Para \citeonline{HASTIE}, as árvores permitem um particionamento do espaço em um conjunto de retângulos com um modelo simple em cada. 
 
 \begin{comment}
 //por figura
@@ -17,7 +16,6 @@ Neste exemplo \cite{HASTIE}, observa-se que o particionamento num espaço bidime
 Trata-se de uma representação de regras que dividem as observações em grupos com características em comum. Em geral, considera-se a hipótese de que cada característica possui um domínio finito e discreto.
 \end{comment}
 
-\begin{comment}
 
 \tikzset{
   treenode/.style = {shape=rectangle, rounded corners,
@@ -29,46 +27,31 @@ Trata-se de uma representação de regras que dividem as observações em grupos
 }
 
 \begin{figure}
+\caption{Exemplo de árvore classificadora}
 \centering
-\begin{tikzpicture}
-  [
-    grow                    = down,
-    sibling distance        = 10em,
-    level distance          = 10em,
-    edge from parent/.style = {draw, -latex},
-    every node/.style       = {font=\footnotesize},
-    sloped
-  ]
-  \node [root] {Formula}
-    child { node [env] {equation}
-      edge from parent node [below] {sim} }
-    child { node [dummy] {}
-      child { node [dummy] {}
-        child { node [env] {align\\flalign}
-          edge from parent node [below] {at relation sign?} }
-        child { node [env] {alignat}
-          edge from parent node [above] {at several}
-                           node [below] {places?} }
-        child { node [env] {gather}
-                edge from parent node [above] {centered?} }
-        edge from parent node [below] {aligned?} }
-      child { node [env] {multline}
-              edge from parent node [above, align=center]
-                {first left,\\centered,}
-              node [below] {last right}}
-              edge from parent node [above] {não} };
-
+        \begin{tikzpicture}
+\node [circle,draw,text width=1.2cm,align=center]{POL $\ge$ 0.332} [level distance=30mm,sibling distance=70mm]
+child {node [circle,draw,text width=1.2cm,align=center] {ATM $\ge$ 0.109 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline15\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline25\%}}
+}
+child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.657} [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline40\%}}
+child { node [circle,draw,text width=1.2cm,align=center]{ ATM $\ge$ 0.299 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline9\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline11\%}}
+}
+};
 \end{tikzpicture}
-\caption{Cada nó representa um atributo de um elemento da amostra. As folhas são consideradas a representação da classe a que uma observação pertence. Já o ramo é um conjunto de valores que reflete todas suas características e detalhes de um elemento}
+\nota{Cada nó representa um atributo de um elemento da amostra. As folhas são consideradas a representação da classe a que uma observação pertence. Já o ramo é um conjunto de valores que reflete todas suas características e detalhes de um elemento}
 \end{figure}
 
-\end{comment}
 
 \begin{comment}
 
 Seja \begin{math}p\end{math} os dados de entrada
 
-Podemos representar de forma genérica o modelo da árvore de classificação por
+Podemos representar de forma genérica o modelo da árvore por
 \end{comment}
 
 
@@ -78,7 +61,7 @@ Suponha que exista \begin{math}M\end{math} partição que possa ser divida em re
 f(x) = \sum_{m=1}^{M}c_{m}I( x \in R_{m} )
 \end{equation}
 
-Utilizando como critério de minimização a soma do mínimos quadrados \begin{math}\sum{ (y_{i} - f(x_{i}))^{2}}\end{math}, temos que o melhor \begin{math}\hat c_{m}\end{math} é exatamente a média para \begin{math}y_{i}\end{math} na região \begin{math}R_{m}\end{math}:
+No caso de uma regressão, utiliza-se como critério de minimização a soma do mínimos quadrados \begin{math}\sum{ (y_{i} - f(x_{i}))^{2}}\end{math}, temos que o melhor \begin{math}\hat c_{m}\end{math} é exatamente a média para \begin{math}y_{i}\end{math} na região \begin{math}R_{m}\end{math}:
 
 \begin{equation}
 \label{eq:media}
@@ -87,7 +70,7 @@ Utilizando como critério de minimização a soma do mínimos quadrados \begin{m
 
 Para encontrar a melhor partição, é necessário recorrer a um algoritmo guloso.
 
-Seja \begin{math}j\end{math} uma variável de reparticionamento, $s$ um ponto de divisão. É possível definir 1 par de semi planos 
+Seja \begin{math}j\end{math} uma variável de reparticionamento, $s$ um ponto de divisão. É possível definir um par de semi planos 
 
 \begin{equation}
 R_{1}(j,s) = {X | X_{j}\leq s} \quad \textrm{e} \quad R_{2}(j,s) = {X | X_{j}\textgreater s})
@@ -108,6 +91,93 @@ Mas como visto em \ref{eq:media}, temos que para qualquer $j$ e $s$, a minimiza�
 
 Este processo é repetido até que todas as regiões sejam descobertas.
 
+Para o caso de uma 
+
 \subsection{\emph{Bagging}}
 
-As árvores vistas anteriormente são modelos interessantes de classificação mas possuem um problema: o resultado gerado por elas em geral possuem uma acurácia muito baixa. Dessa forma, uma solução para contornar esse problema foi a adaptação de uma técnica chamada \emph{bootstraping aggregating}, que constrói uma árvore de classificação repetidamente usando amostras aleatórias do conjunto de dados. Por fim, o modelo final é recalculado.
+As árvores vistas anteriormente são modelos interessantes de classificação mas possuem um problema: o resultado gerado por elas em geral possuem uma acurácia muito baixa.
+
+
+
+\begin{figure*}[t!]
+    \centering
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+\node [circle,draw,text width=1.2cm,align=center]{POL $\ge$ 0.332} [level distance=30mm,sibling distance=70mm]
+child {node [circle,draw,text width=1.2cm,align=center] {ATM $\ge$ 0.109 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline15\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline25\%}}
+}
+child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.657} [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline40\%}}
+child { node [circle,draw,text width=1.2cm,align=center]{ ATM $\ge$ 0.299 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline9\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline11\%}}
+}
+};
+\end{tikzpicture}
+
+        \caption{Configuração 1 da árvore de decisão}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+\node [circle,draw,text width=1.2cm,align=center]{ATM $\ge$ 0.294} [level distance=30mm,sibling distance=70mm]
+child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.117 } [level distance=30mm ,sibling distance=40mm]
+child { node [circle,draw,text width=1.2cm,align=center]{ GDS $\ge$ 0.269 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline21\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline14\%}}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline28\%}}
+}
+child {node [circle,draw,text width=1.2cm,align=center] { GDS $\ge$ 0.745 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline33\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline4\%}}
+};
+\end{tikzpicture}
+        \caption{Configuração 2 da árvore de decisão}
+    \end{subfigure}
+    \\
+    \centering
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+\node [circle,draw,text width=1.2cm,align=center]{POL $\ge$ 0.332} [level distance=30mm,sibling distance=70mm]
+child {node [circle,draw,text width=1.2cm,align=center] {ATM $\ge$ 0.109 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline15\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline25\%}}
+}
+child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.657} [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline40\%}}
+child { node [circle,draw,text width=1.2cm,align=center]{ ATM $\ge$ 0.299 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline9\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline11\%}}
+}
+};
+\end{tikzpicture}
+
+        \caption{Configuração 1 da árvore de decisão}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.5\textwidth}
+        \centering
+        \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+\node [circle,draw,text width=1.2cm,align=center]{ATM $\ge$ 0.294} [level distance=30mm,sibling distance=70mm]
+child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.117 } [level distance=30mm ,sibling distance=40mm]
+child { node [circle,draw,text width=1.2cm,align=center]{ GDS $\ge$ 0.269 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline21\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline14\%}}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline28\%}}
+}
+child {node [circle,draw,text width=1.2cm,align=center] { GDS $\ge$ 0.745 } [level distance=30mm ,sibling distance=40mm]
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline33\%}}
+child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline4\%}}
+};
+\end{tikzpicture}
+        \caption{Configuração 2 da árvore de decisão}
+    \end{subfigure}
+    \caption{Configurações da árvore de decisão sobre subconjuntos distintos}
+\end{figure*}
+
+Dessa forma, uma solução para contornar esse problema foi a adaptação de uma técnica chamada \emph{bootstraping aggregating}, que constrói uma árvore de classificação repetidamente usando amostras aleatórias do conjunto de dados. Por fim, o modelo final é recalculado.
