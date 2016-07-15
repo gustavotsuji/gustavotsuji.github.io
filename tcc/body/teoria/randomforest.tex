@@ -7,7 +7,7 @@
 \subsection{Árvores}
 
 % ---
-Árvores são modelos presentes tanto em computação como estrutura de dados e em estatística como estrutura para tomadas de decisão. No contexto de machine learning, a árvore de decisão refere-se a uma estrutura de modelo preditivo, um método de aprendizagem supervisionada não parametrizada utilizada para classificação (para variáveis categóricas) e regressão (variáveis mpetricas). Para \citeonline{HASTIE}, as árvores permitem um particionamento do espaço em um conjunto de retângulos com um modelo simple em cada. 
+Árvores são modelos presentes tanto em computação como estrutura de dados e em estatística como estrutura para tomadas de decisão. No contexto de machine learning, a árvore de decisão refere-se a uma estrutura de modelo preditivo, um método de aprendizagem supervisionada não parametrizada utilizada para classificação (para variáveis categóricas) e regressão (variáveis métricas). Para \citeonline{HASTIE}, as árvores permitem um particionamento do espaço em um conjunto de retângulos com um modelo simple em cada. 
 
 \begin{comment}
 //por figura
@@ -29,7 +29,7 @@ Trata-se de uma representação de regras que dividem as observações em grupos
 \begin{figure}
 \caption{Exemplo de árvore classificadora}
 \centering
-        \begin{tikzpicture}
+        \begin{tikzpicture}[thick,scale=0.75, every node/.style={scale=0.75}]
 \node [circle,draw,text width=1.2cm,align=center]{POL $\ge$ 0.332} [level distance=30mm,sibling distance=70mm]
 child {node [circle,draw,text width=1.2cm,align=center] {ATM $\ge$ 0.109 } [level distance=30mm ,sibling distance=40mm]
 child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline15\%}}
@@ -61,6 +61,11 @@ Suponha que exista \begin{math}M\end{math} partição que possa ser divida em re
 f(x) = \sum_{m=1}^{M}c_{m}I( x \in R_{m} )
 \end{equation}
 
+Para a repartição dessas regiões, são definidos critérios para decidir de qual lado o dado irá ficar na árvore.
+
+
+\subsubsection{Árvore de regressão}
+
 No caso de uma regressão, utiliza-se como critério de minimização a soma do mínimos quadrados \begin{math}\sum{ (y_{i} - f(x_{i}))^{2}}\end{math}, temos que o melhor \begin{math}\hat c_{m}\end{math} é exatamente a média para \begin{math}y_{i}\end{math} na região \begin{math}R_{m}\end{math}:
 
 \begin{equation}
@@ -91,7 +96,9 @@ Mas como visto em \ref{eq:media}, temos que para qualquer $j$ e $s$, a minimiza�
 
 Este processo é repetido até que todas as regiões sejam descobertas.
 
-Para o caso de uma 
+\subsubsection{Árvore de classificação}
+
+Para o caso de uma árvore de classificação, utiliza-se como critério de decisão a impureza de Gini\footnotemark \footnotetext{Impureza de Gini mede a frequencia de que um elemento selecionado aleatoriamente de um conjunto é marcado de forma errada} \begin{math}Gini(T) = 1 - \sum_{i=1}^{n}{ p_{i}^{2}}\end{math}. 
 
 \subsection{\emph{Bagging}}
 
@@ -101,6 +108,7 @@ As árvores vistas anteriormente são modelos interessantes de classificação m
 
 \begin{figure*}[t!]
     \centering
+        \caption{Configurações da árvore de decisão sobre subconjuntos distintos}
     \begin{subfigure}[t]{0.5\textwidth}
         \centering
         \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
@@ -138,46 +146,91 @@ child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline4\%}}
 \end{tikzpicture}
         \caption{Configuração 2 da árvore de decisão}
     \end{subfigure}
-    \\
-    \centering
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
-\node [circle,draw,text width=1.2cm,align=center]{POL $\ge$ 0.332} [level distance=30mm,sibling distance=70mm]
-child {node [circle,draw,text width=1.2cm,align=center] {ATM $\ge$ 0.109 } [level distance=30mm ,sibling distance=40mm]
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline15\%}}
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline25\%}}
-}
-child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.657} [level distance=30mm ,sibling distance=40mm]
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline40\%}}
-child { node [circle,draw,text width=1.2cm,align=center]{ ATM $\ge$ 0.299 } [level distance=30mm ,sibling distance=40mm]
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline9\%}}
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline11\%}}
-}
-};
-\end{tikzpicture}
 
-        \caption{Configuração 1 da árvore de decisão}
-    \end{subfigure}%
-    ~ 
-    \begin{subfigure}[t]{0.5\textwidth}
-        \centering
-        \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
-\node [circle,draw,text width=1.2cm,align=center]{ATM $\ge$ 0.294} [level distance=30mm,sibling distance=70mm]
-child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.117 } [level distance=30mm ,sibling distance=40mm]
-child { node [circle,draw,text width=1.2cm,align=center]{ GDS $\ge$ 0.269 } [level distance=30mm ,sibling distance=40mm]
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline21\%}}
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline14\%}}}
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline28\%}}
-}
-child {node [circle,draw,text width=1.2cm,align=center] { GDS $\ge$ 0.745 } [level distance=30mm ,sibling distance=40mm]
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline33\%}}
-child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline4\%}}
-};
-\end{tikzpicture}
-        \caption{Configuração 2 da árvore de decisão}
-    \end{subfigure}
-    \caption{Configurações da árvore de decisão sobre subconjuntos distintos}
+
 \end{figure*}
+
+
+
+% \begin{figure*}[t!]
+%     \centering
+%     \begin{subfigure}[t]{0.5\textwidth}
+%         \centering
+%         \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+% \node [circle,draw,text width=1.2cm,align=center]{POL $\ge$ 0.332} [level distance=30mm,sibling distance=70mm]
+% child {node [circle,draw,text width=1.2cm,align=center] {ATM $\ge$ 0.109 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline15\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline25\%}}
+% }
+% child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.657} [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline40\%}}
+% child { node [circle,draw,text width=1.2cm,align=center]{ ATM $\ge$ 0.299 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline9\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline11\%}}
+% }
+% };
+% \end{tikzpicture}
+
+%         \caption{Configuração 1 da árvore de decisão}
+%     \end{subfigure}%
+%     ~ 
+%     \begin{subfigure}[t]{0.5\textwidth}
+%         \centering
+%         \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+% \node [circle,draw,text width=1.2cm,align=center]{ATM $\ge$ 0.294} [level distance=30mm,sibling distance=70mm]
+% child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.117 } [level distance=30mm ,sibling distance=40mm]
+% child { node [circle,draw,text width=1.2cm,align=center]{ GDS $\ge$ 0.269 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline21\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline14\%}}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline28\%}}
+% }
+% child {node [circle,draw,text width=1.2cm,align=center] { GDS $\ge$ 0.745 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline33\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline4\%}}
+% };
+% \end{tikzpicture}
+%         \caption{Configuração 2 da árvore de decisão}
+%     \end{subfigure}
+%     \\
+%     \centering
+%     \begin{subfigure}[t]{0.5\textwidth}
+%         \centering
+%         \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+% \node [circle,draw,text width=1.2cm,align=center]{POL $\ge$ 0.332} [level distance=30mm,sibling distance=70mm]
+% child {node [circle,draw,text width=1.2cm,align=center] {ATM $\ge$ 0.109 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline15\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline25\%}}
+% }
+% child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.657} [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline40\%}}
+% child { node [circle,draw,text width=1.2cm,align=center]{ ATM $\ge$ 0.299 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline9\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline11\%}}
+% }
+% };
+% \end{tikzpicture}
+
+%         \caption{Configuração 1 da árvore de decisão}
+%     \end{subfigure}%
+%     ~ 
+%     \begin{subfigure}[t]{0.5\textwidth}
+%         \centering
+%         \begin{tikzpicture}[thick,scale=0.55, every node/.style={scale=0.55}]
+% \node [circle,draw,text width=1.2cm,align=center]{ATM $\ge$ 0.294} [level distance=30mm,sibling distance=70mm]
+% child { node [circle,draw,text width=1.2cm,align=center]{ POL $\ge$ 0.117 } [level distance=30mm ,sibling distance=40mm]
+% child { node [circle,draw,text width=1.2cm,align=center]{ GDS $\ge$ 0.269 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 1\newline21\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline14\%}}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline28\%}}
+% }
+% child {node [circle,draw,text width=1.2cm,align=center] { GDS $\ge$ 0.745 } [level distance=30mm ,sibling distance=40mm]
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 2\newline33\%}}
+% child {node [rectangle,draw,text width=1.2cm,align=center] {Tipo 3\newline4\%}}
+% };
+% \end{tikzpicture}
+%         \caption{Configuração 2 da árvore de decisão}
+%     \end{subfigure}
+%     \caption{Configurações da árvore de decisão sobre subconjuntos distintos}
+% \end{figure*}
 
 Dessa forma, uma solução para contornar esse problema foi a adaptação de uma técnica chamada \emph{bootstraping aggregating}, que constrói uma árvore de classificação repetidamente usando amostras aleatórias do conjunto de dados. Por fim, o modelo final é recalculado.
