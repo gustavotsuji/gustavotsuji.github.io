@@ -5,6 +5,12 @@
 \providecommand{\abntbstabout}[1]{}
 \abntbstabout{v-1.9.6 }
 
+\bibitem[Associa{\c c}\~ao Brasileira de Normas T\'ecnicas 2003]{NBR6028:2003}
+\abntrefinfo{ABNT}{ABNT}{2003}
+{ASSOCIA{\c C}\~AO BRASILEIRA DE NORMAS T\'ECNICAS. \emph{{NBR} 6028}: Resumo -
+  apresenta{\c c}{\~a}o.
+Rio de Janeiro, 2003. 2~p.}
+
 \bibitem[Baeza-Yates e Ribeiro-Neto 1999]{BAEZA}
 \abntrefinfo{Baeza-Yates e Ribeiro-Neto}{BAEZA-YATES; RIBEIRO-NETO}{1999}
 {BAEZA-YATES, R.; RIBEIRO-NETO, B. \emph{Modern Information Retrieval}. 1. ed.
