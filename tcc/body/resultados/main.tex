@@ -31,73 +31,84 @@ O Apache Spark é uma ferramenta que resolve um problema relacionado a escalabil
 
 Como uma base de uma empresa, o Loan Club apresenta diversos problemas como:
 
-- Missing values
-Ocorre quando uma informação não consta na base. Esse fato influencia na conclusão de uma análise porque é necessário verificar a natureza da informação. Elas são oriundas desde problemas ao guardar a informação (como erro humano, falta de informação ou em decorrência de algum problema ou inconsistência no sistema que armazenou). Para os algortimos, é necessário que algum valor seja colocado para a realização das cálculos dos algoritmos. Nessas situações, existem abordagens diferentes, como subustituição por um valor padrão que faça sentido. Em alguns casos, são usados valores considerado neutros como 0, média ou moda das observações. Contido, é evidente que cada uma dessas técnicas enviesa e modifica o resultado. Para essa situação, neste estudo, desprezamos as informações que possuiam altas ocorrências de missing values.
+\subsection{Missing values}
+Inerente a uma base comum de qualquer empresa, missing values ocorre quando uma informação não consta na base. Esse fato pode influenciar a conclusão de uma análise porque a ausência de dados pode distorcer qualquer análise. Para diminuir o impacto desse tipo de problema, é necessário verificar a natureza da informação. Elas são oriundas desde problemas do armazenamento da informação, provenientes desde erros humanos, falta de informação ou em decorrência de algum problema ou inconsistência no sistema de informação.
 
-- Necessidade de tratamentos de dados
-Foram realizados 3 transformações: normalização de dados para o k médias, tratamento de dados de texto para valores (completar) e remoção das variáveis categóricas.
+Para os algortimos, é necessário que algum valor seja colocado para a realização das cálculos dos algoritmos. Há diversas abordagens, como subustituição por um valor padrão que faça sentido para cada informação. Em alguns casos, são usados valores como 0, média ou moda das observações. Contudo, é evidente que cada uma dessas técnicas enviesa e modifica o resultado. Neste estudo, desprezamos as informações que possuiam altas ocorrências de missing values e para as que possuiam menos de 1\% de missing values, foi preenchido com 0.
+
+\subsubsection{Necessidade de tratamentos de dados}
+Alguns dados como intrate ou o term estavam armazenados como tipo texto, sendo inviável a execução do algoritmo do k médias.
+
+\subsubsection{Normalização de dados}
+
+
+
+\subsubsection{Remoção das variáveis categóricas}
 
 \subsection{K Médias}
 
-PS: perguntar sobre normalização
+O objetivo de uma clusterização é para dado um conjunto de objetos, colocar os elementos em grupos baseados na similaridade entre eles. Neste trabalho, a idéia é encontrar padrões inesperados nos
+dados, por se tratar de um problema que não está totalmente claro.
 
-No diagrama de Voronoi é possível ter uma visualização espacial da distribuição dos registros, bem como os centróides.
+O diagrama de Voronoi é uma ferramenta utilizada para visualizar problemas que envolvem conceito de proximidade em um plano. Baseia-se no fato de que em um plano, existem pontos que estão mais próximos de uma fonte geradora do que de outra fonte, o resultado é um polígono de cujas distâncias entre a fonte e ponto são as menores possíveis (MOURA, 2003). Portanto, é possível ter uma visualização espacial da distribuição dos registros, bem como os centróides.
 
 \begin{figure}[!ht]
-\caption{Visualização dos pontos no diagrama de Voronoi }
+\caption{Visualização dos pontos no diagrama de Voronoi com os dados sem normalizacao}
 \centerline{\includegraphics[width=0.5\textwidth]{img/voronoi}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
- Para isso, foi necessário realizar uma operação de redução de dimensionalidade de veriáveis para 2 features. Neste estudo, aplicamos a construção do diagrama para 8000 registros.
+A imagem mostra um diagrama de Voronoi. Os polígonos externos se estendem infinitamente no plano, logo são desenhados como figuras abertas. Cada aresta do diagrama constitui um lugar onde os pontos são equidistantes em relação à dois locais. Os vértices dos polígonos estão ligados outras arestas sendo pontos de equidistânciacada região definidas.
 
+Para a visualização desse diagrama, foi necessário realizar uma operação de redução de dimensionalidade de variáveis para 2 features. Neste estudo, aplicamos a construção do diagrama para 8000 registros.
 
-Também é possível fazer uma análise para verificar a quantidade de clusters ideal para a amostragem.
+Também é possível fazer uma análise para verificar a quantidade de clusters ideal para a amostragem. A cada execução do algoritmo também foi calculado um score chamado sillhouette, que é uma forma de interpretar e mensurar a validação da consistência dos clusters, além de fornecer uma representação gráfica de quão bem os dados estão inseridos nos clusters (coesão) em comparação a outros (separação). Esse score varia de -1 a 1, na qual quanto mais próximo de 1, mais bem encaixado encontra-se o elemento com seu respectivo cluster.
 
 \begin{figure}[!ht]
 \caption{Analise para 2 clusters }
-\centerline{\includegraphics[width=.8\textwidth]{img/silhoute2}}
+\centerline{\includegraphics[width=.85\textwidth]{img/silhoute2}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-Para a divisão em 2 clusters, foi obtida a nota 0,5516
+A primeira tentativa foi de separar a amostra em 2 clusters. Para essa divisão, foi obtida um score de 0,6428.
+
 
 \begin{figure}[!ht]
 \caption{Analise dos 3 clusters }
-\centerline{\includegraphics[width=.8\textwidth]{img/silhoute3}}
+\centerline{\includegraphics[width=.85\textwidth]{img/silhoute3}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-Para a divisão em 3 clusters, foi obtida a nota 0,4463
+Para a divisão em 3 clusters, foi obtida a nota 0,6188.
+
 
 \begin{figure}[!ht]
 \caption{Analise dos 4 clusters }
-\centerline{\includegraphics[width=.8\textwidth]{img/silhoute4}}
+\centerline{\includegraphics[width=.85\textwidth]{img/silhoute4}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-Para a divisão em 4 clusters, foi obtida a nota 0,4559
+Para a divisão em 4 clusters, foi obtida a nota 0,6099.
 
-\begin{figure}[!ht]
-\caption{Analise dos 5 clusters }
-\centerline{\includegraphics[width=.8\textwidth]{img/silhoute5}}
-\fonte{Gerado a partir do script}
-\end{figure}
 
-Para a divisão em 5 clusters, foi obtida a nota 0,4032
-
-Podemos notar uma tendência do score cair. Contudo, maior o score, melhor. Dessa forma, há um indício de que uma boa clusterização seja com 2 centróides.
-
+A clusterização gerada a partir do K médias servirá de parâmetro para os algoritmos de regressão logística e random forest.
 
 
 \subsection{Regressão Logística}
 
+A função logistic
+
+\begin{figure}[!ht]
+\caption{Funcao logistic para a feature fundedamnt}
+\centerline{\includegraphics[width=.6\textwidth]{img/logit}}
+\fonte{Gerado a partir do script}
+\end{figure}
 
 Também conhecida como matriz de erros, a confusion matrix é uma representação visual dos erros ocorridos durante o processamento do algoritmo. As linhas representam a classe que o dado pertence e a coluna representa a classificação gerada durante o processo. Quando um registro não está dentro da diagonal principal, significa que o algoritmo fez uma classificação diferente do que foi esperado.
 
 \begin{figure}[!ht]
 \caption{Confusion Matrix}
-\centerline{\includegraphics[width=.7\textwidth]{img/confusionMatrix}}
+\centerline{\includegraphics[width=.6\textwidth]{img/confusionMatrix}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
@@ -106,15 +117,17 @@ Para o caso do Loan Club, podemos notar que a função gerada pela regressão lo
 
 \subsection{Random Forest}
 
-A árvore de classificação para 3 clusters é essa
+
+Com uma árvore de decisão tem-se uma representação visual, de fácil interpretação de como é feito a classificação. Foi possível construir uma árvore para ilustrar a árvore do Loan Club. Neste caso, foi feito uma redução de dimensionalidade para 2 features, considerando-se 3 clusters.
 
 \begin{figure}[!ht]
-\caption{Estrutura da arvore de decisao}
+\caption{Estrutura da arvore de decisao com dimensionalidade reduzida para 2 features}
 \centerline{\includegraphics[width=1.05\textwidth]{img/loan}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-Com este esquema, tem-se uma representação visual, de fácil interpretação de como é feito a classificação. A árvore está relativamente grande por possuir mais de 20 features. Além disso, pode ser um indício de que os dados possuem um grau de homogeneidade alto.
+A árvore para mais de 20 features fica muito maior por conta da quantidade de informações.
+
 
 Ao gerar uma árvore de classificação, o algoritmo também disponibiliza a relevância das features.
 
@@ -131,10 +144,11 @@ Desta base, é possível notar que 8 destas features possuem maior relevância f
 %load_data.py
 %}
 
+Assim como foi feito na regressão logística, pode-se calcular a confusion matrix para visualizar a acurácia.
 
 \begin{figure}[!ht]
 \caption{Confusion Matrix}
-\centerline{\includegraphics[width=.7\textwidth]{img/confusionMatrix}}
+\centerline{\includegraphics[width=.6\textwidth]{img/confusionMatrix}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
