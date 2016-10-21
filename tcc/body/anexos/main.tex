@@ -34,7 +34,7 @@ annual\textunderscore inc & Renda anual relatada pelo devedor durante o cadastro
 dti\textunderscore joint & A raz\~ao entre a quantia total de d\'ividas paga pelos co-mutu\'arios (desconsiderando hipotecas e o empr\'estimo feito pelo Loan Club) dividido pela renda mensal dos co-mutu\'arios\\
 delinq\textunderscore 2yrs & Incid\^encias de inadimpl\^encia (eventos ocorridos dentro de 30 dias) dentro de um per\'iodo de 2 anos\\
 inq\textunderscore last\textunderscore 6mths & Quantidade de pedidos de empr\'estimos (excluindo carros e hipotecas)\\
-open\textunderscore acc & N\'umero de linhas de cr\'editos abertas para o tomador de empr\'estimos\\
+open\textunderscore acc & N\'umero de linhas de cr\'editos abertas para o mutu\'ario\\
 pub\textunderscore rec & N\'umero de \"derogatory public records\" (trata-se de um registro que pode ser considerado negativo para o mutu\'ario pois indica um risco e denegrindo sua reputa\c c\~ao e dificultando a possibilidade de aquisi\c c\~ao de outros produtos. Entre os valores, \'e poss\'ivel W e F\\
 revol\textunderscore bal & Total de cr\'edito que n\~ao foi pago\\
 total\textunderscore acc & N\'umero toral de linhas de cr\'editos usada pelo mutu\'ario\\
@@ -62,35 +62,34 @@ recoveries & valor bruto recuperado de \"charge off\" verificados \\
     \endhead
 
 addr\textunderscore state & Estado de moradia do mutu\'ario\\
-annual\textunderscore inc\textunderscore joint & Valor declarado no momento do cadastro da renda anual do co-mutu\'arios\\
+annual\textunderscore inc\textunderscore joint & Valor declarado no momento do cadastro da renda anual do co-mutu\'arios (um emprestimo eh realizado com co-mutuarios quando mais de uma pessao eh sao financiadas)\\
 application\textunderscore type & Indica se o empr\'estimo ser\'a individual ou se ser\'a feito por mais de uma pessoa (co-mutu\'arios) \\
-earliest\textunderscore cr\textunderscore line & The month the borrower's earliest reported credit line was opened\\
+earliest\textunderscore cr\textunderscore line & M\^es mais recente em que o mutu\'ario abriu uma linha de cr\'edito\\
 emp\textunderscore length & Per\'iodo em que o devedor est\'a empregado no trabalho atual, na qual 0 representa menos de 1 ano e 10 pode ser de 10 a mais anos \\
 emp\textunderscore title & Descri\c c\~ao breve do emprego do devedor\\
 fico\textunderscore range\textunderscore high & Limite superior do score proveniente do FICO a qual o devedor est\'a enquadrado\\
 fico\textunderscore range\textunderscore low & Limite inferior do score proveniente do FICO a qual o devedor est\'a enquadrado\\
 home\textunderscore ownership & Indica o status do tipo de moradia do tomador de empr\'estimo RENT (aluguel), OWN (casa pr\'opria), MORTGAGE (hipoteca), OTHER (outros)\\
 id & vari\'avel de identifica\c c\~ao de cada cliente da Loan Club\\
-initial\textunderscore list\textunderscore status & The initial listing status of the \\
+initial\textunderscore list\textunderscore status & Status inicial e interno da Loans Club do mutu\'ario. Varia entre W e F\\
 is\textunderscore inc\textunderscore v & Indica se a renda foi verificada pela Loan Club ou n\~ao ou se a fonte de renda foi verificada\\
 issue\textunderscore d & M\^es no qual o empr\'estimo foi financiado\\
-last\textunderscore credit\textunderscore pull\textunderscore d & O m\^es mais recente desde que o mutu\´ario adquiriu cr\´edito no financiamento\\
-last\textunderscore fico\textunderscore range\textunderscore high & The upper boundary range the borrower’s last FICO pulled belongs to.\\
-last\textunderscore fico\textunderscore range\textunderscore low & The lower boundary range the borrower’s last FICO pulled belongs to.\\
-last\textunderscore pymnt\textunderscore amnt & Valor total de pagamento recebido\\
+last\textunderscore credit\textunderscore pull\textunderscore d & O m\^es mais recente desde que o mutu\'ario adquiriu cr\'edito no financiamento\\
+last\textunderscore fico\textunderscore range\textunderscore high & O limite superior do \'ultimo score do FICO em que o mutu\'ario foi classificado\\
+last\textunderscore fico\textunderscore range\textunderscore low & O limite inferior do \'ultimo score do FICO em que o mutu\'ario foi classificado\\
 last\textunderscore pymnt\textunderscore d & \'Ultimo m\^es em que foi recebido um pagamento\\
-loan\textunderscore status & Status atual do pagamento\\
-mths\textunderscore since\textunderscore last\textunderscore delinq & N\'umero de meses desde a \'ultima inadimpl\^encia do tomador de empr\'estimo\\
-mths\textunderscore since\textunderscore last\textunderscore major\textunderscore derog & Meses desde a pior nota (em um per\´iodo de 90 dias)\\
-mths\textunderscore since\textunderscore last\textunderscore record & N\´unmero de meses desde o \´ultimo registro de informa\c c\~oes p\´ublicas (anteced\^encia criminal)\\
+loan\textunderscore status & Status atual do empr\'estimo\\
+mths\textunderscore since\textunderscore last\textunderscore delinq & N\'umero de meses desde a \'ultima inadimpl\^encia do mutu\'ario\\
+mths\textunderscore since\textunderscore last\textunderscore major\textunderscore derog & Meses desde a pior nota (em um per\'iodo de 90 dias)\\
+mths\textunderscore since\textunderscore last\textunderscore record & N\'unmero de meses desde o \'ultimo registro de informa\c c\~oes p\'ublicas (anteced\^encia criminal)\\
 next\textunderscore pymnt\textunderscore d & Data do pr\'oximo pagamento\\
-policy\textunderscore code & publicly available policy\textunderscore code=1 new products not publicly available policy\textunderscore code=2\\
-purpose & Categoria escolhida pelo mutu\´ario no momento da solicita\c c\~ao do cr\´edito\\
-pymnt\textunderscore plan & Indica se o pagamento do plano est\´a em dia\\
-revol\textunderscore util & Revolving line utilization rate, or the amount of credit the borrower is using relative to all available revolving credit.\\
-sub\textunderscore grade & LC assigned loan subgrade\\
+policy\textunderscore code & C\'odigo interno da Loans Club, variando entre 1 e 2\\
+purpose & Categoria escolhida pelo mutu\'ario no momento da solicita\c c\~ao do cr\'edito\\
+pymnt\textunderscore plan & Indica se o pagamento do plano est\'a em dia\\
+revol\textunderscore util & Taxa de utiliza\c c\~ao da linha de cr\'edito (revolving account)\\
+sub\textunderscore grade & Sub nota atribu\'ida pelo Loan Club\\
 title & Tipo de empr\'estimo realizado pelo mutu\'ario\\
-verified\textunderscore status\textunderscore joint & Indica se a renda dos co-mutu\´arios foi verificada pela Loan Club, se n\~ao foi ou se a fonte de renda foi verificada\\
+verified\textunderscore status\textunderscore joint & Indica se a renda dos co-mutu\'arios foi verificada pela Loan Club, se n\~ao foi ou se a fonte de renda foi verificada\\
 zip\textunderscore code & Os primeiros 3 n\'umeros de c\'odigo postal fornecida pelo mutu\'ario\\
 open\textunderscore acc\textunderscore 6m & N\'umero de neg\'ocios abertos nos \'ultimos 6 meses\\
 open\textunderscore il\textunderscore 6m & N\'umero de opera\c c\~oes de financiamento ativos \\
@@ -98,17 +97,17 @@ open\textunderscore il\textunderscore 12m & N\'umero de contas de opera\c c\~oes
 open\textunderscore il\textunderscore 24m & N\'umero de contas de opera\c c\~oes de financiamento abertas nos \'ultimos 24 meses\\
 mths\textunderscore since\textunderscore rcnt\textunderscore il & Quantidade de meses desde que a mais recente conta de opera\c c\~oes de financiamento aberta\\
 total\textunderscore bal\textunderscore il & Saldo total de todas as installment accounts\\
-il\textunderscore util & Raz\~ao entre o total de saldo sobre o limite de cr\´edito para todas as installment accounts\\
+il\textunderscore util & Raz\~ao entre o total de saldo sobre o limite de cr\'edito para todas as installment accounts\\
 open\textunderscore rv\textunderscore 12m & Quantidade de contas (revolving accounts) nos \'ultimos 12 meses\\
 open\textunderscore rv\textunderscore 24m & Quantidade de contas (revolving accounts) abertas nos \'ultimos 24 meses\\
 max\textunderscore bal\textunderscore bc & Saldo atual de todas as contas abertas (revolving accounts)\\
 all\textunderscore util & Saldo de limite de cr\'editos para todas as opera\c c\~oes\\
-total\textunderscore rev\textunderscore hi\textunderscore lim & Total limite de revolving cr\´editos\\
+total\textunderscore rev\textunderscore hi\textunderscore lim & Total limite de revolving cr\'editos\\
 inq\textunderscore fi & N\'umero de solicita\c c\~oes de cr\'edito para finan\c cas pessoais\\
 total\textunderscore cu\textunderscore tl & N\'umero de neg\'ocios financeiros\\
-inq\textunderscore last\textunderscore 12m & Quantidade de solicita\c \~ao de cr\'editos nos \'ultimos 12 meses\\
+
 acc\textunderscore now\textunderscore delinq & N\'umero de contas nas quais o mutu\'ario est\'a agora inadimplente\\
-tot\textunderscore coll\textunderscore amt & Quantia total de saldo de collection accounts \\
+tot\textunderscore coll\textunderscore amt & Saldo total de collection accounts \\
 tot\textunderscore cur\textunderscore bal & Saldo total de todas as contas do mutuário \\
 \bottomrule
 
