@@ -1,0 +1,342 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Dreuw & Deselaer's Poster
+% LaTeX Template
+% Version 1.0 (11/04/13)
+%
+% Created by:
+% Philippe Dreuw and Thomas Deselaers
+% http://www-i6.informatik.rwth-aachen.de/~dreuw/latexbeamerposter.php
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[final,hyperref={pdfpagelabels=false}]{beamer}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+
+\usepackage[orientation=portrait,size=a0,scale=1.4]{beamerposter} % Use the beamerposter package for laying out the poster with a portrait orientation and an a0 paper size
+
+\usetheme{I6pd2} % Use the I6pd2 theme supplied with this template
+
+\usepackage[english]{babel} % English language/hyphenation
+
+\usepackage{amsmath,amsthm,amssymb,latexsym} % For including math equations, theorems, symbols, etc
+
+%\usepackage{times}\usefonttheme{professionalfonts}  % Uncomment to use Times as the main font
+%\usefonttheme[onlymath]{serif} % Uncomment to use a Serif font within math environments
+
+\boldmath % Use bold for everything within the math environment
+
+\usepackage{booktabs} % Top and bottom rules for tables
+
+\graphicspath{{figures/}} % Location of the graphics files
+
+\usecaptiontemplate{\small\structure{\insertcaptionname~\insertcaptionnumber: }\insertcaption} % A fix for figure numbering
+
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION 
+%----------------------------------------------------------------------------------------
+
+\title{\huge Classifica\c c\~ao e segmenta\c c\~ao de Big Data} % Poster title
+
+\author{Gustavo Kendi Tsuji} % Author(s)
+
+\institute{Faculdade de Administra\c c\~ao, Economia e Contabilidade} % Institution(s)
+
+%----------------------------------------------------------------------------------------
+%	FOOTER TEXT
+%----------------------------------------------------------------------------------------
+
+\newcommand{\leftfoot}{http://www.LaTeXTemplates.com} % Left footer text
+
+\newcommand{\rightfoot}{gustavokt@gmail.com} % Right footer text
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
+
+\begin{frame}[t] % The whole poster is enclosed in one beamer frame
+
+\begin{columns}[t] % The whole poster consists of two major columns, each of which can be subdivided further with another \begin{columns} block - the [t] argument aligns each column's content to the top
+
+\begin{column}{.02\textwidth}\end{column} % Empty spacer column
+
+\begin{column}{.465\textwidth} % The first column
+
+%----------------------------------------------------------------------------------------
+%	INTRODUCTION
+%----------------------------------------------------------------------------------------
+            
+\begin{block}{Introdu\c c\~ao}
+
+\begin{itemize}
+
+\item Na \emph{internet}, é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes}, tendo um tráfego de mais de 600 \emph{terabytes} diários. Se o armazenamento desse volume de dados já era complexo, hoje, o desafio é extrair conhecimento dessas informações. Para as empresas, esse ativo intangível importante abre a possibilidade do desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento dos clientes e do funcionamento de processos, otimização da produção, entre outras melhorias.
+
+\item É desta questão que  nasce o \emph{Big Data}. A interpretação e extração de informações possibilitam uma melhor compreensão de vários aspectos, tanto nas esferas micro e macro na empresa. A utilização de \alert{Big Data} a favor da companhia pode conferir uma grande vantagem competitiva, bem como uma diferenciação, sendo considerado um ativo estratégico muito valioso.
+
+\end{itemize}
+
+\end{block}
+
+
+%----------------------------------------------------------------------------------------
+%	OBJECTIVES
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Objetivos}
+
+\begin{enumerate}
+\item Este trabalho se baseia em um experimento quantitativo sobre problemas relacionados a segmentação e classificação de dados de uma base de dados grande, utilizando algoritmos de aprendizagem supervisionada e não supervisionada.
+\item Para resolver o problema de segmentação, este trabalho irá abordar o algoritmo de K Médias (não supervisionado) e para os casos de classificação, regressão logística e random forest (supervisionados).
+\item Também serão feitas interpretações, análises e comparações, levantando aspectos positivos e negativos de cada algoritmo.
+\end{enumerate}
+
+\end{block}
+
+
+%----------------------------------------------------------------------------------------
+%	MATERIALS
+%----------------------------------------------------------------------------------------
+
+%\begin{block}{Materials}
+
+%\begin{columns} % Subdivide the first main column
+%\begin{column}{.54\textwidth} % The first subdivided column within the first main column
+%\begin{itemize}
+%\item Vestibulum nisl, quis euismod velit eros in ligula.
+%\begin{itemize}
+%\item Cras rhoncus quam et augue convallis in elementum urna tincidunt.
+%\end{itemize}
+%\item Proin ut vestibulum augue.
+%\begin{itemize}
+%\item Donec dapibus sagittis neque eu ultrices.
+%\end{itemize}
+%\end{itemize}
+%\end{column}
+
+%\begin{column}{.43\textwidth} % The second subdivided column within the first main column
+%\centering
+%\begin{figure}
+%\includegraphics[width=0.8\linewidth]{placeholder.jpg}
+%\caption{Figure caption}
+%\end{figure}
+%\end{column}
+%\end{columns} % End of the subdivision
+
+%\begin{itemize}
+%\item Curabitur sapien ligula, faucibus in feugiat quis, vestibulum a turpis.
+%\begin{itemize}
+%\item Phasellus quis nunc neque. Suspendisse mauris diam, suscipit non gravida in, placerat id enim. Ut nec ipsum in lectus ultrices sagittis.
+%\item Ut nec ipsum in lectus ultrices sagittis.
+%\item Phasellus quis nunc neque.
+%\end{itemize}
+%\end{itemize}
+
+%\end{block}
+
+%----------------------------------------------------------------------------------------
+%	METHODS
+%----------------------------------------------------------------------------------------
+
+%\begin{block}{Metodologia}
+
+%\begin{itemize}
+%\item Utilizaremos uma base de dados fornecido pela Loan Club, pelo site www.kaggle.com
+%\begin{itemize}
+%\item A base será  
+%\item In hac habitasse platea dictumst.
+%\end{itemize}
+%\end{itemize}
+
+%\begin{itemize}
+%\item Análise dos algoritmos de Machine Learning
+%\begin{itemize}
+%\item Visualização dos clusters gerados pelo K Médias 
+%\item Criação de função de classificação da regressão logística
+%\item Por alguma coisa sobre a Random Forest
+%\item Comparação da classificação da regressão logística e da random forest
+%\end{itemize}
+%\end{itemize}
+
+%\end{block}
+
+%----------------------------------------------------------------------------------------
+%	MATHEMATICAL SECTION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Fundamenta\c c\~ao te\'orica}
+
+\begin{itemize}
+\item Clusterização
+\begin{itemize}
+\item O K Médias é um algoritmo de \emph{machine learning} não supervisionado relativamente simples. Trata-se de um método que tem para uma quantidade k de clusters pré definida, o objetivo de definir k centróides (ponto médio), um para cada cluster, tal que o conjunto de dados possa ser repartido de forma eficiente. Para um conjunto de observações \begin{math}(x_{1}, x_{2}, ..., x_{n})\end{math}, o objetivo é minimizar usando o princípio dos mínimos quadrados a função objetiva:
+\begin{equation}
+\label{eq:media}
+\underset{S}{\arg\min} \sum_{i=1}^{k} \sum_{x \in S_{i}}\left \| x - \mu_{i} \right \|^{2}
+\end{equation}
+onde \begin{math}\mu_{i}\end{math} é a média dos pontos em \begin{math}S_{i}\end{math}
+
+\end{itemize}
+\item Classificação
+\begin{itemize}
+\item A regressão logística é uma modelagem matemática, isto é, uma representação em fórmulas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos. Ela pode ser representada como
+\begin{equation}
+  \label{eq:regressao_linear}
+  \begin{aligned}
+Y &= \hat{\beta_{0}} + \sum_{j=1}^{p} (X_{j}\hat{\beta_{j}}), 
+  \end{aligned}  
+\end{equation}
+onde \begin{math}Y\end{math} representa uma variável dependente contínua, \begin{math}X_{j}\end{math} as variáveis independentes 
+Além disso, leva-se em consideração a probabilidade de que os eventos estudados ocorram. Para a predição das variáveis, é utilizado a função logit
+
+\begin{equation}
+  \label{eq:t}
+  \begin{aligned}
+    logit^{-1}(\alpha) &= \frac{1}{1+e^{-\alpha}} &= \frac{e^{\alpha}}{1+e^{\alpha}}
+  \end{aligned}
+\end{equation}
+
+Dessa forma, temos que a regressão logística estima as changes (odds) como uma variável contínua, mesmo quando a variável dependente que está sendo o objeto de estudo seja uma variável binária. 
+
+\end{itemize}
+
+\begin{itemize}
+\item A árvore de decisão refere-se a uma estrutura de modelo preditivo, um método de aprendizagem supervisionada não parametrizada utilizada para classificação.
+
+\end{itemize}
+
+\end{itemize}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the first column
+
+\begin{column}{.03\textwidth}\end{column} % Empty spacer column
+ 
+\begin{column}{.465\textwidth} % The second column
+
+%----------------------------------------------------------------------------------------
+%	RESULTS
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Results: Table}
+
+\begin{itemize}
+\item Ased Aliquet Luctus Lectus
+\end{itemize}
+
+\begin{table}
+\begin{tabular}{l l l}
+\toprule
+\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+\midrule
+Treatment 1 & 0.0003262 & 0.562 \\
+Treatment 2 & 0.0015681 & 0.910 \\
+Treatment 3 & 0.0009271 & 0.296 \\
+\bottomrule
+\end{tabular}
+\caption{Table caption}
+\end{table}
+
+\begin{itemize}
+\item Sollicitudin Vel Orci
+\item Maecenas Ultricies Feugiat Velit Non Mattis.
+\end{itemize}
+
+\begin{table}
+\begin{tabular}{l l l}
+\toprule
+\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+\midrule
+Treatment 1 & 0.0003262 & 0.562 \\
+Treatment 2 & 0.0015681 & 0.910 \\
+Treatment 3 & 0.0009271 & 0.296 \\
+\bottomrule
+\end{tabular}
+\caption{Table caption}
+\end{table}
+     
+\end{block}
+
+%------------------------------------------------
+
+\begin{block}{Results: Figure}
+
+\begin{figure}
+\includegraphics[width=0.8\linewidth]{placeholder.jpg}
+\caption{Figure caption}
+\end{figure}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	CONCLUSION
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Conclus\~ao}
+
+\begin{itemize}
+\item Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis.
+\item Nulla eu erat a urna laoreet auctor id a turpis. Nam mollis tristique neque eu luctus. Suspendisse rutrum congue nisi sed convallis. 
+\item Aenean id neque dolor.
+\item Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis.
+\end{itemize}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+%	REFERENCES
+%----------------------------------------------------------------------------------------
+
+\begin{block}{References}
+        
+\nocite{*} % Insert publications even if they are not cited in the poster
+\small{\bibliographystyle{unsrt}
+\bibliography{sample}}
+
+\end{block}
+
+
+
+%----------------------------------------------------------------------------------------
+%	CONTACT INFORMATION
+%----------------------------------------------------------------------------------------
+
+\setbeamercolor{block title}{fg=black,bg=orange!70} % Change the block title color
+
+\begin{block}{Contact Information}
+
+\begin{itemize}
+\item Web: \href{http://www.university.edu/smithlab}{http://www.university.edu/smithlab}
+\item Email: \href{mailto:john@smith.com}{john@smith.com}
+\item Phone: +1 (000) 111 1111
+\end{itemize}
+
+\end{block}
+
+%----------------------------------------------------------------------------------------
+
+\end{column} % End of the second column
+
+\begin{column}{.015\textwidth}\end{column} % Empty spacer column
+
+\end{columns} % End of all the columns in the poster
+
+\end{frame} % End of the enclosing frame
+
+\end{document}
