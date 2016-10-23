@@ -83,9 +83,9 @@
 
 \begin{itemize}
 
-\item Na \emph{internet}, é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes}, tendo um tráfego de mais de 600 \emph{terabytes} diários. Se o armazenamento desse volume de dados já era complexo, hoje, o desafio é extrair conhecimento dessas informações. Para as empresas, esse ativo intangível importante abre a possibilidade do desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento dos clientes e do funcionamento de processos, otimização da produção, entre outras melhorias.
+\item Na \emph{internet}, é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes} e um tráfego de mais de 600 \emph{terabytes} diários. Se o armazenamento desse volume de dados já era complexo, hoje, o desafio é extrair conhecimento dessas informações. Trata-se de um ativo intangível importante abre a possibilidade do desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento dos clientes e funcionamento de processos, otimização da produção e outras melhorias.
 
-\item É desta questão que  nasce o \emph{Big Data}. A interpretação e extração de informações possibilitam uma melhor compreensão de vários aspectos, tanto nas esferas micro e macro na empresa. A utilização de \alert{Big Data} a favor da companhia pode conferir uma grande vantagem competitiva, bem como uma diferenciação, sendo considerado um ativo estratégico muito valioso.
+\item É desta questão que nasce o \emph{Big Data}. A interpretação e extração de informações possibilitam uma melhor compreensão de vários aspectos, tanto nas esferas micro e macro na empresa. A utilização de \alert{Big Data} a favor da companhia pode conferir uma grande vantagem competitiva, bem como uma diferenciação, sendo considerado um ativo estratégico muito valioso.
 
 \end{itemize}
 
@@ -100,7 +100,7 @@
 
 \begin{enumerate}
 \item Este trabalho se baseia em um experimento quantitativo sobre problemas relacionados a segmentação e classificação de dados de uma base de dados grande, utilizando algoritmos de aprendizagem supervisionada e não supervisionada.
-\item Para resolver o problema de segmentação, este trabalho irá abordar o algoritmo de K Médias (não supervisionado) e para os casos de classificação, regressão logística e random forest (supervisionados).
+\item Para resolver o problema de segmentação, este trabalho irá abordar o algoritmo K Médias e para classificação, regressão logística e random forest.
 \item Também serão feitas interpretações, análises e comparações, levantando aspectos positivos e negativos de cada algoritmo.
 \end{enumerate}
 
@@ -238,59 +238,69 @@ Dessa forma, temos que a regressão logística estima as changes (odds) como uma
 
 \begin{itemize}
 \item Ased Aliquet Luctus Lectus
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{loan.png}
+\caption{Clusterização}
+\end{figure}
+
 \end{itemize}
 
-\begin{table}
-\begin{tabular}{l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
-\end{tabular}
-\caption{Table caption}
-\end{table}
+%\begin{table}
+%\begin{tabular}{l l l}
+%\toprule
+%\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+%\midrule
+%Treatment 1 & 0.0003262 & 0.562 \\
+%Treatment 2 & 0.0015681 & 0.910 \\
+%Treatment 3 & 0.0009271 & 0.296 \\
+%\bottomrule
+%\end{tabular}
+%\caption{Table caption}
+%\end{table}
 
-\begin{itemize}
-\item Sollicitudin Vel Orci
-\item Maecenas Ultricies Feugiat Velit Non Mattis.
-\end{itemize}
+%\begin{itemize}
+%\item Sollicitudin Vel Orci
+%\item Maecenas Ultricies Feugiat Velit Non Mattis.
+%\end{itemize}
 
-\begin{table}
-\begin{tabular}{l l l}
-\toprule
-\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
-\midrule
-Treatment 1 & 0.0003262 & 0.562 \\
-Treatment 2 & 0.0015681 & 0.910 \\
-Treatment 3 & 0.0009271 & 0.296 \\
-\bottomrule
-\end{tabular}
-\caption{Table caption}
-\end{table}
+%\begin{table}
+%\begin{tabular}{l l l}
+%\toprule
+%\textbf{Treatments} & \textbf{Response 1} & \textbf{Response 2}\\
+%\midrule
+%Treatment 1 & 0.0003262 & 0.562 \\
+%Treatment 2 & 0.0015681 & 0.910 \\
+%Treatment 3 & 0.0009271 & 0.296 \\
+%\bottomrule
+%\end{tabular}
+%\caption{Table caption}
+%\end{table}
      
 \end{block}
 
 %------------------------------------------------
 
-\begin{block}{Results: Figure}
+\begin{block}{Resultados}
 
-
-
-
-%\begin{figure}[!ht]
-%\caption{Confusion Matrix}
-%\centerline{\includegraphics[width=.6\textwidth]{img/confusionMatrix}}
-%\fonte{Gerado a partir do script}
-%\end{figure}
-
+Foram realizados clusterizações com 2 a 6 centróides e o resultado com o maior silhoute score foi com 2 clusters
 
 \begin{figure}
-\includegraphics[width=0.8\linewidth]{placeholder.jpg}
-\caption{Figure caption}
+\includegraphics[width=0.85\linewidth]{silhoute2.png}
+\caption{Clusterização}
 \end{figure}
+
+Baseado na clusterização realizada pelo K médias, treinamos a base com a regressão logística e o random forest.
+
+\begin{figure}
+\includegraphics[width=0.4\linewidth]{confusionMatrix.png}
+\vspace{1cm}
+\includegraphics[width=0.4\linewidth]{confusionMatrixRanFor.png}
+\caption{Confusion matrix}
+\end{figure}
+
+Podemos observar que...
+
 
 \end{block}
 
@@ -313,7 +323,7 @@ Treatment 3 & 0.0009271 & 0.296 \\
 %	REFERENCES
 %----------------------------------------------------------------------------------------
 
-\begin{block}{References}
+\begin{block}{Refer\^encia Bibliogr\'afica}
         
 \nocite{*} % Insert publications even if they are not cited in the poster
 \small{\bibliographystyle{unsrt}
@@ -327,17 +337,17 @@ Treatment 3 & 0.0009271 & 0.296 \\
 %	CONTACT INFORMATION
 %----------------------------------------------------------------------------------------
 
-\setbeamercolor{block title}{fg=black,bg=orange!70} % Change the block title color
+%\setbeamercolor{block title}{fg=black,bg=orange!70} % Change the block title color
 
-\begin{block}{Contact Information}
+%\begin{block}{Contact Information}
 
-\begin{itemize}
-\item Web: \href{http://www.university.edu/smithlab}{http://www.university.edu/smithlab}
-\item Email: \href{mailto:john@smith.com}{john@smith.com}
-\item Phone: +1 (000) 111 1111
-\end{itemize}
+%\begin{itemize}
+%\item Web: \href{http://www.university.edu/smithlab}{http://www.university.edu/smithlab}
+%\item Email: \href{mailto:john@smith.com}{john@smith.com}
+%\item Phone: +1 (000) 111 1111
+%\end{itemize}
 
-\end{block}
+%\end{block}
 
 %----------------------------------------------------------------------------------------
 
