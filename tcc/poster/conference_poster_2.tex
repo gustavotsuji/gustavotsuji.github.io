@@ -15,11 +15,11 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-%----------------------------------------------------------------------------------------
+%----------------------------------------------------------fselec------------------------------
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[final,hyperref={pdfpagelabels=false}]{beamer}
+\documentclass[final,hyperref={pdfpagelabels=false, brazil}]{beamer}
 
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
@@ -43,15 +43,17 @@
 
 \usecaptiontemplate{\small\structure{\insertcaptionname~\insertcaptionnumber: }\insertcaption} % A fix for figure numbering
 
+
+
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
 
-\title{\huge Classifica\c c\~ao e segmenta\c c\~ao de Big Data} % Poster title
+\title{\huge Segmenta\c c\~ao e classifica\c c\~ao de Big Data} % Poster title
 
 \author{Gustavo Kendi Tsuji} % Author(s)
 
-\institute{Faculdade de Administra\c c\~ao, Economia e Contabilidade} % Institution(s)
+\institute{Universidade de São Paulo} % Institution(s)
 
 %----------------------------------------------------------------------------------------
 %	FOOTER TEXT
@@ -83,9 +85,9 @@
 
 \begin{itemize}
 
-\item Na \emph{internet}, é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes} e um tráfego de mais de 600 \emph{terabytes} diários. Se o armazenamento desse volume de dados já era complexo, hoje, o desafio é extrair conhecimento dessas informações. Trata-se de um ativo intangível importante abre a possibilidade do desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento dos clientes e funcionamento de processos, otimização da produção e outras melhorias.
+\item Na \emph{internet}, é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google\cite{GOO01}. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes} e um tráfego de mais de 600 \emph{terabytes} diários\cite{FAC01}. Se o armazenamento desse volume de dados já era complexo, hoje, o desafio é extrair conhecimento dessas informações. Trata-se de um ativo intangível importante abre a possibilidade do desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento dos clientes e funcionamento de processos, otimização da produção e outras melhorias.
 
-\item É desta questão que nasce o \emph{Big Data}. A interpretação e extração de informações possibilitam uma melhor compreensão de vários aspectos, tanto nas esferas micro e macro na empresa. A utilização de \alert{Big Data} a favor da companhia pode conferir uma grande vantagem competitiva, bem como uma diferenciação, sendo considerado um ativo estratégico muito valioso.
+\item É desta questão que nasce o \emph{Big Data}. A interpretação e extração de informações possibilitam uma melhor compreensão de vários aspectos, tanto nas esferas micro e macro na empresa. A utilização de \emph{Big Data} a favor da companhia pode conferir uma grande vantagem competitiva, bem como uma diferenciação, sendo considerado um ativo estratégico muito valioso.
 
 \end{itemize}
 
@@ -99,9 +101,9 @@
 \begin{block}{Objetivos}
 
 \begin{enumerate}
-\item Este trabalho se baseia em um experimento quantitativo sobre problemas relacionados a segmentação e classificação de dados de uma base de dados grande, utilizando algoritmos de aprendizagem supervisionada e não supervisionada.
-\item Para resolver o problema de segmentação, este trabalho irá abordar o algoritmo K Médias e para classificação, regressão logística e random forest.
-\item Também serão feitas interpretações, análises e comparações, levantando aspectos positivos e negativos de cada algoritmo.
+
+\item Realizar uma segmentação e analisar os clusters usando o algoritmo K Médias 
+\item A partir da clusterização, executar a classificação usando a Regressão Logística e Random Forest e analisar comparando e levantando aspectos positivos e negativos de cada algoritmo
 \end{enumerate}
 
 \end{block}
@@ -151,27 +153,24 @@
 %	METHODS
 %----------------------------------------------------------------------------------------
 
-%\begin{block}{Metodologia}
+\begin{block}{Metodologia}
 
-%\begin{itemize}
-%\item Utilizaremos uma base de dados fornecido pela Loan Club, pelo site www.kaggle.com
-%\begin{itemize}
-%\item A base será  
-%\item In hac habitasse platea dictumst.
-%\end{itemize}
-%\end{itemize}
+\begin{itemize}
+\item Realização de experimento quantitativo sobre problemas relacionados a segmentação e classificação de dados de uma base de dados da Loan Club, disponível em www.kaggle.com, utilizando algoritmos de aprendizagem supervisionada e não supervisionada.
 
-%\begin{itemize}
-%\item Análise dos algoritmos de Machine Learning
-%\begin{itemize}
-%\item Visualização dos clusters gerados pelo K Médias 
-%\item Criação de função de classificação da regressão logística
-%\item Por alguma coisa sobre a Random Forest
-%\item Comparação da classificação da regressão logística e da random forest
-%\end{itemize}
-%\end{itemize}
+\end{itemize}
 
-%\end{block}
+\begin{itemize}
+\item Análise dos algoritmos de Machine Learning
+\begin{itemize}
+\item Visualização dos clusters gerados pelo K Médias 
+\item Criação de função de classificação da regressão logística
+\item Visualização de um CART, base da Random Forest
+\item Comparação da classificação da Regressão Logística e da Random Forest
+\end{itemize}
+\end{itemize}
+
+\end{block}
 
 %----------------------------------------------------------------------------------------
 %	MATHEMATICAL SECTION
@@ -182,17 +181,17 @@
 \begin{itemize}
 \item Clusterização
 \begin{itemize}
-\item O K Médias é um algoritmo de \emph{machine learning} não supervisionado relativamente simples. Trata-se de um método que tem para uma quantidade k de clusters pré definida, o objetivo de definir k centróides (ponto médio), um para cada cluster, tal que o conjunto de dados possa ser repartido de forma eficiente. Para um conjunto de observações \begin{math}(x_{1}, x_{2}, ..., x_{n})\end{math}, o objetivo é minimizar usando o princípio dos mínimos quadrados a função objetiva:
+\item O K Médias é um método que, para uma dada quantidade k de clusters, tem como o objetivo de definir k centróides, um para cada cluster, tal que o conjunto de dados possa ser repartido de forma eficiente \cite{MacQueen}. Para um conjunto de observações \begin{math}(x_{1}, x_{2}, ..., x_{n})\end{math}, o objetivo é minimizar usando o princípio dos mínimos quadrados a função objetiva:
 \begin{equation}
 \label{eq:media}
 \underset{S}{\arg\min} \sum_{i=1}^{k} \sum_{x \in S_{i}}\left \| x - \mu_{i} \right \|^{2}
 \end{equation}
-onde \begin{math}\mu_{i}\end{math} é a média dos pontos em \begin{math}S_{i}\end{math}
+onde \begin{math}\mu_{i}\end{math} é o centróide da partição \begin{math}S_{i}\end{math}
 
 \end{itemize}
 \item Classificação
 \begin{itemize}
-\item A regressão logística é uma modelagem matemática, isto é, uma representação em fórmulas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos. Ela pode ser representada como
+\item A regressão logística é uma representação em fórmulas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos \cite{HASTIE}. Pode ser representada como
 \begin{equation}
   \label{eq:regressao_linear}
   \begin{aligned}
@@ -209,12 +208,12 @@ Além disso, leva-se em consideração a probabilidade de que os eventos estudad
   \end{aligned}
 \end{equation}
 
-Dessa forma, temos que a regressão logística estima as changes (odds) como uma variável contínua, mesmo quando a variável dependente que está sendo o objeto de estudo seja uma variável binária. 
+que estima os \emph{odds} como uma variável contínua. 
 
 \end{itemize}
 
 \begin{itemize}
-\item A árvore de decisão refere-se a uma estrutura de modelo preditivo, um método de aprendizagem supervisionada não parametrizada utilizada para classificação.
+\item A árvore de decisão é uma estrutura de modelo preditivo utilizado na aprendizagem supervisionada não parametrizada \cite{HASTIE}. Cada árvore possui um fluxo que define a classe a qual o dado pertence. É a base da random forest, que gera várias árvores para efetuar a classificação, já que apenas uma árvore poderia enviesar a classificação. Executando o algoritmo, um dado é classificado por diversas árvores e um resultado médio é o que define sua classificação.
 
 \end{itemize}
 
@@ -233,19 +232,6 @@ Dessa forma, temos que a regressão logística estima as changes (odds) como uma
 %----------------------------------------------------------------------------------------
 %	RESULTS
 %----------------------------------------------------------------------------------------
-
-\begin{block}{Results: Table}
-
-\begin{itemize}
-\item Ased Aliquet Luctus Lectus
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{loan.png}
-\caption{Clusterização}
-\end{figure}
-
-\end{itemize}
-
 %\begin{table}
 %\begin{tabular}{l l l}
 %\toprule
@@ -277,20 +263,31 @@ Dessa forma, temos que a regressão logística estima as changes (odds) como uma
 %\caption{Table caption}
 %\end{table}
      
-\end{block}
+%\end{block}
 
 %------------------------------------------------
 
 \begin{block}{Resultados}
 
-Foram realizados clusterizações com 2 a 6 centróides e o resultado com o maior silhoute score foi com 2 clusters
+\begin{itemize}
+\item Foram realizados clusterizações com 2 a 6 centróides e o resultado com o maior silhoute score foi com 2 clusters
+\end{itemize}
 
 \begin{figure}
 \includegraphics[width=0.85\linewidth]{silhoute2.png}
 \caption{Clusterização}
 \end{figure}
 
-Baseado na clusterização realizada pelo K médias, treinamos a base com a regressão logística e o random forest.
+\begin{itemize}
+\item Baseado na clusterização realizada pelo K médias, treinamos a base com a regressão logística e o random forest
+
+\item Esta é uma das árvores geradas durante a execução do Random Forest
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{loan.png}
+\caption{Árvore de decisão para a base da Loan Club}
+\end{figure}
+\end{itemize}
 
 \begin{figure}
 \includegraphics[width=0.4\linewidth]{confusionMatrix.png}
@@ -299,8 +296,10 @@ Baseado na clusterização realizada pelo K médias, treinamos a base com a regr
 \caption{Confusion matrix}
 \end{figure}
 
-Podemos observar que...
+\begin{itemize}
+\item Podemos observar que...
 
+\end{itemize}
 
 \end{block}
 
@@ -326,7 +325,7 @@ Podemos observar que...
 \begin{block}{Refer\^encia Bibliogr\'afica}
         
 \nocite{*} % Insert publications even if they are not cited in the poster
-\small{\bibliographystyle{unsrt}
+\small{\bibliographystyle{acm}
 \bibliography{sample}}
 
 \end{block}
