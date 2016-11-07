@@ -8,7 +8,7 @@
 
 \section{Loan Club}
 
-A Loan Club é um marketplace de créditos online. Trata-se de uma plataforma que reune pessoas que gostaria de realizar um empréstimo e outras que possuem um capital a investir. Em geral, são empréstimos pessoas, de negócios ou para procedimentos médicos. A proposta é oferecer um serviço de fácil acesso via dispositivos mobiles a taxa baixas, além de garantir um retorno que se ajuste a expectativa do investidor. Dessa forma, operam de forma menos burocrática do que um banco, mas assumindo os riscos de uma instituição financeira.
+A Loan Club é um marketplace de créditos online. Trata-se de uma plataforma que reune pessoas que gostariam de realizar um empréstimo e outras que possuem um capital a investir. Em geral, são empréstimos pessoais, de negócios ou para procedimentos médicos. A proposta é oferecer um serviço de fácil acesso via dispositivos mobiles a taxa baixas, além de garantir um retorno que se ajuste a expectativa do investidor. Dessa forma, operam de forma menos burocrática do que um banco mas assumindo os riscos de uma instituição financeira.
 
 \section{Kaggle}
 
@@ -18,12 +18,12 @@ Kaggle é uma plataforma criada em 2010 que reune ferramentas e estudos sobre mo
 
 \subsection{Scikit Learn}
 
-O scikit é um framework desenvolvido em Python voltado para data science. Possui implementação de diversos algoritmos e de ferramentas que auxiliam desde a análise dos dados até na execução de tarefas como clusterização e classificação até a execução dos algoritmos de machine learning. Possui integrações com programas visuais (como será mostrado a seguir). Já são mais de 30 contribuidores ativos.
+O scikit é um framework desenvolvido em Python voltado para Data Science. Possui implementação de diversos algoritmos e de ferramentas que auxiliam desde a análise dos dados até na execução de tarefas como clusterização e classificação até a execução dos algoritmos de Machine Learning, além de disponiblizar integrações com programas visuais que facilitam muito a compreensão. Já são mais de 30 contribuidores ativos. 
 
 
 \subsection{Apache Spark}
 
-O Apache Spark é uma ferramenta que resolve um problema relacionado a escalabilidade da execução de algoritmos de machine learning. Os 3 algoritmos estudos (em especial o Kmédias) possui uma carga de contas alto. Para bases grandes, aspecto relevante quando se trata de Big Data, o scikit não é capaz de executar em tempo hábil. O Apache Spark, por outro lado, oferece uma solução robusta para a execução dos algoritmos de machine learning. Embora seja possível configurá-lo para que os algortimos sejam executados em tempo real com alimentação contínua de dados, tal abordagem não será contemplada por não se tratar do foco do estudo.
+O Apache Spark é uma biblioteca com diversas ferramentas, entre elas que viabiliza a escalabilidade da execução de algoritmos de Machine Learning. Os algoritmos estudados (em especial o K Médias) são robustos e possuem uma grande carga de cáculos. Para bases grandes, o scikit não é capaz de executar em tempo satisfatório. O Apache Spark, por outro lado, oferece uma solução que possibilita uma maior rapidez na execução. Também é possível configurá-lo para que os algoritimos sejam executados em tempo real com alimentação contínua de dados. Contudo tal abordagem não será contemplada por não se tratar do foco do estudo.
 
 \section{Algoritmos}
 
@@ -32,64 +32,69 @@ O Apache Spark é uma ferramenta que resolve um problema relacionado a escalabil
 Como uma base de uma empresa, o Loan Club apresenta diversos problemas como:
 
 \subsection{Missing values}
-Inerente a uma base comum de qualquer empresa, missing values ocorre quando uma informação não consta na base. Esse fato pode influenciar a conclusão de uma análise porque a ausência de dados pode distorcer qualquer análise. Para diminuir o impacto desse tipo de problema, é necessário verificar a natureza da informação. Elas são oriundas desde problemas do armazenamento da informação, provenientes desde erros humanos, falta de informação ou em decorrência de algum problema ou inconsistência no sistema de informação.
+Inerente a uma base comum de qualquer empresa, missing values ocorre quando uma informação não consta na base. Esse fato pode influenciar a conclusão de uma análise porque a ausência de dados pode distorcê-la. Para diminuir o impacto desse tipo de problema, é necessário verificar a natureza da informação. Elas são oriundas desde problemas do armazenamento da informação, provenientes desde erros humanos, falta de informação ou em decorrência de algum problema ou inconsistência no sistema de informação.
 
-Para os algortimos, é necessário que algum valor seja colocado para a realização das cálculos dos algoritmos. Há diversas abordagens, como subustituição por um valor padrão que faça sentido para cada informação. Em alguns casos, são usados valores como 0, média ou moda das observações. Contudo, é evidente que cada uma dessas técnicas enviesa e modifica o resultado. Neste estudo, desprezamos as informações que possuiam altas ocorrências de missing values e para as que possuiam menos de 1\% de missing values, foi preenchido com 0.
+Para os algoritmos, é necessário que algum valor seja colocado para a realização dos cálculos. Há diversas abordagens, como substituição por um valor padrão que faça sentido para cada informação. Em alguns casos, são usados valores como 0, média ou moda dos campos respectivos das observações. Contudo, é evidente que cada uma dessas técnicas enviesa e modifica o resultado. Neste estudo, desprezamos as informações que possuiam altas ocorrências de missing values e para as que possuiam menos de 1\% de missing values, foi preenchido com 0. 
 
-\subsubsection{Necessidade de tratamentos de dados}
-Alguns dados como intrate ou o term estavam armazenados como tipo texto, sendo inviável a execução do algoritmo do k médias.
-
-\subsubsection{Normalização de dados}
-
+\subsubsection{Conversão de tipo de dados}
+Alguns dados como intrate ou o term estavam armazenados como tipo texto, sendo inviável a execução do algoritmo do K Médias. Para isso, foram retirados os termos com \% ou \'months\' e converteu-se os valores em número.
 
 
 \subsubsection{Remoção das variáveis categóricas}
+O algoritmo de K Médias, a princípio, não é executado com uma base que contenha variáveis categóricas. É possível adaptar a base executando uma transformação, tornando-as variáveis dummies. Contudo, não iremos considerar as variáveis categóricas por haver uma carga considerável e inviável no escopo deste trabalho. O random forest consegue lidar com variáveis categóricas mas também necessita de algumas transformações mas que não foram feitas neste trabalho.
 
 \subsection{K Médias}
 
-O objetivo de uma clusterização é para dado um conjunto de objetos, colocar os elementos em grupos baseados na similaridade entre eles. Neste trabalho, a idéia é encontrar padrões inesperados nos
-dados, por se tratar de um problema que não está totalmente claro.
+O objetivo de uma clusterização é para dado um conjunto de dados e agrupar os elementos em grupos baseados na similaridade entre eles. Com a base de dados da Loan Club, já contamos com uma divisão feita por ela mesma. Dessa forma, uma hipótese a ser testada é constatar alguma relação nos grupos gerados pelo K Médias com alguma característica. Neste trabalho, iremos usar as notas atribuídas por ela mesma, armazenada no campo \`grade\`.
+
+Para a execução do K Médias, executou-se uma normalização dos dados. [Explicar porque]
+
+\subsubsection{SciKit Learn}
+
+\subsubsubsection{Diagrama de Voronoi}
 
 O diagrama de Voronoi é uma ferramenta utilizada para visualizar problemas que envolvem conceito de proximidade em um plano. Baseia-se no fato de que em um plano, existem pontos que estão mais próximos de uma fonte geradora do que de outra fonte, o resultado é um polígono de cujas distâncias entre a fonte e ponto são as menores possíveis (MOURA, 2003). Portanto, é possível ter uma visualização espacial da distribuição dos registros, bem como os centróides.
 
 \begin{figure}[!ht]
-\caption{Visualização dos pontos no diagrama de Voronoi com os dados sem normalizacao}
+\caption{Visualização dos pontos no diagrama de Voronoi com os dados sem normaliza\c cao}
 \centerline{\includegraphics[width=0.5\textwidth]{img/voronoi}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
 A imagem mostra um diagrama de Voronoi. Os polígonos externos se estendem infinitamente no plano, logo são desenhados como figuras abertas. Cada aresta do diagrama constitui um lugar onde os pontos são equidistantes em relação à dois locais. Os vértices dos polígonos estão ligados outras arestas sendo pontos de equidistânciacada região definidas.
 
-Para a visualização desse diagrama, foi necessário realizar uma operação de redução de dimensionalidade de variáveis para 2 features. Neste estudo, aplicamos a construção do diagrama para 8000 registros.
+Para a visualização desse diagrama, foi necessário realizar uma operação de redução de dimensionalidade de variáveis para 2 features. Neste estudo, aplicamos a construção do diagrama para 8000 registros. Embora a redução de dimensionalidade possa distorcer os dados, é possível ter uma visualização de como os dados estão distribuídos num espaço bidimensional. No contexto de Big Data, a geração de diagrama de voronoi pode ajudar numa análise inicial, sendo inviável gerá-lo para uma base completa e com muitos dados.
 
-Também é possível fazer uma análise para verificar a quantidade de clusters ideal para a amostragem. A cada execução do algoritmo também foi calculado um score chamado sillhouette, que é uma forma de interpretar e mensurar a validação da consistência dos clusters, além de fornecer uma representação gráfica de quão bem os dados estão inseridos nos clusters (coesão) em comparação a outros (separação). Esse score varia de -1 a 1, na qual quanto mais próximo de 1, mais bem encaixado encontra-se o elemento com seu respectivo cluster.
+\subsubsubsection{Sillhoute Score}
 
-\begin{figure}[!ht]
+É possível fazer uma análise para verificar a quantidade de clusters ideal para a amostragem. A cada execução do algoritmo também calcula-se um score chamado sillhouette, que é uma forma de interpretar e mensurar a validação da consistência dos clusters, além de fornecer uma representação gráfica de quão bem os dados estão inseridos nos clusters (coesão) em comparação a outros (separação). Esse score varia de -1 a 1, na qual quanto mais próximo de 1, mais bem encaixado encontra-se o elemento com seu respectivo cluster.
+
+\begin{figure}[ht]
 \caption{Analise para 2 clusters }
 \centerline{\includegraphics[width=.85\textwidth]{img/silhoute2}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
 A primeira tentativa foi de separar a amostra em 2 clusters. Para essa divisão, foi obtida um score de 0,6428.
+\lipsum[20]
 
-
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \caption{Analise dos 3 clusters }
 \centerline{\includegraphics[width=.85\textwidth]{img/silhoute3}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
 Para a divisão em 3 clusters, foi obtida a nota 0,6188.
+\lipsum[32]
 
-
-\begin{figure}[!ht]
+\begin{figure}[ht]
 \caption{Analise dos 4 clusters }
 \centerline{\includegraphics[width=.85\textwidth]{img/silhoute4}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
 Para a divisão em 4 clusters, foi obtida a nota 0,6099.
-
+\lipsum[31]
 
 A clusterização gerada a partir do K médias servirá de parâmetro para os algoritmos de regressão logística e random forest.
 
@@ -97,6 +102,10 @@ A clusterização gerada a partir do K médias servirá de parâmetro para os al
 \subsection{Regressão Logística}
 
 A função logistic
+
+
+\subsubsection{Scikit Learn}
+
 
 \begin{figure}[!ht]
 \caption{Funcao logistic para a feature fundedamnt}
@@ -114,6 +123,26 @@ Também conhecida como matriz de erros, a confusion matrix é uma representaçã
 
 
 Para o caso do Loan Club, podemos notar que a função gerada pela regressão logística possui um indíce de acurácia alto.
+
+\subsubsection{Spark}
+
+A execução da Regressão Logística foi dividida em 2 fases: treinamento do modelo e teste. A base completa foi dividida em 80\% para treino e 20 \% para testes. Para verificar a clssificação, foi considerado a clusterização realizada previamente pelo K Médias. 
+
+\begin{tabular}{ r r r r }
+
+         & 1 & 2 & 3 \\
+    1    & 29585 & 334   & 1307  \\
+    2    & 715   & 58836 & 3957  \\
+    3    & 1342  & 5006  & 164590
+\end{tabular}
+
+\begin{tabular}{ r r r r r }
+
+  Classe & Precisão & Recall  & Falso Positivo & F-measure  \\
+    1    & 0,93499  & 0,94744 & 0,00877        & 0,94117    \\
+    2    & 0,91679  & 0,92643 & 0,02641        & 0,95234    \\
+    3    & 0,96900  & 0,96286 & 0,05556        & 0,95241
+\end{tabular}
 
 \subsection{Random Forest}
 
@@ -152,8 +181,24 @@ Assim como foi feito na regressão logística, pode-se calcular a confusion matr
 \fonte{Gerado a partir do script}
 \end{figure}
 
+Assim como na Regressão Logística, a classificação com Random Forest também foi dividida em 2 fases: treinamento do modelo (80 \%) e teste (20 \%). Para verificar a classificação, foi considerado a clusterização realizada previamente pelo K Médias. 
+
+\begin{tabular}{ r r r r }
+
+         & 1 & 2 & 3 \\
+    1    & 27234 & 1470   & 524  \\
+    2    & 2255   & 53129 & 5938  \\
+    3    & 2153  & 9577   & 163392
+\end{tabular}
 
 
+\begin{tabular}{ r r r r r }
+
+  Classe & Precisão & Recall  & Falso Positivo & F-measure  \\
+    1    & 0,86069  & 0,93177 & 0,01864        & 0,89482    \\
+    2    & 0,82786  & 0,86639 & 0,05405        & 0,84669    \\
+    3    & 0,96195  & 0,93301 & 0,07136        & 0,94726
+\end{tabular}
 % ---
 % primeiro capitulo de Resultados
 % ---

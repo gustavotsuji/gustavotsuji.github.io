@@ -289,12 +289,45 @@ que estima os \emph{odds} como uma variável contínua.
 \end{figure}
 \end{itemize}
 
-\begin{figure}
-\includegraphics[width=0.4\linewidth]{confusionMatrix.png}
-\vspace{1cm}
-\includegraphics[width=0.4\linewidth]{confusionMatrixRanFor.png}
-\caption{Confusion matrix}
-\end{figure}
+\begin{itemize}
+\item A
+\begin{tabular}{ r r r r }
+
+         & 1 & 2 & 3 \\
+    1    & 29585 & 334   & 1307  \\
+    2    & 715   & 58836 & 3957  \\
+    3    & 1342  & 5006  & 164590
+\end{tabular}
+
+\begin{tabular}{ r r r r r }
+
+  Classe & Precisão & Recall  & Falso Positivo & F-measure  \\
+    1    & 0,93499  & 0,94744 & 0,00877        & 0,94117    \\
+    2    & 0,91679  & 0,92643 & 0,02641        & 0,95234    \\
+    3    & 0,96900  & 0,96286 & 0,05556        & 0,95241
+\end{tabular}
+\end{itemize}
+
+\begin{itemize}
+
+\item B
+\begin{tabular}{ r r r r }
+
+         & 1 & 2 & 3 \\
+    1    & 27234 & 1470   & 524  \\
+    2    & 2255   & 53129 & 5938  \\
+    3    & 2153  & 9577   & 163392
+\end{tabular}
+
+
+\begin{tabular}{ r r r r r }
+
+  Classe & Precisão & Recall  & Falso Positivo & F-measure  \\
+    1    & 0,86069  & 0,93177 & 0,01864        & 0,89482    \\
+    2    & 0,82786  & 0,86639 & 0,05405        & 0,84669    \\
+    3    & 0,96195  & 0,93301 & 0,07136        & 0,94726
+\end{tabular}
+\end{itemize}
 
 \begin{itemize}
 \item Podemos observar que...
@@ -311,9 +344,10 @@ que estima os \emph{odds} como uma variável contínua.
 
 \begin{itemize}
 \item Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis.
-\item Nulla eu erat a urna laoreet auctor id a turpis. Nam mollis tristique neque eu luctus. Suspendisse rutrum congue nisi sed convallis. 
-\item Aenean id neque dolor.
-\item Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis.
+
+
+
+
 \end{itemize}
 
 \end{block}
