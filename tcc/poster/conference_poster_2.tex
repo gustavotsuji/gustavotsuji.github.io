@@ -44,7 +44,6 @@
 \usecaptiontemplate{\small\structure{\insertcaptionname~\insertcaptionnumber: }\insertcaption} % A fix for figure numbering
 
 
-
 %----------------------------------------------------------------------------------------
 %	TITLE SECTION 
 %----------------------------------------------------------------------------------------
@@ -59,13 +58,26 @@
 %	FOOTER TEXT
 %----------------------------------------------------------------------------------------
 
-\newcommand{\leftfoot}{http://www.LaTeXTemplates.com} % Left footer text
+\newcommand{\rightfoot}{Criado a partir do modelo de Philippe Dreuw and Thomas Deselaers do site http://www.LaTeXTemplates.com} % Left footer text
 
-\newcommand{\rightfoot}{gustavokt@gmail.com} % Right footer text
+\newcommand{\leftfoot}{} % Right footer text
+
+\usepackage{tabularx}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\usepackage{ragged2e}
+ 
+\let\olditem=\item% 
+\renewcommand{\item}{\olditem \justifying}%
 
 %----------------------------------------------------------------------------------------
 
 \begin{document}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}m{#1}}
+\newcolumntype{C}[1]{>{\centering\arraybackslash}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\arraybackslash}m{#1}}
 
 \addtobeamertemplate{block end}{}{\vspace*{2ex}} % White space under blocks
 
@@ -85,28 +97,14 @@
 
 \begin{itemize}
 
-\item Na \emph{internet}, é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google\cite{GOO01}. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes} e um tráfego de mais de 600 \emph{terabytes} diários\cite{FAC01}. Se o armazenamento desse volume de dados já era complexo, hoje, o desafio é extrair conhecimento dessas informações. Trata-se de um ativo intangível importante abre a possibilidade do desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento dos clientes e funcionamento de processos, otimização da produção e outras melhorias.
-
-\item É desta questão que nasce o \emph{Big Data}. A interpretação e extração de informações possibilitam uma melhor compreensão de vários aspectos, tanto nas esferas micro e macro na empresa. A utilização de \emph{Big Data} a favor da companhia pode conferir uma grande vantagem competitiva, bem como uma diferenciação, sendo considerado um ativo estratégico muito valioso.
+\item Hoje é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google\cite{GOO01}. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes} e um tráfego de mais de 600 \emph{terabytes} diários\cite{FAC01}. Mas o grande desafio já não é o armazenamento desses dados. Extrair conhecimento dessas informações se tornou o aspecto essencial para as empresas. Trata-se de um ativo intangível estratégico que viabiliza o desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento de clientes e funcionamento de processos ou otimização da produção. Este trabalho apresentará uma abordagem para explorar o que é possível desenvolver num contexto de \emph{Big Data} em conjunto de algoritmos de \emph{Machine Learning}.
 
 \end{itemize}
 
 \end{block}
 
 
-%----------------------------------------------------------------------------------------
-%	OBJECTIVES
-%----------------------------------------------------------------------------------------
 
-\begin{block}{Objetivos}
-
-\begin{enumerate}
-\item Realizar uma segmentação e analisar os clusters 
-\item Classificar os dados usando 2 algoritmos a partir da clusterização realizada anteriormente e verificar a assertividade, analisando aspectos positivos e negativos de cada um
-\end{enumerate}
-
-
-\end{block}
 
 
 %----------------------------------------------------------------------------------------
@@ -157,15 +155,13 @@
 
 
 \begin{itemize}
-\item Realização de experimento quantitativo  segmentação e classificação de dados. O estudo será realizado utilizando uma base de dados disponível em www.kaggle.com. com mais de 800 mil registros com informações relacionados como perfil do mutuário, detalhes das transações, entre outros. Esta base pertence a Loan Club, uma empresa de empréstimos com um sistema online.
+\item Realização de experimento quantitativo de segmentação e classificação de dados. Este estudo utilizou uma base disponível no site kaggle\cite{KAGGLE} com mais de 800 mil registros. Ela possui informações de perfil de mutuários, detalhes das transações, entre outros. Pertence a Loan Club, uma empresa de empréstimos com um sistema online.
 
 \item A análise consiste em:
 \begin{itemize}
-\item Estudo dos algoritmos de Machine Learning (K Médias, Regressão Logística e Random Forest)
-\item Análise descritiva dos clusters gerados
-\item Criação de função de classificação da regressão logística
-\item Visualização de uma árvore de classificação
-\item Comparação da classificação da Regressão Logística e da Random Forest
+\item Estudo dos algoritmos de segmentação K Médias (KM) e de classificação Regressão Logística (RL) e Random Forest (RF)
+\item Análise descritiva dos clusters gerados pelo KM
+\item Comparação da classificação da RL e RF
 \end{itemize}
 \end{itemize}
 
@@ -180,25 +176,20 @@
 \begin{itemize}
 \item Clusterização
 \begin{itemize}
-\item O K Médias é um método que, para uma dada quantidade k de clusters, tem como o objetivo de definir k centróides, um para cada cluster, tal que o conjunto de dados possa ser repartido de forma eficiente \cite{MacQueen}. Para um conjunto de observações \begin{math}(x_{1}, x_{2}, ..., x_{n})\end{math}, o objetivo é minimizar usando o princípio dos mínimos quadrados a função objetiva:
-\begin{equation}
-\label{eq:media}
-\underset{S}{\arg\min} \sum_{i=1}^{k} \sum_{x \in S_{i}}\left \| x - \mu_{i} \right \|^{2}
-\end{equation}
-onde \begin{math}\mu_{i}\end{math} é o centróide da partição \begin{math}S_{i}\end{math}
+\item O KM é um método de aprendizagem não supervisionado que reune os elementos em grupos baseados na similaridade entre eles.  \cite{MacQueen}. 
+
+\begin{figure}
+\centering
+\caption{Ilustração da clusterização de uma amostra de 8000 registros}
+\includegraphics[width=0.65\linewidth]{cluster.png}
+\end{figure}
+
+\item Essa similaridade é baseada na minimização da distância Euclidiana entre os vetores de atributos e os centróides dos clusters.
 
 \end{itemize}
 \item Classificação
 \begin{itemize}
-\item A regressão logística é uma representação em fórmulas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos \cite{HASTIE}. Pode ser representada como
-\begin{equation}
-  \label{eq:regressao_linear}
-  \begin{aligned}
-Y &= \hat{\beta_{0}} + \sum_{j=1}^{p} (X_{j}\hat{\beta_{j}}), 
-  \end{aligned}  
-\end{equation}
-onde \begin{math}Y\end{math} representa uma variável dependente contínua, \begin{math}X_{j}\end{math} as variáveis independentes 
-Além disso, leva-se em consideração a probabilidade de que os eventos estudados ocorram. Para a predição das variáveis, é utilizado a função logit
+\item A RL é um modelo supervisionado que estuda a relação entre variáveis, com o intuito de predizer a ocorrência de eventos. Ao ser treinado, a RL gera uma fórmula que pode classificar dados usando como base o odd ratios ou as chances de que um determinado evento ocorra\cite{HASTIE}. 
 
 \begin{equation}
   \label{eq:t}
@@ -207,12 +198,20 @@ Além disso, leva-se em consideração a probabilidade de que os eventos estudad
   \end{aligned}
 \end{equation}
 
-que estima os \emph{odds} como uma variável contínua. 
-
 \end{itemize}
 
 \begin{itemize}
-\item A árvore de decisão é uma estrutura de modelo preditivo utilizado na aprendizagem supervisionada não parametrizada \cite{HASTIE}. Cada árvore possui um fluxo que define a classe a qual o dado pertence. É a base da random forest, que gera várias árvores para efetuar a classificação, já que apenas uma árvore poderia enviesar a classificação. Executando o algoritmo, um dado é classificado por diversas árvores e um resultado médio é o que define sua classificação.
+\item A RF é um método que gera várias árvores para efetuar a classificação com o intuito de reduzir problemas de viés de usar somente uma. 
+
+\begin{figure}
+\caption{Árvore de decisão para a base da Loan Club}
+\centering
+\includegraphics[width=0.65\linewidth]{loan.png}
+
+\end{figure}
+
+\item A árvore de decisão é uma estrutura de modelo preditivo de fácil interpretação utilizado na aprendizagem supervisionada \cite{HASTIE}. Ela define o fluxo que classifica os dados em cada uma de suas extremidades.
+
 
 \end{itemize}
 
@@ -224,9 +223,23 @@ que estima os \emph{odds} como uma variável contínua.
 
 \end{column} % End of the first column
 
-\begin{column}{.03\textwidth}\end{column} % Empty spacer column
+\begin{column}{.01\textwidth}\end{column} % Empty spacer column
  
 \begin{column}{.465\textwidth} % The second column
+
+%----------------------------------------------------------------------------------------
+% OBJECTIVES
+%----------------------------------------------------------------------------------------
+
+\begin{block}{Objetivos}
+
+\begin{enumerate}
+\item Segmentar e classificar dados usando Scikit Learn\cite{SCI} e Apache Spark\cite{SPARK} 
+
+\end{enumerate}
+
+
+\end{block}
 
 %----------------------------------------------------------------------------------------
 %	RESULTS
@@ -269,70 +282,139 @@ que estima os \emph{odds} como uma variável contínua.
 \begin{block}{Resultados}
 
 \begin{itemize}
-\item Foram realizados clusterizações com 2 a 6 centróides e o resultado com o maior silhoute score foi com 2 clusters
-\end{itemize}
+\item Clusterização
 
-\begin{figure}
-\includegraphics[width=0.85\linewidth]{silhoute2.png}
-\caption{Clusterização}
+\begin{itemize}
+\item Usando o Scikit Learn foi possível visualizar diversas clusterizações. Foi escolhido o particionamento dos dados em 3 grupos.
+
+%\begin{figure}
+%\includegraphics[width=0.85\linewidth]{silhoute2.png}
+%\caption{Clusterização}
+%\end{figure}
+
+\begin{figure}[t!]
+    \centering
+        \caption{Resultados da clusterização}
+    \begin{subfigure}[t]{0.55\textwidth}
+        \centering
+\includegraphics[width=1\linewidth]{silhoute3.png}
+
+        \caption{Ilustração do silhoutte score para 3 clusters}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.35\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{loan_amnt_by_cluster.png}
+        \caption{Box plot por cluster do campo loan\_amnt\_by\_cluster}
+    \end{subfigure}
+
+
 \end{figure}
 
+
+
+\end{itemize}
+
+\end{itemize}
+
 \begin{itemize}
-\item Baseado na clusterização realizada pelo K médias, treinamos a base com a regressão logística e o random forest
+\item Classificação
 
-\item Esta é uma das árvores geradas durante a execução do Random Forest
+\begin{itemize}
+\item Baseado na clusterização realizada pelo K médias, treinamos 80\% da base com RL e RF e executamos uma classificação sobre os 20\% restantes
 
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{loan.png}
-\caption{Árvore de decisão para a base da Loan Club}
+\end{itemize}
+
+%\begin{tabular}{ C{3cm} | C{5cm} | C{5cm} | C{5cm} | }
+
+%    \hline 
+%    1    & 29585 & 334   & 1307  \\[3ex]
+%    \hline
+%    2    & 715   & 58836 & 3957  \\[3ex]
+%    \hline
+%    3    & 1342  & 5006  & 164590 \\[3ex]
+%    \hline
+    
+%\end{tabular}
+
+
+
+\begin{itemize}
+
+\item Após o treinamento, gerou-se as Confusion Matrices de cada algoritmo
+
+\begin{figure}[t!]
+    \centering
+        \caption{Confusion Matrices}
+    \begin{subfigure}[t]{0.42\textwidth}
+        \centering
+\includegraphics[width=1\linewidth]{cm-rl.png}
+
+        \caption{Confusion Matrix da RL}
+    \end{subfigure}%
+    ~ 
+    \begin{subfigure}[t]{0.43\textwidth}
+        \centering
+        \includegraphics[width=1\linewidth]{cm-tree.png}
+        \caption{Confusion matrix da RF}
+    \end{subfigure}
+
+
 \end{figure}
+
+%\begin{tabular}{ r r r r }
+
+%         & 1 & 2 & 3 \\
+%    1    & 27234 & 1470   & 524  \\
+%    2    & 2255   & 53129 & 5938  \\
+%    3    & 2153  & 9577   & 163392
+%\end{tabular}
+
+
+
 \end{itemize}
 
 \begin{itemize}
-\item A
-\begin{tabular}{ r r r r }
-
-         & 1 & 2 & 3 \\
-    1    & 29585 & 334   & 1307  \\
-    2    & 715   & 58836 & 3957  \\
-    3    & 1342  & 5006  & 164590
-\end{tabular}
-
-\begin{tabular}{ r r r r r }
-
-  Classe & Precisão & Recall  & Falso Positivo & F-measure  \\
-    1    & 0,93499  & 0,94744 & 0,00877        & 0,94117    \\
-    2    & 0,91679  & 0,92643 & 0,02641        & 0,95234    \\
-    3    & 0,96900  & 0,96286 & 0,05556        & 0,95241
-\end{tabular}
-\end{itemize}
-
-\begin{itemize}
-
-\item B
-\begin{tabular}{ r r r r }
-
-         & 1 & 2 & 3 \\
-    1    & 27234 & 1470   & 524  \\
-    2    & 2255   & 53129 & 5938  \\
-    3    & 2153  & 9577   & 163392
-\end{tabular}
+\item Pelos estudos, é possível compararmos as métricas de cada classificação e concluimos que a RL teve um melhor resultado.
 
 
-\begin{tabular}{ r r r r r }
+%\begin{tabular}{@{} *5c @{}}    \toprule
+%  Classe & Precisão & Recall  & FP & F-measure  \\\midrule
+%    1 & 0,9349 & 0,9474 & 0,0087 & 0,9411 \\
+%    2 & 0,9167 & 0,9264 & 0,0264 & 0,9523 \\
+%    3 & 0,9690 & 0,9628 & 0,0555 & 0,9524 \\\bottomrule
+% \hline
+%\end{tabular}
 
-  Classe & Precisão & Recall  & Falso Positivo & F-measure  \\
-    1    & 0,86069  & 0,93177 & 0,01864        & 0,89482    \\
-    2    & 0,82786  & 0,86639 & 0,05405        & 0,84669    \\
-    3    & 0,96195  & 0,93301 & 0,07136        & 0,94726
-\end{tabular}
-\end{itemize}
 
-\begin{itemize}
-\item Podemos observar que...
+
+%\begin{tabular}{@{} *5c @{}}    \toprule
+%  Classe & Precisão & Recall  & FP & F-measure  \\\midrule
+%    1 & 0,8606 & 0,9317 & 0,0186 & 0,8948 \\
+%    2 & 0,8278 & 0,8663 & 0,0540 & 0,8466 \\
+ %   3 & 0,9619 & 0,9330 & 0,0713 & 0,9472 \\
+ %   \bottomrule
+% \hline
+%\end{tabular}
+
+\begin{table}
+\centering
+        \caption{Métricas de assertividade e eficiência da RL e da RF}
+        \label{multiprogram}
+        \begin{tabular}{c | c c | c c | c c|c c } \toprule
+             Classe & \multicolumn{2}{|c|}{Precisão} & \multicolumn{2}{|c|}{Recall} & \multicolumn{2}{|c|}{Falso Positivo} & \multicolumn{2}{|c}{F-measure}\\
+            \cline{2-9}
+             & RL & RF & RL & RF & RL & RF & RL & RF \\
+             \hline
+            \multicolumn{1}{c|}{1} & 0,9349 & 0,8606 & 0,9474 & 0,9317 & 0,0087 &  0,0186 & 0,9411 & 0,8948\\
+            \multicolumn{1}{c|}{2} & 0,9167 & 0,8278 & 0,9264 & 0,8663 & 0,0264 & 0,0540 & 0,9523 & 0,8466\\
+            \multicolumn{1}{c|}{3} & 0,9690 & 0,9619 & 0,9628 & 0,9330 & 0,0555 & 0,0713 & 0,9524 & 0,9472\\\bottomrule
+        \end{tabular}
+    \end{table}
+
 
 \end{itemize}
-
+\end{itemize}
 \end{block}
 
 %----------------------------------------------------------------------------------------
@@ -342,9 +424,9 @@ que estima os \emph{odds} como uma variável contínua.
 \begin{block}{Conclus\~ao}
 
 \begin{itemize}
-\item Opet volutpat ligula. Duis semper lorem eget dui dignissim porttitor. Nulla facilisi. In ullamcorper lorem quis dolor iaculis nec egestas enim ultricies. Cras ut mauris elit, ut lacinia dui. Proin in ante et libero hendrerit iaculis.
+\item Ambas ferramentas se mostraram que se complementam: o Scikit Learn possui muitos recursos que facilitam a visualização e a compreensão dos modelos, já o Apache Spark é robusto e eficiente, executando os algoritmos de forma rápida e escalável, ideal para o cenário de Big Data.
 
-
+\item Mesmo com uma menor assertividade, a RF também é um algoritmo com alta eficiência. Possivelmente com outra configuração (redução de cluster, aumento de profundidade ou aumento de árvores) o resultado poderia ser diferente.
 
 
 \end{itemize}
