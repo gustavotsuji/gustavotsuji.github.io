@@ -538,7 +538,53 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \end{landscape}
 
+\chapter{Silhoutte score}
 
+
+É possível fazer uma análise para verificar a quantidade de clusters ideal para a amostragem. A cada execução do algoritmo também calcula-se um score chamado sillhouette, que é uma forma de interpretar e mensurar a validação da consistência dos clusters, além de fornecer uma representação gráfica de quão bem os dados estão inseridos nos clusters (coesão) em comparação a outros (separação). Esse score varia de -1 a 1, na qual quanto mais próximo de 1, mais bem encaixado encontra-se o elemento com seu respectivo cluster.
+
+\begin{figure}[ht]
+\caption{Analise para 2 clusters }
+\centerline{\includegraphics[width=.85\textwidth]{img/silhoute2}}
+\fonte{Gerado a partir do script}
+\end{figure}
+
+\begin{figure}[ht]
+\caption{Analise dos 3 clusters }
+\centerline{\includegraphics[width=.85\textwidth]{img/silhoute3}}
+\fonte{Gerado a partir do script}
+\end{figure}
+
+
+\begin{figure}[ht]
+\caption{Analise dos 4 clusters }
+\centerline{\includegraphics[width=.85\textwidth]{img/silhoute4}}
+\fonte{Gerado a partir do script}
+\end{figure}
+
+A princípio o silhoutte score seria uma métrica de avaliação para definir a quantidade ideal de clusters para a execução do K Médias. Contudo, essa métrica não foi implementada no Spark, sendo útil apenas para uma análise exploratória.
+
+A primeira tentativa foi de separar a amostra em 2 clusters. Para essa divisão, foi obtida um score de 0,6428.
+
+Para a divisão em 3 clusters, foi obtida a nota 0,6188.
+
+
+Para a divisão em 4 clusters, foi obtida a nota 0,6099.
+
+
+\chapter{Diagrama de Voronoi}
+
+O diagrama de Voronoi é uma ferramenta utilizada para visualizar problemas que envolvem conceito de proximidade em um plano. Baseia-se no fato de que em um plano, existem pontos que estão mais próximos de uma fonte geradora do que de outra fonte, o resultado é um polígono de cujas distâncias entre a fonte e ponto são as menores possíveis (MOURA, 2003). Portanto, é possível ter uma visualização espacial da distribuição dos registros, bem como os centróides.
+
+\begin{figure}[!ht]
+\caption{Visualização dos pontos no diagrama de Voronoi com os dados sem normaliza\c cao}
+\centerline{\includegraphics[width=0.5\textwidth]{img/voronoi}}
+\fonte{Gerado a partir do script}
+\end{figure}
+
+A imagem mostra um diagrama de Voronoi. Os polígonos externos se estendem infinitamente no plano, logo são desenhados como figuras abertas. Cada aresta do diagrama constitui um lugar onde os pontos são equidistantes em relação à dois locais. Os vértices dos polígonos estão ligados outras arestas sendo pontos de equidistânciacada região definidas.
+
+Para a visualização desse diagrama, foi necessário realizar uma operação de redução de dimensionalidade de variáveis para 2 features. Neste estudo, aplicamos a construção do diagrama para 8000 registros. Embora a redução de dimensionalidade possa distorcer os dados, é possível ter uma visualização de como os dados estão distribuídos num espaço bidimensional. No contexto de Big Data, a geração de diagrama de voronoi pode ajudar numa análise inicial, sendo inviável gerá-lo para uma base completa e com muitos dados.
 
 % ---
 %\chapter{Morbi ultrices rutrum lorem.}
