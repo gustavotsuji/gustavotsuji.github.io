@@ -59,19 +59,47 @@ A Cross Validation é uma técnica que permite verificar a acurácia de um model
 
 
 \subsubsection{Métricas}
-\lipsum[24]
+O cálculo de métricas para os algoritmos são importantes para avaliar o desempenho da segmentação e da classificação. Cada métrica pode ser mais conveniente para cada tipo de problema ou natureza dos dados. Neste trabalho iremos abordar algumas métricas simples.
 
 \subsubsection{Precision}
-\lipsum[25]
+
+É calculado a partir da proporção dos verdadeiros positivos sobre a quantidade de todos elementos que foram classificados na mesma classe (soma dos verdadeiros positivos e falsos positivos)
+
+\begin{equation}
+  \label{eq:precision}
+  \begin{aligned}
+Precision &= \frac{VP}{VP + FP} 
+  \end{aligned}  
+\end{equation}
 
 \subsubsection{Recall}
-\lipsum[26]
+
+É a proporção de elementos foram classificados corretamente em uma classe 
+sobre a quantidade de todos elementos que realmente pertencem a esta classe mesmo que estejam em outras (soma dos verdadeiros positivos e falsos negativos). 
+
+\begin{equation}
+  \label{eq:precision}
+  \begin{aligned}
+Recall &= \frac{VP}{VP + FN} 
+  \end{aligned}  
+\end{equation}
 
 \subsubsection{Falso Positivo}
 \lipsum[27]
 
-\subsubsection{F-mesuare}
-\lipsum[28]
+\subsubsection{F-measure}
+O F-measure é a média harmônica entre precisão e recall. Trata-se de uma medida que consegue avaliar melhor conjunto de dados que possuem uma distribuição das classes desproporcionais. 
+
+\begin{equation}
+  \label{eq:precision}
+  \begin{aligned}
+F-measure &= (1 + \beta^{2})\frac{precision*recall}{\beta^{2}*precision + recall} 
+  \end{aligned}  
+\end{equation}
+
+\subsubsection{Confusion Matrix}
+Trata-se de uma matriz quadrada na qual 
+as colunas representam as classes as quais o elementos realmente pertencem enquanto as linhas representa a saída do classificador. Cada célula fornece a quantidade de elementos classificados.
 
 \section{Algoritmos}
 

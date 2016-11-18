@@ -97,7 +97,7 @@
 
 \begin{itemize}
 
-\item Hoje é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google\cite{GOO01}. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes} e um tráfego de mais de 600 \emph{terabytes} diários\cite{FAC01}. Mas o grande desafio já não é o armazenamento desses dados. Extrair conhecimento dessas informações se tornou o aspecto essencial para as empresas. Trata-se de um ativo intangível estratégico que viabiliza o desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento de clientes e funcionamento de processos ou otimização da produção. Este trabalho apresentará uma abordagem para explorar o que é possível desenvolver num contexto de \emph{Big Data} em conjunto de algoritmos de \emph{Machine Learning}.
+\item Hoje é possível encontrar mais de 60 trilhões de páginas indexadas pelo Google\cite{GOO01}. Só o Facebook possui \emph{data warehouses} com mais de 300 \emph{petabytes} e um tráfego de mais de 600 \emph{terabytes} diários\cite{FAC01}. Mas o grande desafio já não é o armazenamento desses dados. Extrair conhecimento dessas informações se tornou o aspecto essencial para as empresas. Trata-se de um ativo intangível estratégico que viabiliza o desenvolvimento de novos produtos ou serviços bem como um melhor entendimento sobre comportamento de clientes e funcionamento de processos ou otimização da produção. Este trabalho apresentará uma abordagem para explorar o que é possível desenvolver num contexto de \emph{Big Data} com algoritmos de \emph{Machine Learning}.
 
 \end{itemize}
 
@@ -155,7 +155,7 @@
 
 
 \begin{itemize}
-\item Realização de experimento quantitativo de segmentação e classificação de dados. Este estudo utilizou uma base disponível no site kaggle\cite{KAGGLE} com mais de 800 mil registros. Ela possui informações de perfil de mutuários, detalhes das transações, entre outros. Pertence a Loan Club, uma empresa de empréstimos com um sistema online.
+\item Realização de experimento quantitativo de segmentação e classificação de dados. Este estudo utilizou uma base disponível no site kaggle\cite{KAGGLE} com mais de 800 mil registros. Ela possui informações de perfil de mutuários a detalhes das transações. Pertence a Loan Club, uma empresa de empréstimos com um sistema online.
 
 \item A análise consiste em:
 \begin{itemize}
@@ -189,7 +189,7 @@
 \end{itemize}
 \item Classificação
 \begin{itemize}
-\item A RL é um modelo supervisionado que estuda a relação entre variáveis, com o intuito de predizer a ocorrência de eventos. Ao ser treinado, a RL gera uma fórmula que pode classificar dados usando como base o odd ratios ou as chances de que um determinado evento ocorra\cite{HASTIE}. 
+\item A RL é um modelo supervisionado que estuda a relação entre variáveis com o intuito de predizer a ocorrência de eventos. Ao ser treinado, a RL gera uma fórmula que pode classificar dados usando como base o \emph{odd ratios}, isto é, as chances de que um determinado evento ocorra\cite{HASTIE}. 
 
 \begin{equation}
   \label{eq:t}
@@ -321,7 +321,7 @@
 \item Classificação
 
 \begin{itemize}
-\item Baseado na clusterização realizada pelo K médias, treinamos 80\% da base com RL e RF e executamos uma classificação sobre os 20\% restantes
+\item Baseado na clusterização realizada pelo KM, utilizou-se uma \emph{Cross Validation} treinando 80\% da base com RL e RF e classificando os 20\% restantes
 
 \end{itemize}
 
@@ -348,14 +348,14 @@
         \caption{Confusion Matrices}
     \begin{subfigure}[t]{0.42\textwidth}
         \centering
-\includegraphics[width=1\linewidth]{cm-rl.png}
+\includegraphics[width=1\linewidth]{CM-RL-abs.png}
 
         \caption{Confusion Matrix da RL}
     \end{subfigure}%
     ~ 
     \begin{subfigure}[t]{0.43\textwidth}
         \centering
-        \includegraphics[width=1\linewidth]{cm-tree.png}
+        \includegraphics[width=1\linewidth]{CM-RF-abs.png}
         \caption{Confusion matrix da RF}
     \end{subfigure}
 
