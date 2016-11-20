@@ -13,11 +13,11 @@
 
 \chapter{Tabela de dados}
 
-Para o caso do Loan Club, nem todas as variáveis foram utilizadas. Isto se deve ao fato de que algumas das variáveis em questão são categóricas, outras que representam alguma descrição. Tratam-se de campos que provem informações substanciais mais que para o escopo deste trabalho foram desconsideradas. No caso de variáveis categóricas, seria possível uma conversão para variáveis dummies, mas que para o caso do k médias não devem ser consideradas. Já para os campos que possuem uma informação textual, existem algoritmos que podem fazer análises do conteúdo como \"word to vec\" ou \"bag of words\".
+Para o caso do \emph{Loan Club}, nem todas as variáveis foram utilizadas. Isto se deve ao fato de que algumas das variáveis em questão são categóricas, outras que representam alguma descrição. Tratam-se de campos que provem informações substanciais mais que para o escopo deste trabalho foram desconsideradas. No caso de variáveis categóricas, seria possível uma conversão para variáveis \emph{dummies}, mas que para o caso do K Médias não devem ser consideradas. Já para os campos que possuem uma informação textual, existem algoritmos que podem fazer análises do conteúdo como \emph{word to vec} ou \emph{bag of words}.
 
  \label{tab:daypack}
     \begin{tabularx}{\textwidth}{p{.3\textwidth}X}
-    \caption{Tabela de campos utilizados para a analise do banco de dados Loan Club}\\
+    \caption{Tabela de campos utilizados para a an\'alise do banco de dados \emph{Loan Club}}\\
     \toprule
     \textbf{Coluna} & \textbf{Descrição} \\[6pt]
     \midrule
@@ -25,13 +25,13 @@ Para o caso do Loan Club, nem todas as variáveis foram utilizadas. Isto se deve
 
 funded\textunderscore amnt & Total do montante comprometido para aquele empr\'estimo at\'e este momento\\
 funded\textunderscore amnt\textunderscore inv & Total do montante comprometido pelos investidores para aquele empr\'estimo at\'e este momento\\
-grade & Nota atribu\'ida pelo Loan Club\\
+grade & Nota atribu\'ida pelo \emph{Loan Club}\\
 loan\textunderscore amnt & A quantia do empr\'estimo do mutu\'ario, podendo ter eventualmente descontos pelo departamento de cr\'edito\\
 term & Quantidade de pagamentos do empr\'estimos que pode ser de 36 ou 60 meses\\
 int\textunderscore rate & Taxa de juros do empr\'estimo\\
 installment & Pagamento devido pelo tomador de empr\'estimo\\
 annual\textunderscore inc & Renda anual relatada pelo devedor durante o cadastro\\
-dti\textunderscore joint & A raz\~ao entre a quantia total de d\'ividas paga pelos co-mutu\'arios (desconsiderando hipotecas e o empr\'estimo feito pelo Loan Club) dividido pela renda mensal dos co-mutu\'arios\\
+dti\textunderscore joint & A raz\~ao entre a quantia total de d\'ividas paga pelos co-mutu\'arios (desconsiderando hipotecas e o empr\'estimo feito pelo \emph{Loan Club}) dividido pela renda mensal dos co-mutu\'arios\\
 delinq\textunderscore 2yrs & Incid\^encias de inadimpl\^encia (eventos ocorridos dentro de 30 dias) dentro de um per\'iodo de 2 anos\\
 inq\textunderscore last\textunderscore 6mths & Quantidade de pedidos de empr\'estimos (excluindo carros e hipotecas)\\
 open\textunderscore acc & N\'umero de linhas de cr\'editos abertas para o mutu\'ario\\
@@ -55,7 +55,7 @@ recoveries & valor bruto recuperado de \"charge off\" verificados \\
 
  \label{tab:daypack}
     \begin{tabularx}{\textwidth}{p{.3\textwidth}X}
-    \caption{Tabela de campos disponíveis em Loan Club e que n\~ao foram utilizados}\\
+    \caption{Tabela de campos disponíveis em \emph{Loan Club} e que n\~ao foram utilizados}\\
     \toprule
     \textbf{Coluna} & \textbf{Descrição} \\[6pt]
     \midrule
@@ -70,9 +70,9 @@ emp\textunderscore title & Descri\c c\~ao breve do emprego do devedor\\
 fico\textunderscore range\textunderscore high & Limite superior do score proveniente do FICO a qual o devedor est\'a enquadrado\\
 fico\textunderscore range\textunderscore low & Limite inferior do score proveniente do FICO a qual o devedor est\'a enquadrado\\
 home\textunderscore ownership & Indica o status do tipo de moradia do tomador de empr\'estimo RENT (aluguel), OWN (casa pr\'opria), MORTGAGE (hipoteca), OTHER (outros)\\
-id & vari\'avel de identifica\c c\~ao de cada cliente da Loan Club\\
-initial\textunderscore list\textunderscore status & Status inicial e interno da Loans Club do mutu\'ario. Varia entre W e F\\
-is\textunderscore inc\textunderscore v & Indica se a renda foi verificada pela Loan Club ou n\~ao ou se a fonte de renda foi verificada\\
+id & vari\'avel de identifica\c c\~ao de cada cliente da \emph{Loan Club}\\
+initial\textunderscore list\textunderscore status & Status inicial e interno da \emph{Loan Club} do mutu\'ario. Varia entre W e F\\
+is\textunderscore inc\textunderscore v & Indica se a renda foi verificada pela \emph{Loan Club} ou n\~ao ou se a fonte de renda foi verificada\\
 issue\textunderscore d & M\^es no qual o empr\'estimo foi financiado\\
 last\textunderscore credit\textunderscore pull\textunderscore d & O m\^es mais recente desde que o mutu\'ario adquiriu cr\'edito no financiamento\\
 last\textunderscore fico\textunderscore range\textunderscore high & O limite superior do \'ultimo score do FICO em que o mutu\'ario foi classificado\\
@@ -83,13 +83,13 @@ mths\textunderscore since\textunderscore last\textunderscore delinq & N\'umero d
 mths\textunderscore since\textunderscore last\textunderscore major\textunderscore derog & Meses desde a pior nota (em um per\'iodo de 90 dias)\\
 mths\textunderscore since\textunderscore last\textunderscore record & N\'unmero de meses desde o \'ultimo registro de informa\c c\~oes p\'ublicas (anteced\^encia criminal)\\
 next\textunderscore pymnt\textunderscore d & Data do pr\'oximo pagamento\\
-policy\textunderscore code & C\'odigo interno da Loans Club, variando entre 1 e 2\\
+policy\textunderscore code & C\'odigo interno da \emph{Loan Club}, variando entre 1 e 2\\
 purpose & Categoria escolhida pelo mutu\'ario no momento da solicita\c c\~ao do cr\'edito\\
 pymnt\textunderscore plan & Indica se o pagamento do plano est\'a em dia\\
 revol\textunderscore util & Taxa de utiliza\c c\~ao da linha de cr\'edito (revolving account)\\
 sub\textunderscore grade & Sub nota atribu\'ida pelo Loan Club\\
 title & Tipo de empr\'estimo realizado pelo mutu\'ario\\
-verified\textunderscore status\textunderscore joint & Indica se a renda dos co-mutu\'arios foi verificada pela Loan Club, se n\~ao foi ou se a fonte de renda foi verificada\\
+verified\textunderscore status\textunderscore joint & Indica se a renda dos co-mutu\'arios foi verificada pela \emph{Loan Club}, se n\~ao foi ou se a fonte de renda foi verificada\\
 zip\textunderscore code & Os primeiros 3 n\'umeros de c\'odigo postal fornecida pelo mutu\'ario\\
 open\textunderscore acc\textunderscore 6m & N\'umero de neg\'ocios abertos nos \'ultimos 6 meses\\
 open\textunderscore il\textunderscore 6m & N\'umero de opera\c c\~oes de financiamento ativos \\
@@ -114,14 +114,17 @@ tot\textunderscore cur\textunderscore bal & Saldo total de todas as contas do mu
 \end{tabularx}
 
 
-\chapter{Análise dos clusters vs grades}
+\chapter{Análise dos \emph{clusters} vs \emph{grades}}
 
-Durante os estudos, foram feitos algumas análises com box plots para entender os clusters gerados. Também foram feitos uma comparação com os clientes de acordo com os seus grades para ver se era possível encontrar algum padrão nos registros. Detectar padrões de dados é uma tarefa complexa e visto que não se trata do foco do trabalho, o estudo limitou-se a verificar apenas alguma ocorrência de padrão.
+Durante os estudos, foram feitas algumas análises com \emph{boxplots} para entender os \emph{clusters} gerados. Também foram feitos uma comparação com os clientes de acordo com os seus grades para ver se era possível encontrar algum padrão nos registros. Detectar padrões de dados é uma tarefa complexa e visto que não se trata do foco do trabalho, o estudo limitou-se a verificar apenas alguma ocorrência de padrão.
+
+Nos anexos, estão os outros \emph{boxplots} gerados que não constam na parte de Resultados.
+
 \clearpage
 
 \begin{figure*}[t!]
     \centering
-        \caption{collection\textunderscore recovery\textunderscore fee }
+        \caption{\emph{Boxplots} de collection\textunderscore recovery\textunderscore fee }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
             \caption{Cluster }
@@ -131,13 +134,13 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
         ~ 
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
-            \caption{Grade }
+            \caption{Grade}
    
             \centerline{\includegraphics[width=1\textwidth]{img/collection_recovery_fee_by_grade}}
 
         \end{subfigure}
         \\
-                \caption{funded\textunderscore amnt}
+                \caption{\emph{Boxplots} de funded\textunderscore amnt}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -155,7 +158,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{funded\textunderscore amnt\textunderscore inv }
+        \caption{\emph{Boxplots} de funded\textunderscore amnt\textunderscore inv }
         \begin{subfigure}[t]{0.45\textwidth}
  
             \centerline{\includegraphics[width=1\textwidth]{img/funded_amnt_inv_by_cluster}}
@@ -166,7 +169,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
         \\
-                \caption{installment}
+                \caption{\emph{Boxplots} de installment}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -186,7 +189,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{term\textunderscore float\textunderscore fee }
+        \caption{\emph{Boxplots} de term\textunderscore float\textunderscore fee }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -200,7 +203,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
         \\
-                \caption{loan\textunderscore amnt}
+                \caption{\emph{Boxplots} de loan\textunderscore amnt}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -214,7 +217,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
 \\
-                \caption{int\textunderscore rate\textunderscore float}
+                \caption{\emph{Boxplots} de int\textunderscore rate\textunderscore float}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -233,7 +236,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{annual\textunderscore inc }
+        \caption{\emph{Boxplots} de annual\textunderscore inc }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -247,7 +250,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
         \\
-                \caption{delinq\textunderscore 2yrs}
+                \caption{\emph{Boxplots} de delinq\textunderscore 2yrs}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -261,7 +264,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
 \\
-                \caption{recoveries}
+                \caption{\emph{Boxplots} de recoveries}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -279,7 +282,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{open\textunderscore acc }
+        \caption{\emph{Boxplots} de open\textunderscore acc }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -293,7 +296,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
         \\
-                \caption{pub\textunderscore rec}
+                \caption{\emph{Boxplots} de pub\textunderscore rec}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -307,7 +310,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
 \\
-                \caption{inq\textunderscore last\textunderscore 6mths}
+                \caption{\emph{Boxplots} de inq\textunderscore last\textunderscore 6mths}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -324,7 +327,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{revol\textunderscore bal }
+        \caption{\emph{Boxplots} de revol\textunderscore bal }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -338,7 +341,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
         \\
-                \caption{total\textunderscore acc}
+                \caption{\emph{Boxplots} de total\textunderscore acc}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -352,7 +355,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
 \\
-                \caption{out\textunderscore prncp}
+                \caption{\emph{Boxplots} de out\textunderscore prncp}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -370,7 +373,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{total\textunderscore pymnt }
+        \caption{\emph{Boxplots} de total\textunderscore pymnt }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -384,7 +387,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
         \\
-                \caption{out\textunderscore prncp\textunderscore inv}
+                \caption{\emph{Boxplots} de out\textunderscore prncp\textunderscore inv}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -398,7 +401,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
 \\
-                \caption{total\textunderscore rec\textunderscore int }
+                \caption{\emph{Boxplots} de total\textunderscore rec\textunderscore int }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -417,7 +420,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{total\textunderscore pymnt\textunderscore inv }
+        \caption{\emph{Boxplots} de total\textunderscore pymnt\textunderscore inv }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -431,7 +434,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
         \\
-                \caption{last\textunderscore pymnt\textunderscore amnt}
+                \caption{\emph{Boxplots} de last\textunderscore pymnt\textunderscore amnt}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -445,7 +448,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
 \\
-                \caption{total\textunderscore rec\textunderscore prncp }
+                \caption{\emph{Boxplots} de total\textunderscore rec\textunderscore prncp }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -464,7 +467,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \begin{figure*}[t!]
     \centering
-        \caption{total\textunderscore rec\textunderscore late\textunderscore fee }
+        \caption{\emph{Boxplots} de total\textunderscore rec\textunderscore late\textunderscore fee }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -478,7 +481,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
         \end{subfigure}
                 \\
-                \caption{dti}
+                \caption{\emph{Boxplots} de dti}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -502,7 +505,7 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 
 \centering
-\caption{Correlacao entre variaveis}
+\caption{Correla\c c\~ao entre vari\'aveis}
 \label{my-label}
 
 \scriptsize
@@ -538,53 +541,48 @@ Durante os estudos, foram feitos algumas análises com box plots para entender o
 
 \end{landscape}
 
-\chapter{Silhoutte score}
+\chapter{\emph{Silhoutte score}}
 
 
-É possível fazer uma análise para verificar a quantidade de clusters ideal para a amostragem. A cada execução do algoritmo também calcula-se um score chamado sillhouette, que é uma forma de interpretar e mensurar a validação da consistência dos clusters, além de fornecer uma representação gráfica de quão bem os dados estão inseridos nos clusters (coesão) em comparação a outros (separação). Esse score varia de -1 a 1, na qual quanto mais próximo de 1, mais bem encaixado encontra-se o elemento com seu respectivo cluster.
+É possível fazer uma análise para verificar a quantidade de \emph{clusters} ideal para a amostragem. A cada execução do algoritmo também calcula-se um \emph{score} chamado \emph{sillhouette}, que é uma forma de interpretar e mensurar a validação da consistência dos \emph{clusters}, além de fornecer uma representação gráfica de quão bem os dados estão inseridos nos \emph{clusters} (coesão) em comparação a outros (separação). Esse \emph{score} varia de -1 a 1, na qual quanto mais próximo de 1, mais bem encaixado encontra-se o elemento com seu respectivo \emph{cluster}.
 
-\begin{figure}[ht]
-\caption{Analise para 2 clusters }
+\begin{figure}[!ht]
+\caption{An\'alise de 2 \emph{clusters} }
 \centerline{\includegraphics[width=.85\textwidth]{img/silhoute2}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-\begin{figure}[ht]
-\caption{Analise dos 3 clusters }
+\begin{figure}[!ht]
+\caption{An\'alise de 3 \emph{clusters} }
 \centerline{\includegraphics[width=.85\textwidth]{img/silhoute3}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
 
-\begin{figure}[ht]
-\caption{Analise dos 4 clusters }
+\begin{figure}[!ht]
+\caption{An\'alise de 4 \emph{clusters} }
 \centerline{\includegraphics[width=.85\textwidth]{img/silhoute4}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-A princípio o silhoutte score seria uma métrica de avaliação para definir a quantidade ideal de clusters para a execução do K Médias. Contudo, essa métrica não foi implementada no Spark, sendo útil apenas para uma análise exploratória.
+A princípio o \emph{silhoutte score} seria uma métrica de avaliação para definir a quantidade ideal de \emph{clusters} para a execução do K Médias. Contudo, essa métrica não foi implementada no \emph{Apache Spark}, sendo útil apenas para uma análise exploratória.
 
-A primeira tentativa foi de separar a amostra em 2 clusters. Para essa divisão, foi obtida um score de 0,6428.
-
-Para a divisão em 3 clusters, foi obtida a nota 0,6188.
-
-
-Para a divisão em 4 clusters, foi obtida a nota 0,6099.
+A primeira tentativa foi de separar a amostra em 2 \emph{clusters}. Para essa divisão, foi obtida uma de 0,6428. Para a divisão em 3 \emph{clusters}, foi obtida 0,6188. Já para 4 \emph{clusters}, 0,6099.
 
 
 \chapter{Diagrama de Voronoi}
 
-O diagrama de Voronoi é uma ferramenta utilizada para visualizar problemas que envolvem conceito de proximidade em um plano. Baseia-se no fato de que em um plano, existem pontos que estão mais próximos de uma fonte geradora do que de outra fonte, o resultado é um polígono de cujas distâncias entre a fonte e ponto são as menores possíveis (MOURA, 2003). Portanto, é possível ter uma visualização espacial da distribuição dos registros, bem como os centróides.
+O diagrama de Voronoi é uma ferramenta utilizada para visualizar problemas que envolvem conceito de proximidade em um plano. Baseia-se no fato de que em um plano, existem pontos que estão mais próximos de uma fonte geradora do que de outra fonte, o resultado é um polígono de cujas distâncias entre a fonte e ponto são as menores possíveis. Portanto, é possível ter uma visualização espacial da distribuição dos registros, bem como os centróides.
 
 \begin{figure}[!ht]
-\caption{Visualização dos pontos no diagrama de Voronoi com os dados sem normaliza\c cao}
+\caption{Visualização dos pontos no diagrama de Voronoi com os dados sem normaliza\c c\~ao}
 \centerline{\includegraphics[width=0.5\textwidth]{img/voronoi}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-A imagem mostra um diagrama de Voronoi. Os polígonos externos se estendem infinitamente no plano, logo são desenhados como figuras abertas. Cada aresta do diagrama constitui um lugar onde os pontos são equidistantes em relação à dois locais. Os vértices dos polígonos estão ligados outras arestas sendo pontos de equidistânciacada região definidas.
+A imagem mostra um diagrama de Voronoi. Os polígonos externos se estendem infinitamente no plano, logo são desenhados como figuras abertas. Cada aresta do diagrama constitui um lugar onde os pontos são equidistantes em relação a dois locais. Os vértices dos polígonos estão ligados outras arestas sendo pontos de equidistânciacada região definidas.
 
-Para a visualização desse diagrama, foi necessário realizar uma operação de redução de dimensionalidade de variáveis para 2 features. Neste estudo, aplicamos a construção do diagrama para 8000 registros. Embora a redução de dimensionalidade possa distorcer os dados, é possível ter uma visualização de como os dados estão distribuídos num espaço bidimensional. No contexto de Big Data, a geração de diagrama de voronoi pode ajudar numa análise inicial, sendo inviável gerá-lo para uma base completa e com muitos dados.
+Para a visualização desse diagrama, foi necessário realizar uma operação de redução de dimensionalidade de variáveis para 2 \emph{features}. Neste estudo, aplicamos a construção do diagrama para 8000 registros. Embora a redução de dimensionalidade possa distorcer os dados, é possível ter uma visualização de como os dados estão distribuídos num espaço bidimensional. No contexto de \emph{Big Data}, a geração de Diagrama de Voronoi pode ajudar numa análise inicial, sendo inviável gerá-lo para uma base completa e com muitos dados.
 
 % ---
 %\chapter{Morbi ultrices rutrum lorem.}

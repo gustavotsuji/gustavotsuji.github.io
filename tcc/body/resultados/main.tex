@@ -4,33 +4,34 @@
 \part{Resultados}
 % ----------------------------------------------------------
 
-\chapter{Case: Loan Club}
+\chapter{\emph{Case: Loan Club}}
 
-\section{Loan Club}
+\section{\emph{Loan Club}}
 
-A Loan Club é um marketplace de créditos online. Trata-se de uma plataforma que reune pessoas que gostariam de realizar um empréstimo e outras que possuem um capital a investir. Em geral, são empréstimos pessoais, de negócios ou para procedimentos médicos. A proposta é oferecer um serviço de fácil acesso via dispositivos mobiles a taxa baixas, além de garantir um retorno que se ajuste a expectativa do investidor. Dessa forma, operam de forma menos burocrática do que um banco mas assumindo os riscos de uma instituição financeira.
+A \emph{Loan Club} é um \emph{marketplace} de créditos \emph{online}. Trata-se de uma plataforma que reune pessoas que gostariam de realizar um empréstimo e outras que possuem um capital a investir. Em geral, são empréstimos pessoais, de negócios ou para procedimentos médicos. A proposta é oferecer um serviço de fácil acesso via dispositivos mobiles a taxa baixas, além de garantir um retorno que se ajuste a expectativa do investidor. Dessa forma, operam de forma menos burocrática do que um banco mas assumindo os riscos de uma instituição financeira.
 
-\section{Kaggle}
+\section{\emph{Kaggle}}
 
-Kaggle é uma plataforma criada em 2010 que reune ferramentas e estudos sobre modelagem preditiva. Também viabiliza competições de temas relacionados a análise preditiva. Com o intuito de compartilhar conhecimento, qualquer interessado pode acessar dados de empresas para aplicar estudos ou gerar novos modelos. Além disso, o Kaggle também tem sido usado como uma forma de recrutar cientistas de dados. A base da Loan Club foi disponibilizado no Kaggle e usado como objeto de estudo deste trabalho.
+\emph{Kaggle} é uma plataforma criada em 2010 que reune ferramentas e estudos sobre modelagem preditiva. Também viabiliza competições de temas relacionados a análise preditiva. Com o intuito de compartilhar conhecimento, qualquer interessado pode acessar dados de empresas para aplicar estudos ou gerar novos modelos. Além disso, o \emph{Kaggle} também tem sido usado como uma forma de recrutar cientistas de dados. A base da \emph{Loan Club} foi disponibilizado no Kaggle e usado como objeto de estudo deste trabalho.
 
 \section{Tecnologias}
 
-\subsection{Scikit Learn}
+\subsection{\emph{Scikit Learn}}
 
-O Scikit Learn é um framework desenvolvido em Python voltado para Data Science. Com mais de 30 contribuidores ativos, possui implementação de diversos algoritmos e de ferramentas que auxiliam desde a análise dos dados até na execução de tarefas como clusterização e classificação até a execução dos algoritmos de Machine Learning, além de disponiblizar integrações com programas visuais que facilitam muito a compreensão. 
+O \emph{Scikit Learn} é um \emph{framework} desenvolvido em \emph{Python} voltado para \emph{Data Science}. Com mais de 30 contribuidores ativos, possui implementação de diversos algoritmos e de ferramentas que auxiliam desde a análise dos dados até a execução de tarefas como clusterização e classificação, além de disponibilizar integrações com programas visuais que facilitam muito a compreensão. 
 
 
-\subsection{Apache Spark}
+\subsection{\emph{Apache Spark}}
 
-O Apache Spark é uma biblioteca com diversas ferramentas, entre elas que viabiliza a escalabilidade da execução de algoritmos de Machine Learning. Os algoritmos estudados (em especial o K Médias) são robustos e possuem uma grande carga de cáculos. Para bases grandes, o Scikit Learn não é capaz de executar em tempo satisfatório. O Apache Spark, por outro lado, oferece uma solução que possibilita uma maior rapidez na execução. Também é possível configurá-lo para que os algoritimos sejam executados em tempo real com alimentação contínua de dados. Contudo tal abordagem não será contemplada por não se tratar do foco do estudo.
+O \emph{Apache Spark} é uma biblioteca com diversas ferramentas e viabiliza a escalabilidade da execução de algoritmos de \emph{Machine Learning}. É possível utilizar mais de linguagem de programação para desenvolver os programas. Neste trabalho, foi escolhido Scala.
+Os algoritmos estudados (em especial o K Médias) são robustos e possuem uma grande carga de cálculos. Para bases grandes, o \emph{Scikit Learn} não é capaz de executar em tempo satisfatório. O \emph{Apache Spark}, por outro lado, oferece uma solução que possibilita uma maior rapidez na execução. Também é possível configurá-lo para que os algoritimos sejam executados em tempo real com alimentação contínua de dados. Contudo tal abordagem não será contemplada por não se tratar do foco do estudo.
 
 \section{Preparação da base}
 
-Como uma base de uma empresa, o Loan Club apresenta diversos problemas como:
+Como uma base de uma empresa, a \emph{Loan Club} apresenta diversos problemas como:
 
-\subsection{Missing values}
-Inerente a uma base comum de qualquer empresa, missing values ocorre quando uma informação não consta na base. Esse fato pode influenciar a conclusão de uma análise porque a ausência de dados pode distorcê-la. Para diminuir o impacto desse tipo de problema, é necessário verificar a natureza da informação. Elas são oriundas desde problemas do armazenamento da informação, provenientes desde erros humanos, falta de informação ou em decorrência de algum problema ou inconsistência no sistema de informação.
+\subsection{\emph{Missing values}}
+Inerente a uma base comum de qualquer empresa, \emph{missing values} ocorrem quando uma informação não consta na base. Assim como exemplifica \citeonline[p. 311]{HASTIE} esse fato pode influenciar a conclusão de uma análise porque a ausência de dados pode distorcê-la. Para diminuir o impacto desse tipo de problema, é necessário verificar a natureza da informação. Esses erros são oriundos desde problemas do armazenamento da informação, provenientes de erros humanos, falta de informação ou em decorrência de alguma falha ou inconsistência no sistema de informação.
 
 Para os algoritmos, é necessário que algum valor seja colocado para a realização dos cálculos. Há diversas abordagens, como substituição por um valor padrão que faça sentido para cada informação. Em alguns casos, são usados valores como 0, média ou moda dos campos respectivos das observações. Contudo, é evidente que cada uma dessas técnicas enviesa e modifica o resultado. Neste estudo, desprezamos as informações que possuiam altas ocorrências de missing values e para as que possuiam menos de 1\% de missing values, foi preenchido com 0. 
 
@@ -38,8 +39,8 @@ Para os algoritmos, é necessário que algum valor seja colocado para a realiza�
 Alguns dados como int\_rate ou o term estavam armazenados como tipo texto, sendo inviável a execução do algoritmo do K Médias. Para isso, foram removidos termos de texto e converteu-se os valores em número.
 
 
-\subsection{Remoção das variáveis categóricas}
-O algoritmo de K Médias, a princípio, não é executado com uma base que contenha variáveis categóricas. É possível adaptar a base executando uma transformação, tornando-as variáveis dummies. Contudo, não iremos considerar as variáveis categóricas por haver uma carga considerável e inviável de trabalho no escopo deste estudo. A Random Forest consegue lidar com variáveis categóricas mas também necessita de algumas transformações mas que não foram feitas neste trabalho.
+\subsection{Variáveis categóricas}
+O algoritmo de K Médias, a princípio, não é executado com uma base que contenha variáveis categóricas. É possível adaptar a base executando uma transformação, tornando-as variáveis \emph{dummies}. Contudo, não iremos considerar as variáveis categóricas por haver uma carga considerável e inviável de trabalho no escopo deste estudo. A \emph{Random Forest} consegue lidar com variáveis categóricas mas também necessita de algumas transformações. Contudo, elas não foram feitas neste trabalho.
 
 
 \section{Avaliação dos algoritmos}
@@ -53,15 +54,15 @@ Para a análise descritiva, pode-se utilizar gráficos como histogramas e boxplo
 
 \subsection{Classificação}
 
-\subsubsection{Cross Validation}
+\subsubsection{\emph{Cross Validation}}
 
-A Cross Validation é uma técnica que permite verificar a acurácia de um modelo preditivo. A idéia é particionar a base para se criar um modelo de treinamento e executar um teste. Essa partição é mutualmente exclusiva, ou seja, os dados que são usados para o treinamento não são reutilizados no teste. Neste caso, a Cross Validation será executada nos algoritmos de classificação.
+A \emph{Cross Validation} é uma técnica que permite verificar a eficiência de um modelo preditivo \cite[p. 241]{HASTIE}. A idéia é particionar a base para se criar um modelo de treinamento e executar um teste. Essa partição é mutualmente exclusiva, ou seja, os dados que são usados para o treinamento não são reutilizados no teste. Neste caso, a \emph{Cross Validation} será executada nos algoritmos de classificação.
 
 
 \subsubsection{Métricas}
-O cálculo de métricas para os algoritmos são importantes para avaliar o desempenho da segmentação e da classificação. Cada métrica pode ser mais conveniente para cada tipo de problema ou natureza dos dados. Neste trabalho iremos abordar algumas métricas simples.
+O cálculo de métricas para os algoritmos são importantes para avaliar o desempenho da classificação. Cada métrica pode ser mais conveniente para cada tipo de problema ou natureza dos dados. Neste trabalho iremos abordar algumas métricas simples mas iremos fazer uma análise profunda.
 
-\subsubsection{Precision}
+\subsubsubsection{\emph{Precision}}
 
 É calculado a partir da proporção dos verdadeiros positivos sobre a quantidade de todos elementos que foram classificados na mesma classe (soma dos verdadeiros positivos e falsos positivos)
 
@@ -72,7 +73,7 @@ Precision &= \frac{VP}{VP + FP}
   \end{aligned}  
 \end{equation}
 
-\subsubsection{Recall}
+\subsubsubsection{\emph{Recall}}
 
 É a proporção de elementos foram classificados corretamente em uma classe 
 sobre a quantidade de todos elementos que realmente pertencem a esta classe mesmo que estejam em outras (soma dos verdadeiros positivos e falsos negativos). 
@@ -84,11 +85,11 @@ Recall &= \frac{VP}{VP + FN}
   \end{aligned}  
 \end{equation}
 
-\subsubsection{Falso Positivo}
-\lipsum[27]
+\subsubsubsection{Falso Positivo}
+O Falso Positivo corresponde aos elementos que foram classificados como pertencentes a uma dada classe mas que, quando na verdade, não pertencem a essa classe.
 
-\subsubsection{F-measure}
-O F-measure é a média harmônica entre precisão e recall. Trata-se de uma medida que consegue avaliar melhor conjunto de dados que possuem uma distribuição das classes desproporcionais. 
+\subsubsubsection{\emph{F-measure}}
+O F-measure é a média harmônica entre \emph{precision} e \emph{recall}. Trata-se de uma medida que consegue avaliar melhor conjunto de dados que possuem uma distribuição das classes desproporcionais. 
 
 \begin{equation}
   \label{eq:precision}
@@ -97,7 +98,7 @@ F-measure &= (1 + \beta^{2})\frac{precision*recall}{\beta^{2}*precision + recall
   \end{aligned}  
 \end{equation}
 
-\subsubsection{Confusion Matrix}
+\subsubsection{\emph{Confusion Matrix}}
 Trata-se de uma matriz quadrada na qual 
 as colunas representam as classes as quais o elementos realmente pertencem enquanto as linhas representa a saída do classificador. Cada célula fornece a quantidade de elementos classificados.
 
@@ -105,21 +106,19 @@ as colunas representam as classes as quais o elementos realmente pertencem enqua
 
 \subsection{K Médias}
 
-O objetivo de uma clusterização é para dado um conjunto de dados e agrupar os elementos em grupos baseados na similaridade entre eles. Com a base de dados da Loan Club, já contamos com uma divisão feita por ela mesma. Dessa forma, uma hipótese a ser testada é constatar alguma relação nos grupos gerados pelo K Médias com alguma característica. Neste trabalho, iremos usar as notas atribuídas por ela mesma, armazenada no campo \emph{grade}.
+O objetivo de uma clusterização é para dado um conjunto de dados e agrupar os elementos em grupos baseados na similaridade entre eles. Com a base de dados da \emph{Loan Club}, já contamos com uma divisão feita por ela mesma. Dessa forma, uma hipótese a ser testada é constatar alguma relação nos grupos gerados pelo K Médias com alguma característica. Neste trabalho, iremos usar as notas atribuídas por ela mesma, armazenada no campo \emph{grade}.
 
 Para a execução do K Médias, executou-se uma normalização dos dados. Ela é recomendada pois como os dados possuem diversas informações, é possível que haja grandes disparidades de intervalos. Assim quando se normaliza todos os dados, a idéia é uniformizar esses intervalos para que não haja muita interferência nos cálculos do algoritmo. 
 
-\subsubsection{Scikit Learn}
+Pelo \emph{Scikit Learn}, é possível criar gráficos de \emph{boxplot} para visualizar em quais campos houve uma separação mais clara do banco. Inicialmente foi feito criado uma amostra de 8000 registros na qual foi executado o K Médias. Esses gráficos estão disponível em Anexos na seção Análise dos clusters vs grades. Junto desses gráficos, há um comparativo com \emph{boxplots} gerados a partir dos grades estabelecidos pela \emph{Loan Club}. Dessa forma, pode-se ver que existe uma relação entre os \emph{clusters} e os \emph{grades}.
 
-Pelo Scikit Learn, é possível criar gráficos de boxplot para visualizar em quais campos houve uma separação mais clara do banco. Inicialmente foi feito criado uma amostra de 8000 registros na qual foi executado o K Médias. Esses gráficos estão disponível em Anexos na seção Análise dos clusters vs grades. Junto desses gráficos, há um comparativo com boxplots gerados a partir dos grades estabelecidos pela Loan Club. Dessa forma, pode-se ver que existe uma relação entre os clusters e os grades.
-
-Campos como o funded\_amnt, installment, loan\_amnt, total\_pymnt deixam muito claro a segregação dos clusters, enquanto que os outros não foram capazes de mostrar a diferença entre os grupos.
-Não foi possível criar esses gráficos para a base toda pois seria necessário uma integração entre as ferramentas do Scikit Learn e do Apache Spark uma vez que não foi possível clusterizar toda a base via Scikit Learn. Contudo, devemos ressaltar que dentro de um contexto de Big Data nem sempre será possível utilizar as ferramentas de visualização por conta da quantidade de dados.
+Campos como o funded\_amnt, installment, loan\_amnt, total\_pymnt deixam muito claro a segregação dos \emph{clusters}, enquanto que os outros não foram capazes de mostrar a diferença entre os grupos.
+Não foi possível criar esses gráficos para a base toda pois seria necessário uma integração entre as ferramentas do \emph{Scikit Learn} e do \emph{Apache Spark} uma vez que não foi possível clusterizar toda a base via \emph{Scikit Learn}. Contudo, devemos ressaltar que dentro de um contexto de \emph{Big Data} nem sempre será possível utilizar as ferramentas de visualização por conta da quantidade de dados.
 
 
 \begin{figure*}[!ht]
     \centering
-        \caption{funded\textunderscore amnt }
+        \caption{\emph{Boxplots} de funded\textunderscore amnt }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
             \caption{Cluster }
@@ -138,7 +137,7 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
 
 \begin{figure*}[!ht]
     \centering        
-                \caption{installment}
+                \caption{\emph{Boxplots} de installment}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -157,7 +156,7 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
 
 \begin{figure*}[!ht]
     \centering
-        \caption{loan\textunderscore amnt }
+        \caption{\emph{Boxplots} de loan\textunderscore amnt }
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
             \caption{Cluster }
@@ -178,7 +177,7 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
 
 \begin{figure*}[!ht]
     \centering
-                \caption{total\textunderscore pymnt}
+                \caption{\emph{Boxplots} de total\textunderscore pymnt}
         \begin{subfigure}[t]{0.45\textwidth}
             \centering
 
@@ -194,16 +193,14 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
 
 \end{figure*}
 
-\subsubsection{Apache Spark}
-
-Pelo Apache Spark, é possível calcular algumas váriaveis como a média, o desvio padrão, mínimo e máximo sobre a base completa. Na tabela abaixo, comparamos os 4 componentes de cada cluster.
+Pelo \emph{Apache Spark}, é possível calcular algumas váriaveis como a média, o desvio padrão, mínimo e máximo sobre a base completa. Na tabela abaixo, comparamos os 4 componentes de cada \emph{cluster}.
 
 \pagebreak
 
 \begin{table}
 \tiny
 \centering
-        \caption{Média, Desvio Padrão, Mínimo, Máximo dos Clusters}
+        \caption{Média, Desvio Padrão, Mínimo, Máximo dos \emph{clusters}}
         \label{multiprogram}
         \begin{tabular}{c | c c c | c c c | c c c | c c c } \toprule
              Variável & \multicolumn{3}{|c|}{Média} & \multicolumn{3}{|c|}{Desvio Padrão} & \multicolumn{3}{|c|}{Mínimo} & \multicolumn{3}{|c}{Máximo}\\
@@ -237,16 +234,14 @@ Pelo Apache Spark, é possível calcular algumas váriaveis como a média, o des
         \fonte{Dados gerados pelo script}
     \end{table}
 
-Assim como nos boxplots do Anexo, é possível notar pela tabela que algumas variáveis não possuem valores que viabilize a criação de clusters por si só.
-Podemos observar uma nítida diferença entre os clusters 1 e 3, sendo que o cluster 2 possui algumas variáveis mais próximas do cluster 1 e para outras, mais próxima do cluster 3.
+Assim como nos \emph{boxplots} do Anexo, é possível notar pela tabela que algumas variáveis não possuem valores que viabilize a criação de \emph{clusters} por si só.
+Podemos observar uma nítida diferença entre os \emph{clusters} 1 e 3, sendo que o \emph{cluster} 2 possui algumas variáveis mais próximas do \emph{cluster 1} e para outras, mais próxima do \emph{cluster} 3.
 
 
 \subsection{Regressão Logística}
 
 
-\subsubsection{Spark}
-
-A execução da Regressão Logística foi dividida em 2 fases: treinamento do modelo e teste. A base completa foi dividida em 80\% para treino e 20 \% para testes. Para verificar a clssificação, foi considerado a clusterização realizada previamente pelo K Médias. 
+No \emph{Apache Spark}, a execução da Regressão Logística foi dividida em 2 fases: treinamento do modelo e teste. A base completa foi dividida em 80\% para treino e 20 \% para testes. Para verificar a clssificação, foi considerado a clusterização realizada previamente pelo K Médias. 
 
 %\begin{tabular}{ r r r r }
 
@@ -297,54 +292,40 @@ Podemos notar que houve uma classificação com baixos índices de erros, isto �
 \fonte{Tabela gerada pelo script}
 \end{table}
 
-\subsection{Random Forest}
+\subsection{\emph{Random Forest}}
 
 
-\subsubsection{Scikit Learn}
-
-Com uma árvore de decisão tem-se uma representação visual, de fácil interpretação de como é feito a classificação. Foi possível construir uma árvore para ilustrar a árvore do Loan Club. Neste caso, foi feito uma redução de dimensionalidade para 2 features, considerando-se 3 clusters.
+Com uma árvore de decisão tem-se uma representação visual, de fácil interpretação de como é feito a classificação. No \emph{Scikit Learn}, foi possível construir uma árvore para ilustrar a árvore do \emph{Loan Club}. Neste caso, foi feito uma redução de dimensionalidade para 2 \emph{features}, considerando-se 3 \emph{clusters}.
 
 
 
 \begin{figure}[!ht]
-\caption{Estrutura da arvore de decisao com dimensionalidade reduzida para 2 features}
+\caption{Estrutura da \'arvore de decis\~ao reduzida a 2 \emph{features}}
 \centerline{\includegraphics[width=.7\textwidth]{img/loan}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-A árvore para mais de 20 features fica muito maior por conta da quantidade de informações.
+A árvore para mais de 20 \emph{features} fica muito maior por conta da quantidade de informações.
 
 
-Ao gerar uma árvore de classificação, o algoritmo também disponibiliza a relevância das features.
+Ao gerar uma árvore de classificação, o algoritmo também disponibiliza a relevância das \emph{features}.
 
 \begin{figure}[!ht]
-\caption{Features mais relevantes}
+\caption{\emph{Features} mais relevantes}
 \centerline{\includegraphics[width=.7\textwidth]{img/tree-most-important-features}}
 \fonte{Gerado a partir do script}
 \end{figure}
 
-Desta base, é possível notar que 8 destas features possuem maior relevância frente as demais. Isso pode levar a uma redução de dimensionalidade, isto é, as features de menor relevância passam a ser descartadas no treinamento do modelo, o que pode gerar economia de processamento de dados. Por outro lado, isso é válido partindo-se do pressuposto de que a natureza das informações se manterão, o que pode não ser verdade.
+Desta base, é possível notar que 8 destas \emph{features} possuem maior relevância frente as demais. Isso pode levar a uma redução de dimensionalidade, isto é, as features de menor relevância passam a ser descartadas no treinamento do modelo, o que pode gerar economia de processamento de dados. Por outro lado, isso é válido partindo-se do pressuposto de que a natureza das informações se manterão, o que pode não ser verdade.
 
-%
-%\lstinputlisting[language=Python, firstline=37, lastline=45]{
-%load_data.py
-%}
 
-\subsubsection{Apache Spark}
-
-%\begin{figure}[!ht]
-%\caption{Confusion Matrix}
-%\centerline{\includegraphics[width=.6\textwidth]{img/confusionMatrix}}
-%\fonte{Gerado a partir do script}
-%\end{figure}
-
-Assim como na Regressão Logística, a classificação com Random Forest também foi dividida em 2 fases: treinamento do modelo (80 \%) e teste (20 \%). Para verificar a classificação, foi considerado a clusterização realizada previamente pelo K Médias. 
+No \emph{Apache Spark}, assim como na Regressão Logística, a classificação com \emph{Random Forest} também foi dividida em 2 fases: treinamento do modelo (80 \%) e teste (20 \%). Para verificar a classificação, foi considerado a clusterização realizada previamente pelo K Médias. 
 
 
 
 \begin{figure}[!ht]
     \centering
-        \caption{Resultados da clusterização da Random Forest}
+        \caption{Resultados da clusterização da \emph{Random Forest}}
     \begin{subfigure}[t]{0.45\textwidth}
         \centering
 \includegraphics[width=1\linewidth]{CM-RF-abs.png}
@@ -366,7 +347,7 @@ Ao compararmos com a classificação realizada pela Regressão Logística, perce
 
 
 \begin{table}[!ht]
-  \caption{Métricas para a Random Forest}
+  \caption{Métricas para a \emph{Random Forest}}
   \centering
   \begin{tabular}{ c c c c c } \toprule
   Classe & Precisão & Recall  & Falso Positivo & F-measure  \\\midrule

@@ -7,14 +7,14 @@ A classificação é uma análise preditiva com o objetivo de estabelecer modelo
 \subsection{Regressão Linear}
 
 
-A regressão linear é uma modelagem matemática \footnotemark \footnotetext{modelagem matemática é uma representação em fórmulas matemáticas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos} que permite descrever variáveis em função de outras. Ela pode ser representada como
+A regressão linear é uma modelagem matemática \footnotemark \footnotetext{modelagem matemática é uma representação em fórmulas matemáticas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos} que permite descrever variáveis em função de outras. Segundo \citeonline[p. 44]{HASTIE} ela pode ser representada como
 \begin{equation}
   \label{eq:regressao_linear}
   \begin{aligned}
 Y &= \hat{\beta_{0}} + \sum_{j=1}^{p} (X_{j}\hat{\beta_{j}}), 
   \end{aligned}  
 \end{equation}
-onde \begin{math}Y\end{math} representa uma variável dependente contínua, \begin{math}X_{j}\end{math} as variáveis independentes (contínuas, discretas ou binárias).
+onde \begin{math}Y\end{math} representa uma variável dependente contínua, \begin{math}X_{j}\end{math} as variáveis independentes (contínuas, discretas ou binárias). Isto significa que uma certa característica (variável dependente) pode ser descrita por outras (variável independente).
 
 Para ajustar o modelo linear ao conjunto de dados, é possível utilizar diferentes maneiras. Um deles é método dos mínimos quadrados, uma técnica de otimização matemática que visa encontrar ajuste ótimo para um conjunto de dados por meio da minimização a soma dos quadrados das diferenças entre o valor estimado e os dados observados, representado por:
 
@@ -36,7 +36,7 @@ Assim, nosso problema passar a ser como descobrir \begin{math}\hat{\beta}\end{ma
 
 onde \begin{math} X \in \mathbb{R}^{N,p} \end{math} X representando uma matriz com cada linha sendo um vetor do conjunto de dados de entrada e \begin{math}y \in \mathbb{R}^{N}\end{math} um vetor que representa os dados de saída \footnotemark \footnotetext{inicialmente, esses dados devem vir do conjunto de treino}
 
-Com a definição de \begin{math}\hat{\beta}\end{math}, é possível determinar uma reta que separa o conjunto de dad
+Com a definição de \begin{math}\hat{\beta}\end{math}, é possível determinar uma reta que separa o conjunto de dados.
 
 \begin{figure}[!ht]
 \caption{Exemplo de classificação em 2 dimensões.}
@@ -44,13 +44,11 @@ Com a definição de \begin{math}\hat{\beta}\end{math}, é possível determinar 
 \fonte{Extraído de \cite{HASTIE}}
 \end{figure}
 
-
-
  As classes estão representadas um variável binária (AZUL = 0, LARANJA = 1), ajustadas por uma regressão linear. A linha que separa os grupos foi definido por \begin{math}x^{T}\hat{\beta} = 0,5\end{math}. A área hachurada em laranja representa o espaço classificado por LARANJA enquanto a área em azul, classificado por AZUL
 
 \subsection{Regressão Logística}
 
-A regressão logística, assim como a regressão linear, também é um modelo matemático de predição de eventos usada para descrever dados e explicar a relação entre um conjunto de variáveis independentes e uma variável dependente. Contudo, enquanto na regressão linear a variável dependente é contínua, na regressão logística, ela é considerada uma variável categórica. Ela segue uma distribuição Bernoulli\footnotemark \footnotetext{distribuição de Bernoulli é uma modelagem de probabilidade que representa eventos binários cujas ocorrências são tratados como sucesso ou falha. Considerando que a probabilidade de ocorrer um sucesso é \begin{math}p\end{math}, então a probabilidade de ocorrer uma falha é \begin{math}1-p\end{math} } com uma probabilidade \begin{math}p\end{math} desconhecida. Assim, a regressão logística tem como objetivo estimar essa probabilidade \begin{math}p\end{math} desconhecida.
+Segundo \citeonline[p. 119]{HASTIE}, a regressão logística, assim como a regressão linear, também é um modelo matemático de predição de eventos usada para descrever dados e explicar a relação entre um conjunto de variáveis independentes e uma variável dependente. Contudo, enquanto na regressão linear a variável dependente é contínua, na regressão logística, ela é considerada uma variável categórica. Ela segue uma distribuição Bernoulli\footnotemark \footnotetext{distribuição de Bernoulli é uma modelagem de probabilidade que representa eventos binários cujas ocorrências são tratados como sucesso ou falha. Considerando que a probabilidade de ocorrer um sucesso é \begin{math}p\end{math}, então a probabilidade de ocorrer uma falha é \begin{math}1-p\end{math} } com uma probabilidade \begin{math}p\end{math} desconhecida. Assim, a regressão logística tem como objetivo estimar essa probabilidade \begin{math}p\end{math} desconhecida.
 
 Para estimar essa probabilidade, a regressão logística usa as chances (\emph{odds}) do evento ocorrer em cada variável independente, calculando a taxa dessas chances, dada pela equação:
 
