@@ -133,6 +133,7 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
             \centerline{\includegraphics[width=1\textwidth]{img/funded_amnt_by_grade}}
 
         \end{subfigure}
+        \fonte{Gerado a partir do script ClusterAnalysis.ipynb}
 \end{figure*}
 
 \begin{figure*}[!ht]
@@ -150,7 +151,7 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
             \centerline{\includegraphics[width=1.05\textwidth]{img/installment_by_grade}}
 
         \end{subfigure}
-
+        \fonte{Gerado a partir do script ClusterAnalysis.ipynb}
 \end{figure*}
 
 
@@ -171,7 +172,7 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
             \centerline{\includegraphics[width=1\textwidth]{img/loan_amnt_by_grade}}
 
         \end{subfigure}
-
+        \fonte{Gerado a partir do script ClusterAnalysis.ipynb}
 \end{figure*}
 
 
@@ -190,7 +191,7 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
             \centerline{\includegraphics[width=1.05\textwidth]{img/total_pymnt_by_grade}}
 
         \end{subfigure}
-
+        \fonte{Gerado a partir do script ClusterAnalysis.ipynb}
 \end{figure*}
 
 Pelo \emph{Apache Spark}, é possível calcular algumas váriaveis como a média, o desvio padrão, mínimo e máximo sobre a base completa. Na tabela abaixo, comparamos os 4 componentes de cada \emph{cluster}.
@@ -231,7 +232,7 @@ Pelo \emph{Apache Spark}, é possível calcular algumas váriaveis como a média
             \multicolumn{1}{c|}{23} & 0.027  & 0.046  & -0.022 & 1.488 & 1.286 & 0.724 & -0.077 & -0.077 & -0.077 & 110.893 & 82.221  & 91.441 \\
             \multicolumn{1}{c|}{24} & 1.469  & -0.281 & -0.164 & 2.008 & 0.326 & 0.567 & -0.451 & -0.451 & -0.451 & 7.155   & 7.006   & 5.194 \\\bottomrule
         \end{tabular}
-        \fonte{Dados gerados pelo script}
+        \fonte{Gerado a partir do script spark.scala}
     \end{table}
 
 Assim como nos \emph{boxplots} do Anexo, é possível notar pela tabela que algumas variáveis não possuem valores que viabilize a criação de \emph{clusters} por si só.
@@ -275,7 +276,7 @@ No \emph{Apache Spark}, a execução da Regressão Logística foi dividida em 2 
         \caption{Classificação em percentual}
     \end{subfigure}
 
-\fonte{Gerado a partir do script}
+\fonte{Dados gerados a partir do script spark.scala}
 \end{figure}
 
 Podemos notar que houve uma classificação com baixos índices de erros, isto é, com menos de 5\% de predições em classes não esperadas. A classificação dos registros seguiu uma proporção de 11,38\% para a classe 1, 20,44\% para a classe 2 e 63,31\% para a classe 3.
@@ -289,7 +290,7 @@ Podemos notar que houve uma classificação com baixos índices de erros, isto �
     2    & 0,91679  & 0,92643 & 0,02641        & 0,95234    \\
     3    & 0,96900  & 0,96286 & 0,05556        & 0,95241 \\\bottomrule
 \end{tabular}
-\fonte{Tabela gerada pelo script}
+\fonte{Gerado a partir do script spark.scala}
 \end{table}
 
 \subsection{\emph{Random Forest}}
@@ -302,7 +303,7 @@ Com uma árvore de decisão tem-se uma representação visual, de fácil interpr
 \begin{figure}[!ht]
 \caption{Estrutura da \'arvore de decis\~ao reduzida a 2 \emph{features}}
 \centerline{\includegraphics[width=.7\textwidth]{img/loan}}
-\fonte{Gerado a partir do script}
+\fonte{Gerado a partir do script RandomForest.ipynb}
 \end{figure}
 
 A árvore para mais de 20 \emph{features} fica muito maior por conta da quantidade de informações.
@@ -313,7 +314,7 @@ Ao gerar uma árvore de classificação, o algoritmo também disponibiliza a rel
 \begin{figure}[!ht]
 \caption{\emph{Features} mais relevantes}
 \centerline{\includegraphics[width=.7\textwidth]{img/tree-most-important-features}}
-\fonte{Gerado a partir do script}
+\fonte{Gerado a partir do script RandomForest.ipynb}
 \end{figure}
 
 Desta base, é possível notar que 8 destas \emph{features} possuem maior relevância frente as demais. Isso pode levar a uma redução de dimensionalidade, isto é, as features de menor relevância passam a ser descartadas no treinamento do modelo, o que pode gerar economia de processamento de dados. Por outro lado, isso é válido partindo-se do pressuposto de que a natureza das informações se manterão, o que pode não ser verdade.
@@ -339,7 +340,7 @@ No \emph{Apache Spark}, assim como na Regressão Logística, a classificação c
         \caption{Classificação em percentual}
     \end{subfigure}
 
-\fonte{Gerado a partir do script}
+\fonte{Gerado a partir do script RandomForest.ipynb}
 \end{figure}
 
 Ao compararmos com a classificação realizada pela Regressão Logística, percebe-se que também houve baixos índices de erros, isto é, com menos de 7\% de predições em classes não esperadas. Manteve-se uma proporção das classes muito próxima ao da Regressão Logística: 10,25\% para a classe 1, 20,00\% para a classe 2 e 61,50\% para a classe 3.
@@ -355,6 +356,7 @@ Ao compararmos com a classificação realizada pela Regressão Logística, perce
     2    & 0,82786  & 0,86639 & 0,05405        & 0,84669    \\
     3    & 0,96195  & 0,93301 & 0,07136        & 0,94726 \\\bottomrule
 \end{tabular}
+\fonte{Gerado a partir do script spark.scala}
 \end{table}
 
 
