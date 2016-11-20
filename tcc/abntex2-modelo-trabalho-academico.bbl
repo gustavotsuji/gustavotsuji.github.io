@@ -1,0 +1,76 @@
+\providecommand{\abntreprintinfo}[1]{%
+ \citeonline{#1}}
+\setlength{\labelsep}{0pt}\begin{thebibliography}{}
+\providecommand{\abntrefinfo}[3]{}
+\providecommand{\abntbstabout}[1]{}
+\abntbstabout{v-1.9.6 }
+
+\bibitem[Baeza-Yates e Ribeiro-Neto 1999]{BAEZA}
+\abntrefinfo{Baeza-Yates e Ribeiro-Neto}{BAEZA-YATES; RIBEIRO-NETO}{1999}
+{BAEZA-YATES, R.; RIBEIRO-NETO, B. \emph{Modern Information Retrieval}. 1. ed.
+  [S.l.]: Addison Wesley, 1999.}
+
+\bibitem[Bezerra 2006]{BEZERRA}
+\abntrefinfo{Bezerra}{BEZERRA}{2006}
+{BEZERRA, E. \emph{Introdu{\c{c}}{\~{a}}o {\`{a}} tarefa de agrupamento:
+  li{\c{c}}{\~{o}}es de inform}. 2. ed. Rio de Janeiro: UniverCidade Editora,
+  2006.}
+
+\bibitem[Concei{\c{c}}{\~{a}}o]{kmeans-step}
+\abntrefinfo{Concei{\c{c}}{\~{a}}o}{CONCEI{\c{C}}{\~{A}}O}{}
+{CONCEI{\c{C}}{\~{A}}O, H. \emph{K-means clustering}.
+Dispon{\'\i}vel em: \url{http://www.onmyphd.com/?p=k-means.clustering}. Acesso
+  em: 21 jun 2016.}
+
+\bibitem[Hastie, Tibshirani e Friedman 2011]{HASTIE}
+\abntrefinfo{Hastie, Tibshirani e Friedman}{HASTIE; TIBSHIRANI; FRIEDMAN}{2011}
+{HASTIE, T.; TIBSHIRANI, R.; FRIEDMAN, J. \emph{The Elements of Statistical
+  Learning: Data Mining, Inference, and Prediction, Second Edition (Springer
+  Series in Statistics)}. [S.l.]: Springer, 2011.
+ISBN 0387848576.}
+
+\bibitem[Kotler 1992]{KOTLER}
+\abntrefinfo{Kotler}{KOTLER}{1992}
+{KOTLER, P. \emph{Administra{\c{c}}{\~{a}}o de Marketing: an{\'{a}}lise,
+  planejamento, implementa{\c{c}}{\~{a}}o e controle}. 2. ed. S{\~{a}}o Paulo:
+  Atlas, 1992.}
+
+\bibitem[MacQueen 1967]{MacQueen}
+\abntrefinfo{MacQueen}{MACQUEEN}{1967}
+{MACQUEEN, J. \emph{Some Methods for classification and Analysis of
+  Multivariate Observations}. Berkeley, University of California Press, 1967.
+  Dispon{\'\i}vel em:
+  \url{https://projecteuclid.org/download/pdf\_1/euclid.bsmsp/1200512992}.
+  Acesso em: 16 jun 2016.}
+
+\bibitem[Mayer-Schönberger e Cukier 2013]{CUKIER}
+\abntrefinfo{Mayer-Schönberger e Cukier}{MAYER-SCHöNBERGER; CUKIER}{2013}
+{MAYER-SCHöNBERGER, V.; CUKIER, K. \emph{Big Data: A Revolution That Will
+  Transform How We Live, Work, and Think}. [S.l.]: Eamon Dolan/Houghton Mifflin
+  Harcourt, 2013.
+ISBN 0544002695.}
+
+\bibitem[Smith 2016]{GOO01}
+\abntrefinfo{Smith}{SMITH}{2016}
+{SMITH, C. \emph{By the numbers: a gigantic list of google stats and facts}.
+  2016.
+Dispon{\'\i}vel em:
+  \url{http://expandedramblings.com/index.php/by-the-numbers-a-gigantic-list-of-google-stats-and-facts/}.
+  Acesso em: 07 jun 2016.}
+
+\bibitem[Vagata e Wilfong 2014]{FAC01}
+\abntrefinfo{Vagata e Wilfong}{VAGATA; WILFONG}{2014}
+{VAGATA, P.; WILFONG, K. \emph{Scaling the Facebook data warehouse to 300 PB}.
+  2014.
+Dispon{\'\i}vel em:
+  \url{https://code.facebook.com/posts/229861827208629/scaling-the-facebook-data-warehouse-to-300-pb/}.
+  Acesso em: 07 jun 2016.}
+
+\bibitem[Zikopoulos e Eaton 2011]{ZIKO}
+\abntrefinfo{Zikopoulos e Eaton}{ZIKOPOULOS; EATON}{2011}
+{ZIKOPOULOS, P.; EATON, C. \emph{Understanding Big Data: Analytics for
+  Enterprise Class Hadoop and Streaming Data}. [S.l.]: McGraw-Hill Osborne
+  Media, 2011.
+ISBN 0071790535.}
+
+\end{thebibliography}
