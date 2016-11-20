@@ -104,37 +104,17 @@ as colunas representam as classes as quais o elementos realmente pertencem enqua
 
 \section{Algoritmos}
 
+Todos os scripts dos algoritmos foram desenvolvidos baseado nos códigos que estão no site do Scikit Learn e do Apache Spark. Encontram-se noo GitHub \cite{GIT}.
+
 \subsection{K Médias}
 
-O objetivo de uma clusterização é para dado um conjunto de dados e agrupar os elementos em grupos baseados na similaridade entre eles. Com a base de dados da \emph{Loan Club}, já contamos com uma divisão feita por ela mesma. Dessa forma, uma hipótese a ser testada é constatar alguma relação nos grupos gerados pelo K Médias com alguma característica. Neste trabalho, iremos usar as notas atribuídas por ela mesma, armazenada no campo \emph{grade}.
-
-Para a execução do K Médias, executou-se uma normalização dos dados. Ela é recomendada pois como os dados possuem diversas informações, é possível que haja grandes disparidades de intervalos. Assim quando se normaliza todos os dados, a idéia é uniformizar esses intervalos para que não haja muita interferência nos cálculos do algoritmo. 
+O objetivo de uma clusterização é para dado um conjunto de dados e agrupar os elementos em grupos baseados na similaridade entre eles. Com a base de dados da \emph{Loan Club}, já contamos com uma divisão feita por ela mesma. Dessa forma, uma hipótese a ser testada é constatar alguma relação nos grupos gerados pelo K Médias com alguma característica. Neste trabalho, iremos usar as notas atribuídas por ela mesma, armazenada no campo \emph{grade}. Para a execução do K Médias, executou-se uma normalização dos dados. Ela é recomendada pois como os dados possuem diversas informações, é possível que haja grandes disparidades de intervalos. Assim quando se normaliza todos os dados, a idéia é uniformizar esses intervalos para que não haja muita interferência nos cálculos do algoritmo. 
 
 Pelo \emph{Scikit Learn}, é possível criar gráficos de \emph{boxplot} para visualizar em quais campos houve uma separação mais clara do banco. Inicialmente foi feito criado uma amostra de 8000 registros na qual foi executado o K Médias. Esses gráficos estão disponível em Anexos na seção Análise dos clusters vs grades. Junto desses gráficos, há um comparativo com \emph{boxplots} gerados a partir dos grades estabelecidos pela \emph{Loan Club}. Dessa forma, pode-se ver que existe uma relação entre os \emph{clusters} e os \emph{grades}.
 
 Campos como o funded\_amnt, installment, loan\_amnt, total\_pymnt deixam muito claro a segregação dos \emph{clusters}, enquanto que os outros não foram capazes de mostrar a diferença entre os grupos.
 Não foi possível criar esses gráficos para a base toda pois seria necessário uma integração entre as ferramentas do \emph{Scikit Learn} e do \emph{Apache Spark} uma vez que não foi possível clusterizar toda a base via \emph{Scikit Learn}. Contudo, devemos ressaltar que dentro de um contexto de \emph{Big Data} nem sempre será possível utilizar as ferramentas de visualização por conta da quantidade de dados.
 
-
-\begin{figure*}[!ht]
-    \centering
-        \caption{\emph{Boxplots} de funded\textunderscore amnt }
-        \begin{subfigure}[t]{0.45\textwidth}
-            \centering
-            \caption{Cluster }
-
-            \centerline{\includegraphics[width=1\textwidth]{img/funded_amnt_by_cluster}}
-        \end{subfigure}%
-        ~ 
-        \begin{subfigure}[t]{0.45\textwidth}
-            \centering
-            \caption{Grade }
-   
-            \centerline{\includegraphics[width=1\textwidth]{img/funded_amnt_by_grade}}
-
-        \end{subfigure}
-        \fonte{Gerado a partir do script ClusterAnalysis.ipynb}
-\end{figure*}
 
 \begin{figure*}[!ht]
     \centering        
@@ -195,8 +175,6 @@ Não foi possível criar esses gráficos para a base toda pois seria necessário
 \end{figure*}
 
 Pelo \emph{Apache Spark}, é possível calcular algumas váriaveis como a média, o desvio padrão, mínimo e máximo sobre a base completa. Na tabela abaixo, comparamos os 4 componentes de cada \emph{cluster}.
-
-\pagebreak
 
 \begin{table}
 \tiny
