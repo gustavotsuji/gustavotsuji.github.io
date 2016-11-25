@@ -1,4 +1,4 @@
-\section{Segmentação}
+\subsection{Segmentação}
 
 
 Com um volume de dados grande disponível, uma possibilidade para as empresas é conseguir reconhecer certos padrões. Por exemplo, conhecendo o perfil dos clientes, é possível adotar estratégias adequadas para cada segmento, principalmente quando o público alvo é composto por clientes muito heterogêneos. Segundo \citeonline[p. 257]{KOTLER}, ``segmentação de mercado é o ato de dividir um mercado em grupos distintos de compradores com diferentes necessidades e respostas''.
@@ -10,14 +10,14 @@ Um bom agrupamento exibe a característica de que objetos associados ao mesmo gr
 Com a segmentação e os grupos definidos, é possível realizar uma análise descritiva para traçar um padrão no comportamento dos dados. 
 
 % ---
-\subsection{K Médias}
+\subsubsection{K Médias}
 % ---
 
 O K Médias é um algoritmo de \emph{machine learning} não supervisionado relativamente simples, podendo ser utilizado para resolver problemas de clusterização. Para \citeonline{MacQueen}, trata-se de um método que tem para uma quantidade k de \emph{clusters} pré definida, o objetivo de definir k centróides\footnotemark \footnotetext{centróide é um conceito muito utilizado em geometria e física e representa um ponto médio ou um centro de massa de uma representação. No caso de K Médias, considerando que as informações são transformadas em vetores, seria um ponto médio da informação}, um para cada \emph{cluster}, tal que o conjunto de dados possa ser repartido de forma eficiente. Para um conjunto de observações \begin{math}(x_{1}, x_{2}, ..., x_{n})\end{math}, onde 
 
 \begin{equation}
 \label{eq:media}
-\underset{S}{\arg\max} \sum_{i=1}^{k} \sum_{x \in S_{i}}\left \| x - \mu_{i} \right \|^{2}
+\underset{S}{\arg\min} \sum_{i=1}^{k} \sum_{x \in S_{i}}\left \| x - \mu_{i} \right \|^{2},
 \end{equation}
 
 onde \begin{math}\mu_{i}\end{math} é a média dos pontos em \begin{math}S_{i}\end{math}

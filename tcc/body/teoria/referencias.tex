@@ -1,13 +1,15 @@
 % ----------------------------------------------------------
 % PARTE
 % ----------------------------------------------------------
-\part{Referenciais teóricos}
+%\part{Referenciais teóricos}
 % ----------------------------------------------------------
 
 % ---
 % Capitulo de revisão de literatura
 % ---
-\chapter{\emph{Big Data}}
+\chapter{\emph{Referencial Teórico}}
+
+\section{\emph{Big Data}}
 % ---
 
 Não existe uma definição clara do que é \emph{Big Data}. Para \citeonline[p. 6]{CUKIER}, trata-se de um volume de informações que cresceu de tal forma que simples computadores não são capazes de processar com ferramentas tradicionais. Pode referir-se a qualquer ação ou evento que necessite ser executado em larga escala, inviável de ser realizado numa estrutura menor, para extrair novos \emph{insights} ou criar novas formas de valor de tal forma que provoque mudanças nos mercados, organizações, na relação entre as pessoas e os governos, entre outros.
@@ -30,7 +32,7 @@ Para \cite[p. 5]{ZIKO}, \emph{Big Data} pode ser caracterizado por:
 \end{itemize}
 
 
-\chapter{\emph{Algoritmos}}
+\section{\emph{Algoritmos}}
 
 
 \input{body/teoria/kmedias.tex}
@@ -38,3 +40,74 @@ Para \cite[p. 5]{ZIKO}, \emph{Big Data} pode ser caracterizado por:
 \input{body/teoria/regressao.tex}
 
 \input{body/teoria/randomforest.tex}
+
+\section{Tecnologias}
+
+\subsection{\emph{Scikit Learn}}
+
+O \emph{Scikit Learn} é um \emph{framework} desenvolvido em \emph{Python} voltado para \emph{Data Science}. Com mais de 30 contribuidores ativos, possui implementação de diversos algoritmos e de ferramentas que auxiliam desde a análise dos dados até a execução de tarefas como clusterização e classificação, além de disponibilizar integrações com programas visuais que facilitam muito a compreensão. 
+
+
+\subsection{\emph{Apache Spark}}
+
+O \emph{Apache Spark} é uma biblioteca com diversas ferramentas e viabiliza a escalabilidade da execução de algoritmos de \emph{Machine Learning}. É possível utilizar mais de linguagem de programação para desenvolver os programas. Neste trabalho, foi escolhido Scala.
+Os algoritmos estudados (em especial o K Médias) são robustos e possuem uma grande carga de cálculos. Para bases grandes, o \emph{Scikit Learn} não é capaz de executar em tempo satisfatório. O \emph{Apache Spark}, por outro lado, oferece uma solução que possibilita uma maior rapidez na execução. Também é possível configurá-lo para que os algoritimos sejam executados em tempo real com alimentação contínua de dados. Contudo tal abordagem não será contemplada por não se tratar do foco do estudo.
+
+\section{Avaliação dos algoritmos}
+
+\subsection{Segmentação}
+
+\subsubsection{Análise Descritiva}
+A análise descritiva possibilita a descrição e sumarização dos dados de um conjunto. Há 2 tipos de medidas: a de tendência central e a de variabilidade ou dispersão. Entre as medidas de tendência central estão média, mediana e moda. Já para as medidas de variabilidade, existem o desvio padrão, variância, o valor máximo e mínimo e quantis.
+Para a análise descritiva, pode-se utilizar gráficos como histogramas e boxplots que ajudam visualizar com clareza e caracterizar dos dados.
+
+
+\subsection{Classificação}
+
+\subsubsection{\emph{Cross Validation}}
+
+A \emph{Cross Validation} é uma técnica que permite verificar a eficiência de um modelo preditivo \cite[p. 241]{HASTIE}. A idéia é particionar a base para se criar um modelo de treinamento e executar um teste. Essa partição é mutualmente exclusiva, ou seja, os dados que são usados para o treinamento não são reutilizados no teste. Neste caso, a \emph{Cross Validation} será executada nos algoritmos de classificação.
+
+
+\subsubsection{Métricas}
+O cálculo de métricas para os algoritmos são importantes para avaliar o desempenho da classificação. Cada métrica pode ser mais conveniente para cada tipo de problema ou natureza dos dados. Neste trabalho iremos abordar algumas métricas simples mas iremos fazer uma análise profunda.
+
+\subsubsubsection{\emph{Precision}}
+
+É calculado a partir da proporção dos verdadeiros positivos sobre a quantidade de todos elementos que foram classificados na mesma classe (soma dos verdadeiros positivos e falsos positivos)
+
+\begin{equation}
+  \label{eq:precision}
+  \begin{aligned}
+Precision &= \frac{VP}{VP + FP} 
+  \end{aligned}  
+\end{equation}
+
+\subsubsubsection{\emph{Recall}}
+
+É a proporção de elementos foram classificados corretamente em uma classe 
+sobre a quantidade de todos elementos que realmente pertencem a esta classe mesmo que estejam em outras (soma dos verdadeiros positivos e falsos negativos). 
+
+\begin{equation}
+  \label{eq:precision}
+  \begin{aligned}
+Recall &= \frac{VP}{VP + FN} 
+  \end{aligned}  
+\end{equation}
+
+\subsubsubsection{Falso Positivo}
+O Falso Positivo corresponde aos elementos que foram classificados como pertencentes a uma dada classe mas que, quando na verdade, não pertencem a essa classe.
+
+\subsubsubsection{\emph{F-measure}}
+O F-measure é a média harmônica entre \emph{precision} e \emph{recall}. Trata-se de uma medida que consegue avaliar melhor conjunto de dados que possuem uma distribuição das classes desproporcionais. 
+
+\begin{equation}
+  \label{eq:precision}
+  \begin{aligned}
+F-measure &= (1 + \beta^{2})\frac{precision*recall}{\beta^{2}*precision + recall} 
+  \end{aligned}  
+\end{equation}
+
+\subsubsection{\emph{Confusion Matrix}}
+Trata-se de uma matriz quadrada na qual 
+as colunas representam as classes as quais o elementos realmente pertencem enquanto as linhas representa a saída do classificador. Cada célula fornece a quantidade de elementos classificados.

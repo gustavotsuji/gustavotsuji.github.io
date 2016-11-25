@@ -1,10 +1,10 @@
 % ---
-\section{Classificação}
+\subsection{Classificação}
 % ---
 
 A classificação é uma análise preditiva com o objetivo de estabelecer modelos que possbilitem uma previsão do futuro, permitindo estudar tendências por meio do uso de técnicas estatísticas sobre dados históricos.
 
-\subsection{Regressão Linear}
+\subsubsection{Regressão Linear}
 
 
 A regressão linear é uma modelagem matemática \footnotemark \footnotetext{modelagem matemática é uma representação em fórmulas matemáticas que tentam descrever ou simular eventos e sistemas reais com o propósito de prever comportamentos} que permite descrever variáveis em função de outras. Segundo \citeonline[p. 44]{HASTIE} ela pode ser representada como
@@ -46,7 +46,7 @@ Com a definição de \begin{math}\hat{\beta}\end{math}, é possível determinar 
 
  As classes estão representadas um variável binária (AZUL = 0, LARANJA = 1), ajustadas por uma regressão linear. A linha que separa os grupos foi definido por \begin{math}x^{T}\hat{\beta} = 0,5\end{math}. A área hachurada em laranja representa o espaço classificado por LARANJA enquanto a área em azul, classificado por AZUL
 
-\subsection{Regressão Logística}
+\subsubsection{Regressão Logística}
 
 Segundo \citeonline[p. 119]{HASTIE}, a regressão logística, assim como a regressão linear, também é um modelo matemático de predição de eventos usada para descrever dados e explicar a relação entre um conjunto de variáveis independentes e uma variável dependente. Contudo, enquanto na regressão linear a variável dependente é contínua, na regressão logística, ela é considerada uma variável categórica. Ela segue uma distribuição Bernoulli\footnotemark \footnotetext{distribuição de Bernoulli é uma modelagem de probabilidade que representa eventos binários cujas ocorrências são tratados como sucesso ou falha. Considerando que a probabilidade de ocorrer um sucesso é \begin{math}p\end{math}, então a probabilidade de ocorrer uma falha é \begin{math}1-p\end{math} } com uma probabilidade \begin{math}p\end{math} desconhecida. Assim, a regressão logística tem como objetivo estimar essa probabilidade \begin{math}p\end{math} desconhecida.
 
@@ -55,8 +55,8 @@ Para estimar essa probabilidade, a regressão logística usa as chances (\emph{o
 \begin{equation}
   \label{eq:OR}
   \begin{aligned}
-   OR &= \frac{P(sucesso)}{P(fracasso)}\\
-     &= \frac{p}{1-p}
+   OR &= \frac{P(sucesso)}{P(fracasso)}
+     &= \frac{p}{1-p}.
   \end{aligned}
 \end{equation}
 
@@ -65,7 +65,7 @@ Utilizando inferência de estatística, podemos aplicar log em \ref{eq:OR}, fica
 \begin{equation}
   \label{eq:t}
   \begin{aligned}
-    logit(p) &= ln\left ( \frac{p}{1-p} \right )
+    logit(p) &= ln\left ( \frac{p}{1-p} \right ).
   \end{aligned}
 \end{equation}
 
@@ -74,7 +74,7 @@ Tal transformação recebe o nome de logit. Ela é ajustada a função de predi�
 \begin{equation}
   \label{eq:t}
   \begin{aligned}
-    logit^{-1}(\alpha) &= \frac{1}{1+e^{-\alpha}} &= \frac{e^{\alpha}}{1+e^{\alpha}}
+    logit^{-1}(\alpha) &= \frac{1}{1+e^{-\alpha}} &= \frac{e^{\alpha}}{1+e^{\alpha}}.
   \end{aligned}
 \end{equation}
 
@@ -85,13 +85,25 @@ Tal transformação recebe o nome de logit. Ela é ajustada a função de predi�
 \end{figure}
 
 
-Generalizando, temos:
+Generalizando com \ref{eq:t1}, \ref{eq:t2} e \ref{eq:t3} , temos:
 
 \begin{equation}
-  \label{eq:t}
+  \label{eq:t1}
   \begin{aligned}
-    \log\left ( \frac{P(G = 1 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{10}+\beta_{1}^{T}x\\
-    \log\left ( \frac{P(G = 2 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{20}+\beta_{2}^{T}x\\
+    \log\left ( \frac{P(G = 1 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{10}+\beta_{1}^{T}x
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \label{eq:t2}
+  \begin{aligned}
+    \log\left ( \frac{P(G = 2 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{20}+\beta_{2}^{T}x
+  \end{aligned}
+\end{equation}
+
+\begin{equation}
+  \label{eq:t3}
+  \begin{aligned}
     \log\left ( \frac{P(G = K-1 | X = x)}{P(G = K | X = x)} \right ) &= \beta_{(k-1)0}+\beta_{k-1}^{T}x,
   \end{aligned}
 \end{equation}
@@ -99,14 +111,14 @@ Generalizando, temos:
 onde o modelo é composto por K classes e K - 1 transformações logit. Utilizando a inversa da logit, temos:
 
 \begin{equation}
-  \label{eq:t}
+  \label{eq:t4}
   \begin{aligned}
     P(G = k | X = x) &= \frac{\exp \left ( \beta_{k0}+\beta_{k}^{T}x \right )}{1 + \sum_{\ell=1}^{K - 1}\exp \left ( \beta_{\ell0}+\beta_{\ell}^{T}x \right )}, k = 1, ..., K - 1\\
-    P(G = K | X = x) &= \frac{1}{1 + \sum_{\ell=1}^{K - 1}\exp \left ( \beta_{\ell0}+\beta_{\ell}^{T}x \right )}
+    P(G = K | X = x) &= \frac{1}{1 + \sum_{\ell=1}^{K - 1}\exp \left ( \beta_{\ell0}+\beta_{\ell}^{T}x \right )} .
   \end{aligned}
 \end{equation}
 
-Dessa forma, temos que a regressão logística estima as changes (odds) como uma variável contínua, mesmo quando a variável dependente que está sendo o objeto de estudo seja uma variável binária. 
+Dessa forma, temos com \ref{eq:t4} que a regressão logística estima as changes (odds) como uma variável contínua, mesmo quando a variável dependente que está sendo o objeto de estudo seja uma variável binária. 
 
 
 

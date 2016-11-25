@@ -58,6 +58,13 @@ Dispon{\'\i}vel em:
   \url{http://expandedramblings.com/index.php/by-the-numbers-a-gigantic-list-of-google-stats-and-facts/}.
   Acesso em: 07 jun 2016.}
 
+\bibitem[Tsuji]{GIT}
+\abntrefinfo{Tsuji}{TSUJI}{}
+{TSUJI, G.~K. \emph{Reposit\'orio de c\'odigo}.
+Dispon{\'\i}vel em:
+  \url{https://github.com/gustavotsuji/gustavotsuji.github.io/tree/master/tcc/scripts}.
+  Acesso em: 20 nov 2016.}
+
 \bibitem[Vagata e Wilfong 2014]{FAC01}
 \abntrefinfo{Vagata e Wilfong}{VAGATA; WILFONG}{2014}
 {VAGATA, P.; WILFONG, K. \emph{Scaling the Facebook data warehouse to 300 PB}.
