@@ -1,0 +1,206 @@
+% -- Encoding UTF-8 without BOM
+% -- XeLaTeX => PDF (BIBER)
+
+\documentclass[english]{cv-style}     % Add 'print' as an option into the square bracket to remove colours from this template for printing. 
+                                      % Add 'espanol' as an option into the square bracket to change the date format of the Last Updated Text
+%\setdefaultlanguage{english}
+%\sethyphenation[variant=english]{}{}  % Add words between the {} to avoid them to be cut 
+
+\usepackage{graphicx}
+
+\usepackage{enumitem}
+\renewenvironment{entrylist}{%
+  \begin{itemize}[leftmargin=1in]%[leftmargin=*,align=left,itemindent=-\dimexpr\labelwidth+\labelindent+\labelsep\relax]
+}{%
+  \end{itemize}
+}
+\renewcommand{\bfseries}{\headingfont\color{headercolor}}
+\renewcommand{\entry}[4]{%
+  \item[#1]
+    \textbf{#2}%
+    \hfill%
+    {\footnotesize\addfontfeature{Color=lightgray} #3}\\%
+    #4\vspace{\parsep}%
+  }
+
+\begin{document}
+
+\header{Renata }{AOKI}
+\lastupdated
+
+%----------------------------------------------------------------------------------------
+% SIDEBAR SECTION  -- In the aside, each new line forces a line break
+%----------------------------------------------------------------------------------------
+\begin{aside}
+\section{-}
+\includegraphics[width=4cm]{renata}
+%
+\section{contact}
+Rua Nanuque, 310 ap. 62
+Vila Leopoldina - São Paulo
+~
++55 11 994466211
+~
+renata.aoki@gmail.com 
+%
+\section{languages}
+Portuguese native
+English fluency
+Spanish fluency
+%
+\section{programming}
+VBA
+%
+\section{software}
+Microsoft Office Word, Excel, Power Point
+%
+\end{aside}
+%----------------------------------------------------------------------------------------
+% PERFIL SECTION
+%----------------------------------------------------------------------------------------
+\vspace{0.3cm}
+\section{about me}
+  \vspace{-0.2cm}
+I am a hard-working and determined professional looking for an opportunity to developing formal processes at strategic HR areas. In my current position with General Eletric HealthCare, I led a team to consistently meet project goals on time. I am confident that my knowledge, ability and experience will allow me to deliver successful results for any company in a range of administrative positions.
+%----------------------------------------------------------------------------------------
+% WORK EXPERIENCE SECTION
+%----------------------------------------------------------------------------------------
+\section{experience}
+  \vspace{-0.2cm}
+\begin{entrylist}
+%------------------------------------------------
+\entry
+  {2014--Present}
+  {General Eletrics}
+  {São Paulo, Brazil}
+  {
+  \jobtitle{Employee Human Resources Specialist}\\
+  \textbf{Detailed achievements:}
+  \begin{itemize}[noitemsep]\small{
+    \item Human Resources partner for Field Services, Technical Services, EHS, Communications and Regulatory Affairs teams (\~300 employees)
+    \item First point of contact for managers and employees to provide counsel, coaching and support on HR fundamentals and employee related questions
+    \item Guide and coach managers and employees with focus on: employee advocacy engagement, HR fundamentals and process training, employee relations management, performance management, career development, talent assessment, acquisition and retention and workplace investigations
+    \item Advice and counsel to managers and employees to ensure consistent application and integration of policies, procedures and practices at 100\% compliance to promote an ethical and compliant work environment }
+  \end{itemize}
+  
+  \jobtitle{Variable Compensation Analyst}\\
+  \textbf{Detailed achievements:}
+  \begin{itemize}[noitemsep]\small{
+    \item Responsible for the variable compensation calculation of HC Latin America Sales, Services and Operations team (\~500 employees)
+    \item Support VC board in the process of VC plan design, proposing improvements and feasibility analysis for the Lat Am VC plan model regarding the calculation
+    \item Assist eligible employees, explaining conditions and details of the plans and clarifying doubts
+    \item Development of monitoring reports and visualization of performance indicators
+    \item Strong interaction with the finance team to collect the results for the calculation }
+  \end{itemize}
+
+
+
+  \jobtitle{Human Resources Analyst}\\
+  \textbf{Detailed achievements:}
+  \begin{itemize}[noitemsep]\small{
+    \item Support HR process integration implementation with Alstom acquisition
+    \item Provide HR integration support with respect to organization demographics, base cost control and headcount comparative analysis
+    \item Management of the employees and intern’s life cycle (hiring, vacation, end of employment)
+    \item Provide employees with an available first point of contact for questions and guidance on fundamental HR topics and issues; escalates concerns beyond their scope to HR Business Partners; navigates employees and manager to HR Shared Services when it is the more appropriate resource
+
+    \item Provide advice and counsel to employees to ensure consistent application and integration of
+policies, procedures and practices at 100% compliance to promote an ethical and compliant work
+environment }
+  \end{itemize}
+  
+  \jobtitle{Human Resources Intern}\\
+  \textbf{Detailed achievements:}
+  \begin{itemize}[noitemsep]\small{
+    \item Control and analysis of headcount and costing plan of compensation and benefits for Latin America region
+    \item Control of the employees and intern’s life cycle (hiring, vacation, end of employment)
+    \item General support to Latin America Human Resources leader for health management
+programs, employee communication actions and interface with employees allocated on the sites
+    \item Request of necessary changes on employees' information in Oracle system }
+  \end{itemize}}
+%----------------------------el area de a-------------- ------
+\vspace{0.3cm}
+\entry
+  {2009 - 2011}
+  {inSitus Genética}
+  {São Paulo, Brazil}
+  {\jobtitle{Cytogenetic Technician}\\
+Responsible for the banding sector for cytogenetic tests - improvement and standardization of C-banding technique.
+
+  \textbf{Detailed achievements:}
+  \begin{itemize}[noitemsep]\small{
+    \item Analysis of karyotype and release of exam report
+    \item Quality Manager of technical area: Quality Management System for ISO 9001: 2008 certification (obtained on 03/2010)
+    \item Preparation of internal documents (SOPs, ITs and forms) 
+    \item Evaluation of indicators 
+    \item Internal audit }
+  \end{itemize}}
+%------------------------------------------------
+\end{entrylist}
+%----------------------------------------------------------------------------------------
+% EDUCATION SECTION
+%----------------------------------------------------------------------------------------
+\section{education}
+  \vspace{-0.2cm}
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2012--2016}
+{Bachelor \normalfont{ Business Administration (B.B.A.)}}
+{University of São Paulo}
+{Field of study: Human Resources Management and Services}
+%------------------------------------------------
+\entry
+{2007 – 2009}
+{Licentiate  \normalfont{ Biological Sciences}}
+{University of São Paulo}
+{}
+%------------------------------------------------
+
+\entry
+{2004 – 2008}
+{Bachelor  \normalfont{ Biological Sciences}}
+{University of São Paulo}
+{}
+%------------------------------------------------
+\end{entrylist}
+
+\section{other qualifications}
+
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2013}
+{Qualification}
+{Institution}
+{\vspace{-0.3cm}}
+%------------------------------------------------
+\entry
+{2011}
+{Qualification}
+{Institution}
+{\vspace{-0.3cm}}
+%------------------------------------------------
+\end{entrylist}
+
+%----------------------------------------------------------------------------------------
+% AWARDS SECTION
+%----------------------------------------------------------------------------------------
+\section{awards}
+  \vspace{-0.2cm}
+\begin{entrylist}
+%------------------------------------------------
+\entry
+{2020}
+{Award name}
+{Institution}
+{Award description. }
+%------------------------------------------------
+\end{entrylist}
+  \vspace{-0.2cm}
+%----------------------------------------------------------------------------------------
+% INTERESTS SECTION
+%----------------------------------------------------------------------------------------3
+\section{interests}
+  \vspace{-0.2cm}
+%----------------------------------------------------------------------------------------
+\end{document}
