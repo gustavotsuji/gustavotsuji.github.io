@@ -1,0 +1,55 @@
+#!/bin/sh
+
+# Carrega config local se existir
+CONFIG_FILE=".husky.user.config"
+if [ -f "$CONFIG_FILE" ]; then
+  source "$CONFIG_FILE"
+fi
+
+# Lint e Prettier
+if [ "${HUSKY_RUN_LINT:-false}" = "true" ]; then
+  echo "🔹 Executando lint-staged..."
+  npx lint-staged
+  if [ $? -ne 0 ]; then
+    echo "❌ Lint/prettier falharam. Commit abortado."
+    exit 1
+  fi
+else
+  echo "🟡 Lint-staged desabilitado (ative com HUSKY_RUN_LINT=true)."
+fi
+
+# Gitleaks
+if [ "${HUSKY_RUN_GITLEAKS:-false}" = "true" ]; then
+  echo "🔹 Verificando segredos com gitleaks..."
+  if command -v gitleaks >/dev/null 2>&1; then
+    gitleaks protect --staged -v
+    if [ $? -ne 0 ]; then
+      echo "❌ Segredos detectados pelo gitleaks. Commit abortado."
+      exit 1
+    fi
+  else
+    echo "🟡 gitleaks não encontrado, pulando verificação de segredos."
+  fi
+else
+  echo "🟡 Gitleaks desabilitado (ative com HUSKY_RUN_GITLEAKS=true)."
+fi
+
+# Dockerfile build check
+if [ "${HUSKY_VALIDATE_DOCKERFILE:-false}" = "true" ]; then
+  if git diff --cached --name-only | grep -q "Dockerfile"; then
+    echo "🔹 Dockerfile modificado. Validando o build da imagem..."
+    if command -v docker >/dev/null 2>&1; then
+      docker build . -t call-tracking-validacao
+      if [ $? -ne 0 ]; then
+        echo "❌ Erro ao construir a imagem Docker. Commit abortado."
+        exit 1
+      fi
+    else
+      echo "🟡 Docker não encontrado, pulando validação do Dockerfile."
+    fi
+  fi
+else
+  echo "🟡 Validação do Dockerfile desabilitada (ative com HUSKY_VALIDATE_DOCKERFILE=true)."
+fi
+
+echo "✅ Pre-commit concluído! (Configure .husky.user.config para ativar mais verificações)"

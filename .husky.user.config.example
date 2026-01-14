@@ -1,0 +1,38 @@
+#!/bin/sh
+#
+# Local Husky configuration.
+# By DEFAULT, all steps are DISABLED for maximum performance.
+# Change values to 'true' to enable the checks you want.
+# This file should NOT be committed.
+#
+# --- PRE-COMMIT HOOKS ---
+export HUSKY_RUN_LINT=true              # ESLint + Prettier on modified files
+export HUSKY_RUN_GITLEAKS=true          # Secrets/passwords detection
+export HUSKY_VALIDATE_DOCKERFILE=true   # Dockerfile build validation
+
+# --- COMMIT-MSG HOOKS ---
+export HUSKY_RUN_COMMIT_MSG_VALIDATION=true # Commit message format validation
+
+# --- PRE-PUSH HOOKS ---
+export HUSKY_RUN_UNIT_TESTS=true        # npm test
+export HUSKY_RUN_INTEGRATION_TESTS=true # npm run test:integration (if exists)
+export HUSKY_RUN_TYPE_CHECK=false        # npm run type-check (if exists)
+export HUSKY_RUN_BUILD=true             # npm run build (if exists)
+export HUSKY_RUN_TRIVY_SCAN=true        # Trivy vulnerability scanner
+export HUSKY_RUN_NPM_AUDIT=true         # npm audit --audit-level=high
+export HUSKY_RUN_SONAR_SCAN=false       # SonarQube code quality scan (blocks push if fails)
+
+# --- SONARQUBE CONFIGURATION ---
+# SonarQube token (generate at: http://localhost:9000 → My Account → Security)
+# ⚠️ This file should NOT be committed!
+export SONAR_TOKEN=""                   # Your SonarQube token (leave empty if not using)
+export SONAR_HOST_URL="http://sonarqube:9000"  # SonarQube URL
+export SONAR_PROJECT_KEY="olxbr_call_tracking" # Project key in SonarQube (must match sonar-project.properties)
+
+#
+# EXAMPLE: To enable only lint and unit tests:
+# export HUSKY_RUN_LINT=true
+# export HUSKY_RUN_UNIT_TESTS=true
+#
+
+

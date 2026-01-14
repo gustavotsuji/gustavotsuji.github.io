@@ -1,0 +1,20 @@
+# Carrega config local se existir
+CONFIG_FILE=".husky.user.config"
+if [ -f "$CONFIG_FILE" ]; then
+  . "$CONFIG_FILE"
+fi
+
+# Validação da mensagem de commit (desabilitado por padrão)
+if [ "${HUSKY_RUN_COMMIT_MSG_VALIDATION:-false}" = "true" ]; then
+  echo "🔹 Validando formato da mensagem do commit..."
+  npx --no -- commitlint --edit $1
+  if [ $? -ne 0 ]; then
+    echo "❌ Formato da mensagem de commit inválido."
+    echo "Use o formato: tipo(escopo): descrição"
+    echo "Exemplos: feat: nova funcionalidade, fix: correção de bug"
+    exit 1
+  fi
+  echo "✅ Formato da mensagem de commit válido!"
+else
+  echo "⏭️  Validação de commit-msg desabilitada (configure HUSKY_RUN_COMMIT_MSG_VALIDATION=true para ativar)"
+fi

@@ -1,0 +1,96 @@
+# Dependabot configuration for automated dependency updates
+# https://docs.github.com/en/code-security/dependabot/dependabot-version-updates/configuration-options-for-the-dependabot.yml-file
+
+version: 2
+updates:
+  # Enable version updates for npm/yarn dependencies
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/Sao_Paulo'
+    # Allow both direct and indirect dependency updates
+    open-pull-requests-limit: 10
+    # Grouping strategy for related updates
+    groups:
+      # Group all Next.js related packages
+      nextjs:
+        patterns:
+          - 'next'
+          - 'react'
+          - 'react-dom'
+        update-types:
+          - 'minor'
+          - 'patch'
+      # Group all Tailwind CSS related packages
+      tailwindcss:
+        patterns:
+          - 'tailwindcss'
+          - '@tailwindcss/*'
+          - 'autoprefixer'
+          - 'postcss'
+        update-types:
+          - 'minor'
+          - 'patch'
+      # Group all TypeScript type definitions
+      types:
+        patterns:
+          - '@types/*'
+        update-types:
+          - 'minor'
+          - 'patch'
+      # Group development dependencies
+      dev-dependencies:
+        dependency-type: 'development'
+        update-types:
+          - 'minor'
+          - 'patch'
+    # Automatically merge minor and patch updates
+    labels:
+      - 'dependencies'
+      - 'automated'
+    # Add reviewers (opcional - adicione seus usernames)
+    # reviewers:
+    #   - "gustavotsuji"
+    # Add assignees (opcional)
+    # assignees:
+    #   - "gustavotsuji"
+    # Commit message configuration
+    commit-message:
+      prefix: 'chore(deps)'
+      prefix-development: 'chore(deps-dev)'
+      include: 'scope'
+    # Rebase strategy
+    rebase-strategy: 'auto'
+    # Ignore specific dependencies (se necessário)
+    # ignore:
+    #   - dependency-name: "package-name"
+    #     versions: ["x.x.x"]
+
+  # Enable version updates for GitHub Actions
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'monday'
+      time: '09:00'
+      timezone: 'America/Sao_Paulo'
+    open-pull-requests-limit: 5
+    labels:
+      - 'dependencies'
+      - 'github-actions'
+      - 'automated'
+    commit-message:
+      prefix: 'chore(ci)'
+      include: 'scope'
+    rebase-strategy: 'auto'
+    # Group all GitHub Actions updates
+    groups:
+      github-actions:
+        patterns:
+          - '*'
+        update-types:
+          - 'minor'
+          - 'patch'

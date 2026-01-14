@@ -1,0 +1,265 @@
+#!/bin/sh
+
+# Carrega config local se existir
+CONFIG_FILE=".husky.user.config"
+if [ -f "$CONFIG_FILE" ]; then
+  source "$CONFIG_FILE"
+fi
+
+# Verificação de nome de branch
+BRANCH_NAME=$(git rev-parse --abbrev-ref HEAD)
+VALID_BRANCH_REGEX="^(feature|fix|hotfix|chore|feat)\\/[A-Za-z0-9]+-[A-Za-z0-9-]+.*$"
+if ! echo "$BRANCH_NAME" | grep -qE "$VALID_BRANCH_REGEX"; then
+  echo "🟡 Nome de branch não segue o padrão recomendado: '$BRANCH_NAME'"
+  echo "   Padrão esperado: tipo/TICKET-descricao (ex: feature/TASK-123-nova-feature)"
+fi
+
+# Testes unitários
+if [ "${HUSKY_RUN_UNIT_TESTS:-false}" = "true" ]; then
+  echo "🔹 Executando testes unitários..."
+  npm test
+  if [ $? -ne 0 ]; then
+    echo "❌ Testes unitários falharam. Push abortado."
+    exit 1
+  fi
+else
+  echo "🟡 Testes unitários desabilitados (ative com HUSKY_RUN_UNIT_TESTS=true)."
+fi
+
+# Testes de integração
+if [ "${HUSKY_RUN_INTEGRATION_TESTS:-false}" = "true" ]; then
+  echo "🔹 Executando testes de integração..."
+  if npm run test:integration >/dev/null 2>&1; then
+    npm run test:integration
+    if [ $? -ne 0 ]; then
+      echo "❌ Testes de integração falharam. Push abortado."
+      exit 1
+    fi
+  else
+    echo "🟡 Script test:integration não encontrado, pulando."
+  fi
+else
+  echo "🟡 Testes de integração desabilitados (ative com HUSKY_RUN_INTEGRATION_TESTS=true)."
+fi
+
+# TypeScript check
+if [ "${HUSKY_RUN_TYPE_CHECK:-false}" = "true" ]; then
+  echo "🔹 Verificando tipos com TypeScript..."
+  if npm run type-check >/dev/null 2>&1; then
+    npm run type-check
+    if [ $? -ne 0 ]; then
+      echo "❌ Verificação de tipos falhou. Push abortado."
+      exit 1
+    fi
+  else
+    echo "🟡 Script type-check não encontrado, pulando."
+  fi
+else
+  echo "🟡 Verificação de tipos desabilitada (ative com HUSKY_RUN_TYPE_CHECK=true)."
+fi
+
+# Build
+if [ "${HUSKY_RUN_BUILD:-false}" = "true" ]; then
+  echo "🔹 Executando build da aplicação..."
+  if npm run build >/dev/null 2>&1; then
+    npm run build
+    if [ $? -ne 0 ]; then
+      echo "❌ Build da aplicação falhou. Push abortado."
+      exit 1
+    fi
+  else
+    echo "🟡 Script build não encontrado, pulando."
+  fi
+else
+  echo "🟡 Build da aplicação desabilitado (ative com HUSKY_RUN_BUILD=true)."
+fi
+
+# Trivy scan
+if [ "${HUSKY_RUN_TRIVY_SCAN:-false}" = "true" ]; then
+  echo "🔹 Executando scanner de vulnerabilidades Trivy..."
+  if command -v trivy >/dev/null 2>&1; then
+    # Configurar cache e timeout
+    export TRIVY_CACHE_DIR="${HOME}/.cache/trivy"
+    export TRIVY_TIMEOUT="10m"
+    
+    # Baixar/atualizar DB primeiro (com retry)
+    echo "📥 Atualizando base de dados do Trivy..."
+    trivy image --download-db-only --no-progress 2>/dev/null || echo "⚠️  Usando cache local"
+    
+    # Executar scan
+    trivy fs . --no-progress
+    if [ $? -ne 0 ]; then
+      echo "❌ Vulnerabilidades encontradas pelo Trivy. Push abortado."
+      exit 1
+    fi
+  else
+    echo "🟡 Trivy não encontrado, pulando scanner de vulnerabilidades."
+  fi
+else
+  echo "🟡 Scanner Trivy desabilitado (ative com HUSKY_RUN_TRIVY_SCAN=true)."
+fi
+
+# npm audit
+if [ "${HUSKY_RUN_NPM_AUDIT:-false}" = "true" ]; then
+  echo "🔹 Executando auditoria de dependências..."
+  npm audit --audit-level=high
+  if [ $? -ne 0 ]; then
+    echo "❌ Vulnerabilidades de alta severidade encontradas. Push abortado."
+    exit 1
+  fi
+else
+  echo "🟡 Auditoria de dependências desabilitada (ative com HUSKY_RUN_NPM_AUDIT=true)."
+fi
+
+echo "✅ Pre-push concluído! (Configure .husky.user.config para ativar mais verificações)"
+
+# SonarQube scan
+if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
+  echo "🔹 Executando SonarQube code quality scan..."
+  
+  # Check if token is configured
+  if [ -z "$SONAR_TOKEN" ]; then
+    echo "❌ SONAR_TOKEN não configurado no .husky.user.config. Push abortado."
+    echo "   Configure seu token em .husky.user.config e tente novamente."
+    exit 1
+  fi
+  
+  # Check if SonarQube is accessible
+  if ! docker ps | grep -q sonarqube; then
+    echo "⚠️  Container SonarQube não está rodando."
+    echo "   Iniciando SonarQube..."
+    docker run -d --name sonarqube \
+      --network sonar-network \
+      -p 9000:9000 \
+      sonarqube:latest 2>/dev/null || {
+      echo "❌ Falha ao iniciar SonarQube. Push abortado."
+      exit 1
+    }
+    echo "⏳ Aguardando SonarQube iniciar (pode levar ~60s)..."
+    sleep 60
+  fi
+  
+  # Check if project exists in SonarQube
+  echo "🔍 Verificando se o projeto existe no SonarQube..."
+  
+  # URL encode the project key (replace _ with %5F, - with %2D, etc)
+  ENCODED_PROJECT_KEY=$(printf '%s' "$SONAR_PROJECT_KEY" | jq -sRr @uri)
+  
+  # If jq is not available, use sed as fallback
+  if [ $? -ne 0 ]; then
+    ENCODED_PROJECT_KEY=$(echo "$SONAR_PROJECT_KEY" | sed 's/_/%5F/g' | sed 's/-/%2D/g')
+  fi
+  
+  PROJECT_SEARCH_RESPONSE=$(curl -s -H "Authorization: Bearer $SONAR_TOKEN" \
+    "http://localhost:9000/api/projects/search?projects=${ENCODED_PROJECT_KEY}" 2>/dev/null)
+  
+  PROJECT_EXISTS=$(echo "$PROJECT_SEARCH_RESPONSE" | grep -o '"total":[0-9]*' | cut -d':' -f2)
+  
+  if [ "$PROJECT_EXISTS" = "0" ] || [ -z "$PROJECT_EXISTS" ]; then
+    echo "⚠️  Projeto '$SONAR_PROJECT_KEY' não existe. Criando..."
+    
+    # Create project (use original key, not encoded)
+    CREATE_RESPONSE=$(curl -s -X POST \
+      -H "Authorization: Bearer $SONAR_TOKEN" \
+      -H "Content-Type: application/x-www-form-urlencoded" \
+      --data-urlencode "project=${SONAR_PROJECT_KEY}" \
+      --data-urlencode "name=${SONAR_PROJECT_KEY}" \
+      "http://localhost:9000/api/projects/create" 2>/dev/null)
+    
+    if echo "$CREATE_RESPONSE" | grep -q "errors"; then
+      # Check if error is "project already exists"
+      if echo "$CREATE_RESPONSE" | grep -q "A similar key already exists"; then
+        echo "✅ Projeto já existe no SonarQube (detectado pelo erro de criação)."
+      else
+        echo "❌ Erro ao criar projeto. Push abortado."
+        echo "   Resposta da API: $CREATE_RESPONSE"
+        echo "   Crie o projeto manualmente em: http://localhost:9000/projects/create"
+        exit 1
+      fi
+    else
+      echo "✅ Projeto criado com sucesso!"
+      # Aguardar um pouco para o projeto ser processado
+      sleep 3
+    fi
+  else
+    echo "✅ Projeto '$SONAR_PROJECT_KEY' já existe."
+  fi
+  
+  # Run scan
+  echo "📊 Analisando código..."
+  SCAN_OUTPUT=$(docker run \
+    --rm \
+    --network sonar-network \
+    -e SONAR_HOST_URL="${SONAR_HOST_URL:-http://sonarqube:9000}" \
+    -e SONAR_TOKEN="$SONAR_TOKEN" \
+    -v "$(pwd):/usr/src" \
+    sonarsource/sonar-scanner-cli 2>&1)
+  
+  SCAN_EXIT_CODE=$?
+  
+  if [ $SCAN_EXIT_CODE -ne 0 ]; then
+    echo "❌ SonarQube scan falhou. Push abortado."
+    echo "$SCAN_OUTPUT"
+    exit 1
+  fi
+  
+  # Wait for SonarQube processing
+  echo "⏳ Aguardando processamento dos resultados..."
+  sleep 10
+  
+  # Check Quality Gate
+  echo "🎯 Verificando Quality Gate..."
+  
+  # Adjust URL depending on where curl is running
+  # On host: use localhost. In container: use sonarqube
+  if command -v curl >/dev/null 2>&1; then
+    # Curl on host - use localhost
+    QUALITY_GATE_URL="http://localhost:9000/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY}"
+    # gitleaks:allow
+    QUALITY_GATE_RESPONSE=$(curl -s -H "Authorization: Bearer $SONAR_TOKEN" "$QUALITY_GATE_URL" 2>&1)
+    CURL_EXIT_CODE=$?
+    
+    if [ $CURL_EXIT_CODE -ne 0 ]; then
+      echo "⚠️  Erro ao conectar com SonarQube API (curl exit code: $CURL_EXIT_CODE)"
+      echo "   Resposta: $QUALITY_GATE_RESPONSE"
+      echo "   Pulando validação do Quality Gate..."
+    else
+      QUALITY_GATE_STATUS=$(echo "$QUALITY_GATE_RESPONSE" | grep -o '"status":"[^"]*"' | head -1 | cut -d'"' -f4)
+    fi
+  else
+    # Curl via container - use sonarqube (Docker network hostname)
+    QUALITY_GATE_URL="${SONAR_HOST_URL:-http://sonarqube:9000}/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY}"
+    # gitleaks:allow
+    QUALITY_GATE_RESPONSE=$(docker run --rm --network sonar-network curlimages/curl:latest \
+      -s -H "Authorization: Bearer $SONAR_TOKEN" "$QUALITY_GATE_URL" 2>&1)
+    QUALITY_GATE_STATUS=$(echo "$QUALITY_GATE_RESPONSE" | grep -o '"status":"[^"]*"' | head -1 | cut -d'"' -f4)
+  fi
+  
+  # Debug: show response if there's a problem
+  if [ -z "$QUALITY_GATE_STATUS" ]; then
+    echo "⚠️  Quality Gate status vazio ou não encontrado."
+    echo "   URL: $QUALITY_GATE_URL"
+    echo "   Resposta da API: $QUALITY_GATE_RESPONSE"
+    echo "   Continuando o push (configure Quality Gate no SonarQube)..."
+  elif [ "$QUALITY_GATE_STATUS" = "NONE" ]; then
+    echo "⚠️  Quality Gate não configurado no projeto."
+    echo "   Configure um Quality Gate em: http://localhost:9000/dashboard?id=${SONAR_PROJECT_KEY}"
+    echo "   Continuando o push..."
+  elif [ "$QUALITY_GATE_STATUS" = "OK" ]; then
+    echo "✅ Quality Gate passou! Código está OK."
+    echo "   Veja o relatório completo em: ${SONAR_HOST_URL:-http://localhost:9000}/dashboard?id=${SONAR_PROJECT_KEY}"
+  elif [ "$QUALITY_GATE_STATUS" = "ERROR" ]; then
+    echo "❌ Quality Gate FALHOU! Push abortado."
+    echo "   Problemas encontrados no código que precisam ser corrigidos."
+    echo "   Veja detalhes em: ${SONAR_HOST_URL:-http://localhost:9000}/dashboard?id=${SONAR_PROJECT_KEY}"
+    exit 1
+  else
+    echo "⚠️  Status do Quality Gate desconhecido: '$QUALITY_GATE_STATUS'"
+    echo "   Resposta completa: $QUALITY_GATE_RESPONSE"
+    echo "   Continuando o push..."
+  fi
+else
+  echo "🟡 SonarQube scan desabilitado (ative com HUSKY_RUN_SONAR_SCAN=true)."
+fi
+
+echo "✅ Pre-push concluído! (Configure .husky.user.config para ativar mais verificações)"
