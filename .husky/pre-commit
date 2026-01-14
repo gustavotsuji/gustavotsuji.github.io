@@ -9,7 +9,7 @@ fi
 # Lint e Prettier
 if [ "${HUSKY_RUN_LINT:-false}" = "true" ]; then
   echo "🔹 Executando lint-staged..."
-  npx lint-staged
+  yarn lint-staged
   if [ $? -ne 0 ]; then
     echo "❌ Lint/prettier falharam. Commit abortado."
     exit 1

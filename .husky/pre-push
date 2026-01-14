@@ -17,7 +17,7 @@ fi
 # Testes unitários
 if [ "${HUSKY_RUN_UNIT_TESTS:-false}" = "true" ]; then
   echo "🔹 Executando testes unitários..."
-  npm test
+  yarn test
   if [ $? -ne 0 ]; then
     echo "❌ Testes unitários falharam. Push abortado."
     exit 1
@@ -29,8 +29,8 @@ fi
 # Testes de integração
 if [ "${HUSKY_RUN_INTEGRATION_TESTS:-false}" = "true" ]; then
   echo "🔹 Executando testes de integração..."
-  if npm run test:integration >/dev/null 2>&1; then
-    npm run test:integration
+  if yarn run test:integration >/dev/null 2>&1; then
+    yarn run test:integration
     if [ $? -ne 0 ]; then
       echo "❌ Testes de integração falharam. Push abortado."
       exit 1
@@ -45,8 +45,8 @@ fi
 # TypeScript check
 if [ "${HUSKY_RUN_TYPE_CHECK:-false}" = "true" ]; then
   echo "🔹 Verificando tipos com TypeScript..."
-  if npm run type-check >/dev/null 2>&1; then
-    npm run type-check
+  if yarn run type-check >/dev/null 2>&1; then
+    yarn run type-check
     if [ $? -ne 0 ]; then
       echo "❌ Verificação de tipos falhou. Push abortado."
       exit 1
@@ -61,8 +61,8 @@ fi
 # Build
 if [ "${HUSKY_RUN_BUILD:-false}" = "true" ]; then
   echo "🔹 Executando build da aplicação..."
-  if npm run build >/dev/null 2>&1; then
-    npm run build
+  if yarn run build >/dev/null 2>&1; then
+    yarn run build
     if [ $? -ne 0 ]; then
       echo "❌ Build da aplicação falhou. Push abortado."
       exit 1
@@ -99,16 +99,16 @@ else
   echo "🟡 Scanner Trivy desabilitado (ative com HUSKY_RUN_TRIVY_SCAN=true)."
 fi
 
-# npm audit
-if [ "${HUSKY_RUN_NPM_AUDIT:-false}" = "true" ]; then
+# Yarn audit
+if [ "${HUSKY_RUN_YARN_AUDIT:-false}" = "true" ]; then
   echo "🔹 Executando auditoria de dependências..."
-  npm audit --audit-level=high
+  yarn audit --level high
   if [ $? -ne 0 ]; then
     echo "❌ Vulnerabilidades de alta severidade encontradas. Push abortado."
     exit 1
   fi
 else
-  echo "🟡 Auditoria de dependências desabilitada (ative com HUSKY_RUN_NPM_AUDIT=true)."
+  echo "🟡 Auditoria de dependências desabilitada (ative com HUSKY_RUN_YARN_AUDIT=true)."
 fi
 
 echo "✅ Pre-push concluído! (Configure .husky.user.config para ativar mais verificações)"

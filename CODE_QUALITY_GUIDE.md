@@ -81,7 +81,7 @@ chore: atualiza dependências
 
 ```bash
 # Executar ESLint
-npx eslint .
+yarn lint
 
 # Verificar formatação com Prettier
 yarn format:check
