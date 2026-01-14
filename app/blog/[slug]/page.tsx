@@ -76,42 +76,44 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
   }
 
   return (
-    <article className="max-w-4xl mx-auto px-4 py-16">
-      {/* Header */}
-      <header className="mb-12">
-        <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{post.title}</h1>
+    <article className="py-20 bg-white">
+      <div className="max-w-4xl mx-auto px-4">
+        <div className="bg-gray-50 rounded-lg shadow-sm p-8 md:p-12">
+          {/* Header */}
+          <header className="mb-12">
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">{post.title}</h1>
 
-        <div className="flex items-center text-gray-600 mb-6">
-          <time dateTime={post.date} className="text-sm">
-            {new Date(post.date).toLocaleDateString('pt-BR', {
-              year: 'numeric',
-              month: 'long',
-              day: 'numeric',
-            })}
-          </time>
-          {post.author && (
-            <>
-              <span className="mx-2">•</span>
-              <span className="text-sm">{post.author}</span>
-            </>
-          )}
-        </div>
+            <div className="flex items-center text-gray-500 mb-6">
+              <time dateTime={post.date} className="text-sm">
+                {new Date(post.date).toLocaleDateString('pt-BR', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
+              </time>
+              {post.author && (
+                <>
+                  <span className="mx-2">•</span>
+                  <span className="text-sm">{post.author}</span>
+                </>
+              )}
+            </div>
 
-        <div className="flex flex-wrap gap-2">
-          {post.tags.map((tag) => (
-            <span
-              key={tag}
-              className="px-3 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded-full"
-            >
-              {tag}
-            </span>
-          ))}
-        </div>
-      </header>
+            <div className="flex flex-wrap gap-2">
+              {post.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="px-3 py-1 text-xs font-medium bg-primary-100 text-primary-700 rounded-full"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </header>
 
-      {/* Content */}
-      <div
-        className="prose prose-lg prose-gray max-w-none
+          {/* Content */}
+          <div
+            className="prose prose-lg prose-gray max-w-none
         prose-headings:font-bold prose-headings:text-gray-900
         prose-h1:text-3xl prose-h1:mt-8 prose-h1:mb-4
         prose-h2:text-2xl prose-h2:mt-8 prose-h2:mb-4
@@ -128,26 +130,28 @@ export default async function BlogPost({ params }: { params: Promise<{ slug: str
         prose-th:bg-gray-100 prose-th:p-3 prose-th:text-left prose-th:font-semibold
         prose-td:border prose-td:border-gray-300 prose-td:p-3
       "
-      >
-        <ReactMarkdown components={MarkdownComponents}>{post.content}</ReactMarkdown>
-      </div>
+          >
+            <ReactMarkdown components={MarkdownComponents}>{post.content}</ReactMarkdown>
+          </div>
 
-      {/* Back Link */}
-      <div className="mt-16 pt-8 border-t border-gray-200">
-        <a
-          href="/blog"
-          className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
-        >
-          <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M10 19l-7-7m0 0l7-7m-7 7h18"
-            />
-          </svg>
-          Voltar para o blog
-        </a>
+          {/* Back Link */}
+          <div className="mt-16 pt-8 border-t border-gray-200">
+            <a
+              href="/blog"
+              className="inline-flex items-center text-primary-600 hover:text-primary-700 font-medium"
+            >
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
+                />
+              </svg>
+              Voltar para o blog
+            </a>
+          </div>
+        </div>
       </div>
     </article>
   )
