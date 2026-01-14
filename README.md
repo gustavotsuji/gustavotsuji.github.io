@@ -1,14 +1,6 @@
 # Gustavo Tsuji - Portfolio & Blog
 
-Modern portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a Medium-style b## 📚 Documentation
-
-- [BLOG_GUIDE.md](./BLOG_GUIDE.md) - How to create blog posts
-- [CODE_QUALITY_GUIDE.md](./CODE_QUALITY_GUIDE.md) - ESLint, Prettier, and Husky guide
-- [TESTING_GUIDE.md](./TESTING_GUIDE.md) - Unit testing guide
-- [NODE_UPGRADE_GUIDE.md](./NODE_UPGRADE_GUIDE.md) - Upgrading to Node.js 24
-- [YARN_MIGRATION.md](./YARN_MIGRATION.md) - npm to Yarn migration guide
-- [DEPENDABOT_GUIDE.md](./DEPENDABOT_GUIDE.md) - Automated dependency updates
-- [.github/workflows/deploy.yml](./.github/workflows/deploy.yml) - CI/CD configurationr technical articles.
+Modern portfolio website built with Next.js, TypeScript, and Tailwind CSS. Features a Medium-style blog for technical articles.
 
 ## 🚀 Features
 
@@ -42,7 +34,7 @@ node --version  # Should be v24.x.x
 yarn --version  # Should be >= 1.22.x
 ```
 
-If you need to upgrade Node.js, see [NODE_UPGRADE_GUIDE.md](./NODE_UPGRADE_GUIDE.md)
+If you need to upgrade Node.js, see [NODE_UPGRADE_GUIDE.md](./docs/NODE_UPGRADE_GUIDE.md)
 
 To install Yarn:
 
@@ -108,7 +100,7 @@ The project uses:
 - **Husky**: Git hooks for pre-commit validation
 - **Commitlint**: Validates commit messages (Conventional Commits)
 
-See [CODE_QUALITY_GUIDE.md](./CODE_QUALITY_GUIDE.md) for details.
+See [CODE_QUALITY_GUIDE.md](./docs/CODE_QUALITY_GUIDE.md) for details.
 
 ## 🚀 Deployment to GitHub Pages
 
@@ -133,7 +125,7 @@ yarn build
 
 ## 📝 Adding Blog Posts
 
-See [BLOG_GUIDE.md](./BLOG_GUIDE.md) for detailed instructions on creating blog posts.
+See [BLOG_GUIDE.md](./docs/BLOG_GUIDE.md) for detailed instructions on creating blog posts.
 
 Quick start:
 
@@ -142,11 +134,19 @@ Quick start:
 3. Write your content in Markdown
 4. The post will appear automatically!
 
-## � Documentation
+## 📚 Documentation
 
-- [BLOG_GUIDE.md](./BLOG_GUIDE.md) - How to create blog posts
-- [NODE_UPGRADE_GUIDE.md](./NODE_UPGRADE_GUIDE.md) - Upgrading to Node.js 24
-- [YARN_MIGRATION.md](./YARN_MIGRATION.md) - npm to Yarn migration guide
+For detailed technical documentation, see the [docs](./docs) directory:
+
+- **[docs/README.md](./docs/README.md)** - Documentation index
+- **[docs/DEPLOY.md](./docs/DEPLOY.md)** - Complete deployment guide
+- **[docs/BLOG_GUIDE.md](./docs/BLOG_GUIDE.md)** - How to create blog posts
+- **[docs/CODE_QUALITY_GUIDE.md](./docs/CODE_QUALITY_GUIDE.md)** - ESLint, Prettier, and Husky
+- **[docs/TESTING_GUIDE.md](./docs/TESTING_GUIDE.md)** - Unit testing guide
+- **[docs/NODE_UPGRADE_GUIDE.md](./docs/NODE_UPGRADE_GUIDE.md)** - Node.js 24 upgrade
+- **[docs/YARN_MIGRATION.md](./docs/YARN_MIGRATION.md)** - npm to Yarn migration
+- **[docs/TAILWIND_V4_GUIDE.md](./docs/TAILWIND_V4_GUIDE.md)** - Tailwind CSS 4 guide
+- **[docs/DEPENDABOT_GUIDE.md](./docs/DEPENDABOT_GUIDE.md)** - Automated updates
 - [.github/workflows/deploy.yml](./.github/workflows/deploy.yml) - CI/CD configuration
 
 ## �📄 License
