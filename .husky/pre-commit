@@ -39,7 +39,7 @@ if [ "${HUSKY_VALIDATE_DOCKERFILE:-false}" = "true" ]; then
   if git diff --cached --name-only | grep -q "Dockerfile"; then
     echo "🔹 Dockerfile modificado. Validando o build da imagem..."
     if command -v docker >/dev/null 2>&1; then
-      docker build . -t call-tracking-validacao
+      docker build . -t gustavo_github_pages-validacao
       if [ $? -ne 0 ]; then
         echo "❌ Erro ao construir a imagem Docker. Commit abortado."
         exit 1
