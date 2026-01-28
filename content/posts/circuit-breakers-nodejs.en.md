@@ -6,8 +6,6 @@ tags: ['Node.js', 'Architecture', 'Resilience', 'Microservices']
 author: 'Gustavo Tsuji'
 ---
 
-# Building Resilient Microservices with Circuit Breakers
-
 In distributed systems, failures are inevitable. The question isn't _if_ a service will fail, but _when_. This article explores how to use the Circuit Breaker pattern to build resilient microservices in Node.js.
 
 ## The Problem

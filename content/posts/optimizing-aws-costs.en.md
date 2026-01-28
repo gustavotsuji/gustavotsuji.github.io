@@ -6,8 +6,6 @@ tags: ['AWS', 'Cost Optimization', 'Cloud', 'Infrastructure']
 author: 'Gustavo Tsuji'
 ---
 
-# Optimizing AWS Costs: A Practical Guide
-
 Cloud costs can quickly spiral out of control if not managed properly. In this article, I'll share the strategies we used at OLX to reduce our AWS infrastructure costs by approximately **60%**.
 
 ## The Challenge

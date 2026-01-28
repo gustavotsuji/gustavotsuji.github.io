@@ -23,18 +23,20 @@ export async function generateStaticParams() {
 import { notFound } from 'next/navigation'
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
+import MarkdownImage from '@/components/MarkdownImage'
+import type { Components } from 'react-markdown'
 
-interface BlogPostPageProps {
-  params: {
-    lang: string
-    year: string
-    month: string
-    slug: string
-  }
+type Params = {
+  lang: string
+  year: string
+  month: string
+  slug: string
 }
 
-export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { lang, year, month, slug } = await params
+export default async function BlogPostPage(props: { params: Params | Promise<Params> }) {
+  // Next App Router may provide `params` as a Promise in some runtime modes;
+  // unwrap it before accessing properties as the framework requires.
+  const { lang, year, month, slug } = await props.params
   // Exemplo de caminho: content/posts/postgresql-partitioning.en.md
   const fileName = `${slug}.${lang}.md`
   const filePath = path.join(process.cwd(), 'content', 'posts', fileName)
@@ -54,13 +56,85 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     notFound()
   }
 
+  // metadata for head (App Router supports generateMetadata as a separate export,
+  // but here we return per-page metadata via in-component Metadata API by constructing head tags)
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gustavotsuji.github.io'
+  const postUrl = `${baseUrl}/blog/${lang}/${year}/${month}/${slug}`
+  // Prefer optimized versions (avif/webp) under public/optimized when available
+  const resolveFeaturedImage = (imgPath: string | undefined) => {
+    if (!imgPath) return undefined
+    // if already absolute, return as-is
+    if (/^https?:\/\//.test(imgPath)) return imgPath
+
+    const basename = path.basename(imgPath)
+    const optimizedAvif = `optimized/${basename.replace(path.extname(basename), '.avif')}`
+    const optimizedWebp = `optimized/${basename.replace(path.extname(basename), '.webp')}`
+
+    const avifPath = path.join(process.cwd(), 'public', optimizedAvif)
+    const webpPath = path.join(process.cwd(), 'public', optimizedWebp)
+
+    if (fs.existsSync(avifPath)) return `${baseUrl}/${optimizedAvif}`
+    if (fs.existsSync(webpPath)) return `${baseUrl}/${optimizedWebp}`
+
+    // fallback to original image (assume it's served under site root)
+    return `${baseUrl}${imgPath}`
+  }
+
+  const featuredImageUrl = resolveFeaturedImage(data.image)
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: data.title,
+    description: data.excerpt || data.description || '',
+    author: { '@type': 'Person', name: data.author || 'Gustavo Tsuji' },
+    datePublished: data.date,
+    mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
+    image: featuredImageUrl || undefined,
+  }
+
   return (
-    <article className="prose mx-auto">
-      <h1>{data.title}</h1>
-      <p className="text-sm text-gray-500 mb-4">
-        {data.date} • {data.author}
-      </p>
-      <ReactMarkdown>{content}</ReactMarkdown>
-    </article>
+    <>
+      {/* Head meta */}
+      <head>
+        <title>{data.title}</title>
+        <meta name="description" content={data.excerpt || ''} />
+        <link rel="canonical" href={postUrl} />
+        {/* hreflang alternatives - adjust languages you support */}
+        <link rel="alternate" hrefLang={lang} href={postUrl} />
+        <link rel="alternate" hrefLang="x-default" href={postUrl} />
+
+        {/* Open Graph */}
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={data.title} />
+        <meta property="og:description" content={data.excerpt || ''} />
+        {featuredImageUrl && <meta property="og:image" content={featuredImageUrl} />}
+
+        {/* Twitter */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={data.title} />
+        <meta name="twitter:description" content={data.excerpt || ''} />
+      </head>
+
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
+      {/* Preload featured image for faster LCP when available (prefer optimized output) */}
+      {featuredImageUrl && <link rel="preload" as="image" href={featuredImageUrl} />}
+
+      {/* use the site header-aware utility so padding/scroll-margin track the header height */}
+      <article className="prose mx-auto with-header">
+        <h1>{data.title}</h1>
+        <p className="text-sm text-gray-500 mb-4">
+          {data.date} • {data.author}
+        </p>
+        <ReactMarkdown components={{ img: MarkdownImage as unknown as Components['img'] }}>
+          {content}
+        </ReactMarkdown>
+      </article>
+    </>
   )
 }

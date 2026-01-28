@@ -1,12 +1,10 @@
 ---
-title: 'PostgreSQL Table Partitioning: Performance at Scale'
+title: 'Scaling PostgreSQL: How Table Partitioning Solves Performance Bottlenecks'
 date: '2024-01-10'
 excerpt: 'Advanced partitioning strategies to handle billions of records efficiently. Real-world examples and performance benchmarks from production systems.'
 tags: ['PostgreSQL', 'Database', 'Performance', 'Scalability']
 author: 'Gustavo Tsuji'
 ---
-
-# Scaling PostgreSQL: How Table Partitioning Solves Performance Bottlenecks
 
 Anyone working with large data volumes knows that, eventually, table size starts taking a toll. Queries become slow, indexes grow to massive sizes, and maintenance operations can overload the database.
 

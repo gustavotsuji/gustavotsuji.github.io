@@ -48,6 +48,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Header height variable and utility
+   - --site-header-height is set at runtime by the Header component
+   - .with-header applies padding-top and scroll-margin-top using that value
+*/
+:root {
+  --site-header-height: 5rem; /* sensible default (80px) */
+}
+
+.with-header {
+  /* add a slightly larger safe offset so content sits further below the fixed header */
+  padding-top: calc(var(--site-header-height) + 2rem);
+  scroll-margin-top: calc(var(--site-header-height) + 2rem);
+}
+
 /* Typography enhancements */
 h1,
 h2,

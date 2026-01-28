@@ -33,3 +33,7 @@ yarn-error.log*
 next-env.d.ts
 
 .husky.user.config
+
+.lighthouseci
+.vscode
+.swc
