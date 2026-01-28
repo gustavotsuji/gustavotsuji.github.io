@@ -7,7 +7,7 @@ export default function HeaderClient() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   useEffect(() => {
-    const el = document.querySelector('header') as HTMLElement | null
+    const el = document.querySelector<HTMLElement>('header')
     if (!el) return
     const setVar = () => {
       const height = `${el.getBoundingClientRect().height}px`

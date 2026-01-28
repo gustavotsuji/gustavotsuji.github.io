@@ -2,7 +2,7 @@ import React from 'react'
 import fs from 'node:fs'
 import path from 'node:path'
 
-type ImgProps = React.ImgHTMLAttributes<HTMLImageElement>
+type ImgProps = Readonly<React.ImgHTMLAttributes<HTMLImageElement>>
 
 /**
  * MarkdownImage renders a <picture> tag preferring optimized assets under
