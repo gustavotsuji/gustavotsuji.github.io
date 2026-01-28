@@ -1,5 +1,23 @@
 #!/bin/sh
 
+# Debug helper: if HUSKY_DEBUG=true the script will re-exec under bash -x
+if [ "${HUSKY_DEBUG:-false}" = "true" ]; then
+  # Avoid re-exec loop: only re-exec once and mark with HUSKY_DEBUG_REEXEC
+  if [ "${HUSKY_DEBUG_REEXEC:-false}" != "true" ]; then
+    if command -v bash >/dev/null 2>&1; then
+      echo "🔧 HUSKY_DEBUG=true — reexecutando hook em modo debug (bash -x)"
+      # mark that we've re-exec'd so this block won't run again
+      export HUSKY_DEBUG_REEXEC=true
+      exec bash -x "$0" "$@"
+    else
+      echo "🔧 HUSKY_DEBUG=true, mas 'bash' não encontrado — ativando set -x"
+      set -x
+    fi
+  else
+    echo "🔧 HUSKY_DEBUG já reexecutado — continuando execução normal"
+  fi
+fi
+
 # Carrega config local se existir
 CONFIG_FILE=".husky.user.config"
 if [ -f "$CONFIG_FILE" ]; then
