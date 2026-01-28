@@ -6,6 +6,8 @@ const postsDirectory = path.join(process.cwd(), 'content/posts')
 
 export interface Post {
   slug: string
+  baseSlug?: string
+  lang?: string
   title: string
   date: string
   excerpt: string
@@ -28,10 +30,31 @@ export function getAllPosts(): Post[] {
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
 
+      // derive language from filename suffix (e.g. "post-slug.en")
+      const langRe = /\.([a-z]{2})$/i
+      const langMatch = langRe.exec(String(slug))
+      const lang = langMatch ? langMatch[1].toLowerCase() : 'en'
+      const baseSlug = String(slug).replace(/\.[a-z]{2}$/i, '')
+
+      // normalize date to YYYY-MM-DD when possible; fall back to original or empty
+      let normalizedDate = ''
+      if (typeof data.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
+        normalizedDate = data.date
+      } else if (data.date) {
+        const parsed = new Date(data.date)
+        if (Number.isFinite(parsed.getTime())) {
+          normalizedDate = parsed.toISOString().slice(0, 10)
+        }
+      }
+
       return {
+        // keep original slug (filename without .md) for backward compatibility
         slug,
+        // additional, safer fields for consumers
+        baseSlug,
+        lang,
         title: data.title,
-        date: data.date,
+        date: normalizedDate || data.date || '',
         excerpt: data.excerpt,
         tags: data.tags || [],
         author: data.author || 'Gustavo Tsuji',
@@ -55,10 +78,29 @@ export function getPostBySlug(slug: string): Post | null {
     const fileContents = fs.readFileSync(fullPath, 'utf8')
     const { data, content } = matter(fileContents)
 
+    // derive language and baseSlug for the provided slug
+    const langRe = /\.([a-z]{2})$/i
+    const langMatch = langRe.exec(String(slug))
+    const lang = langMatch ? langMatch[1].toLowerCase() : 'en'
+    const baseSlug = String(slug).replace(/\.[a-z]{2}$/i, '')
+
+    // normalize date similar to getAllPosts
+    let normalizedDate = ''
+    if (typeof data.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(data.date)) {
+      normalizedDate = data.date
+    } else if (data.date) {
+      const parsed = new Date(data.date)
+      if (Number.isFinite(parsed.getTime())) {
+        normalizedDate = parsed.toISOString().slice(0, 10)
+      }
+    }
+
     return {
       slug,
+      baseSlug,
+      lang,
       title: data.title,
-      date: data.date,
+      date: normalizedDate || data.date || '',
       excerpt: data.excerpt,
       tags: data.tags || [],
       author: data.author || 'Gustavo Tsuji',
