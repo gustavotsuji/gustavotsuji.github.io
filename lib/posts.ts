@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import matter from 'gray-matter'
 
 const postsDirectory = path.join(process.cwd(), 'content/posts')
@@ -119,5 +119,6 @@ export function getAllTags(): string[] {
     post.tags.forEach((tag) => tags.add(tag))
   })
 
-  return Array.from(tags).sort()
+  // Use localeCompare to ensure consistent, locale-aware alphabetical sorting
+  return Array.from(tags).sort((a, b) => a.localeCompare(b))
 }
