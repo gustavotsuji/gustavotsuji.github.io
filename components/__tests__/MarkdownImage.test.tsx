@@ -27,8 +27,8 @@ describe('MarkdownImage', () => {
     expect(avifSource).toBeInTheDocument()
 
     // ensure the <img> fallback uses original src
-    const img = screen.getByAltText('Test') as HTMLImageElement
-    expect(img.src).toContain('/images/test.jpg')
+    const img = screen.getByAltText('Test')
+    expect((img as HTMLImageElement).src).toContain('/images/test.jpg')
   })
 
   it('renders plain <img> for absolute URLs and does not check fs', () => {
@@ -37,7 +37,7 @@ describe('MarkdownImage', () => {
     })
 
     render(<MarkdownImage src="https://example.com/photo.jpg" alt="Remote" />)
-    const img = screen.getByAltText('Remote') as HTMLImageElement
-    expect(img.src).toContain('https://example.com/photo.jpg')
+    const img = screen.getByAltText('Remote')
+    expect((img as HTMLImageElement).src).toContain('https://example.com/photo.jpg')
   })
 })
