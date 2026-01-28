@@ -1,6 +1,6 @@
 'use client'
 import { useState } from 'react'
-import BlogPreview from './BlogPreview'
+import BlogPreview from './BlogPreviewClient'
 import type { Post } from '@/lib/posts'
 
 interface BlogLanguageSelectorProps {

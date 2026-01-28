@@ -142,11 +142,10 @@ if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
   # Check if project exists in SonarQube
   echo "🔍 Verificando se o projeto existe no SonarQube..."
   
-  # URL encode the project key (replace _ with %5F, - with %2D, etc)
-  ENCODED_PROJECT_KEY=$(printf '%s' "$SONAR_PROJECT_KEY" | jq -sRr @uri)
-  
-  # If jq is not available, use sed as fallback
-  if [ $? -ne 0 ]; then
+  # URL encode the project key check
+  if command -v jq >/dev/null 2>&1; then
+    ENCODED_PROJECT_KEY=$(printf '%s' "$SONAR_PROJECT_KEY" | jq -sRr @uri)
+  else
     ENCODED_PROJECT_KEY=$(echo "$SONAR_PROJECT_KEY" | sed 's/_/%5F/g' | sed 's/-/%2D/g')
   fi
   
@@ -178,7 +177,6 @@ if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
       fi
     else
       echo "✅ Projeto criado com sucesso!"
-      # Aguardar um pouco para o projeto ser processado
       sleep 3
     fi
   else
@@ -210,10 +208,8 @@ if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
   # Check Quality Gate
   echo "🎯 Verificando Quality Gate..."
   
-  # Adjust URL depending on where curl is running
-  # On host: use localhost. In container: use sonarqube
   if command -v curl >/dev/null 2>&1; then
-    # Curl on host - use localhost
+    # Curl on host
     QUALITY_GATE_URL="http://localhost:9000/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY}"
     # gitleaks:allow
     QUALITY_GATE_RESPONSE=$(curl -s -H "Authorization: Bearer $SONAR_TOKEN" "$QUALITY_GATE_URL" 2>&1)
@@ -227,7 +223,7 @@ if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
       QUALITY_GATE_STATUS=$(echo "$QUALITY_GATE_RESPONSE" | grep -o '"status":"[^"]*"' | head -1 | cut -d'"' -f4)
     fi
   else
-    # Curl via container - use sonarqube (Docker network hostname)
+    # Curl via container
     QUALITY_GATE_URL="${SONAR_HOST_URL:-http://sonarqube:9000}/api/qualitygates/project_status?projectKey=${SONAR_PROJECT_KEY}"
     # gitleaks:allow
     QUALITY_GATE_RESPONSE=$(docker run --rm --network sonar-network curlimages/curl:latest \
