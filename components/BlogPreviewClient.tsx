@@ -1,21 +1,19 @@
-/* eslint-disable no-unused-vars */
+'use client'
 import Link from 'next/link'
+import React from 'react'
 import type { Post } from '@/lib/posts'
-import { getAllPosts } from '@/lib/posts'
 
-interface BlogPreviewProps {
-  readonly posts?: readonly Post[]
+interface BlogPreviewClientProps {
+  readonly posts: readonly Post[]
   readonly selectedLang?: string
-  readonly setLang?: (_lang: string) => void
+  readonly setLang?: React.Dispatch<React.SetStateAction<string>>
 }
-export default function BlogPreview({ posts, selectedLang, setLang }: BlogPreviewProps) {
-  // if posts not provided (used on the homepage), load them server-side
-  let blogPosts: readonly Post[] = posts ?? []
-  if ((!posts || posts.length === 0) && typeof getAllPosts === 'function') {
-    // safe to call on server components
-    blogPosts = getAllPosts().slice(0, 5)
-  }
 
+export default function BlogPreviewClient({
+  posts = [],
+  selectedLang = 'en',
+  setLang,
+}: BlogPreviewClientProps) {
   const languages = [
     { code: 'pt', label: 'Português' },
     { code: 'en', label: 'English' },
@@ -23,6 +21,7 @@ export default function BlogPreview({ posts, selectedLang, setLang }: BlogPrevie
     { code: 'ja', label: '日本語' },
     { code: 'fr', label: 'Français' },
   ]
+
   return (
     <section id="blog" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
@@ -35,7 +34,7 @@ export default function BlogPreview({ posts, selectedLang, setLang }: BlogPrevie
                     key={l.code}
                     aria-pressed={selectedLang === l.code}
                     className={`px-3 py-1 rounded text-sm font-medium border transition-colors ${selectedLang === l.code ? 'bg-primary-600 text-white border-primary-600' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700 hover:bg-primary-100 dark:hover:bg-primary-900/30'}`}
-                    onClick={() => setLang(l.code)}
+                    onClick={() => setLang?.(l.code)}
                   >
                     {l.label}
                   </button>
@@ -53,8 +52,7 @@ export default function BlogPreview({ posts, selectedLang, setLang }: BlogPrevie
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {blogPosts.map((post) => {
-              // prefer normalized values from ingestion (lib/posts). Fall back when not available.
+            {posts.map((post) => {
               const dateIso =
                 typeof post.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(post.date)
                   ? post.date
@@ -65,12 +63,10 @@ export default function BlogPreview({ posts, selectedLang, setLang }: BlogPrevie
               const langFromPost = (post.lang as string) || ''
               const baseSlugFromPost = (post.baseSlug as string) || ''
 
-              // If ingestion provided normalized fields, use them; otherwise derive from slug
               const rawLang = langFromPost || String(post.slug).split('.').pop() || 'en'
               const langCode = /^[a-z]{2}$/.test(rawLang) ? rawLang : 'en'
               const rawSlug = baseSlugFromPost || String(post.slug).replace(/\.[a-z]{2}$/, '')
 
-              // encode each segment to prevent injection in the URL
               const safeLang = encodeURIComponent(langCode)
               const safeSlug = encodeURIComponent(rawSlug)
 
