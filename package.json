@@ -80,5 +80,8 @@
     "*.{json,md,yml,yaml}": [
       "prettier --write"
     ]
+  },
+  "resolutions": {
+    "tmp": "0.2.4"
   }
 }
