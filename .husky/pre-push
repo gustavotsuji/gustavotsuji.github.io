@@ -215,7 +215,21 @@ if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
   
   # Run scan
   echo "📊 Analisando código..."
+  # Ensure coverage file exists; if missing, run tests to generate coverage
+  if [ ! -f coverage/lcov.info ]; then
+    echo "ℹ️  coverage/lcov.info not found — running tests to generate coverage..."
+    if command -v yarn >/dev/null 2>&1; then
+      yarn test --coverage --silent || { echo "❌ Tests failed generating coverage. Push abortado."; exit 1; }
+    elif command -v npm >/dev/null 2>&1; then
+      npm test -- --coverage --silent || { echo "❌ Tests failed generating coverage. Push abortado."; exit 1; }
+    else
+      echo "⚠️  No yarn or npm available to run tests. Ensure coverage exists at coverage/lcov.info";
+      exit 1
+    fi
+  fi
+
   # Run scanner container, explicitly passing project key and login and setting platform for Mac/ARM hosts
+  # Also provide LCOV path so Sonar ingests the JavaScript/TypeScript coverage report
   SCAN_OUTPUT=$(docker run \
     --rm \
     --platform linux/amd64 \
@@ -227,7 +241,8 @@ if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
     sonarsource/sonar-scanner-cli \
     -Dsonar.projectKey="${SONAR_PROJECT_KEY}" \
     -Dsonar.host.url="${SONAR_HOST_URL:-http://sonarqube:9000}" \
-    -Dsonar.login="${SONAR_TOKEN}" 2>&1)
+    -Dsonar.login="${SONAR_TOKEN}" \
+    -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info 2>&1)
   
   SCAN_EXIT_CODE=$?
   
