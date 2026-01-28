@@ -1,16 +1,9 @@
 /* eslint-disable no-unused-vars */
 import Link from 'next/link'
+import type { Post } from '@/lib/posts'
 
 interface BlogPreviewProps {
-  readonly posts: Array<{
-    readonly slug: string
-    readonly title: string
-    readonly date: string
-    readonly excerpt: string
-    readonly tags: readonly string[]
-    readonly author: string
-    readonly content: string
-  }>
+  readonly posts: readonly Post[]
   readonly selectedLang: string
   readonly setLang?: (_lang: string) => void
 }
@@ -52,59 +45,79 @@ export default function BlogPreview({ posts = [], selectedLang, setLang }: BlogP
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {posts.map((post) => (
-              <article
-                key={post.slug}
-                className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
-              >
-                <div className="p-6">
-                  <div className="flex flex-wrap gap-2 mb-3">
-                    {post.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+            {posts.map((post) => {
+              // prefer normalized values from ingestion (lib/posts). Fall back when not available.
+              const dateIso =
+                typeof post.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(post.date)
+                  ? post.date
+                  : ''
+              const year = dateIso ? dateIso.slice(0, 4) : '0000'
+              const month = dateIso ? dateIso.slice(5, 7) : '01'
+
+              const langFromPost = (post.lang as string) || ''
+              const baseSlugFromPost = (post.baseSlug as string) || ''
+
+              // If ingestion provided normalized fields, use them; otherwise derive from slug
+              const rawLang = langFromPost || String(post.slug).split('.').pop() || 'en'
+              const langCode = /^[a-z]{2}$/.test(rawLang) ? rawLang : 'en'
+              const rawSlug = baseSlugFromPost || String(post.slug).replace(/\.[a-z]{2}$/, '')
+
+              // encode each segment to prevent injection in the URL
+              const safeLang = encodeURIComponent(langCode)
+              const safeSlug = encodeURIComponent(rawSlug)
+
+              const safeHref = `/blog/${safeLang}/${year}/${month}/${safeSlug}`
+
+              return (
+                <article
+                  key={post.slug}
+                  className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
+                >
+                  <div className="p-6">
+                    <div className="flex flex-wrap gap-2 mb-3">
+                      {post.tags.map((tag) => (
+                        <span
+                          key={tag}
+                          className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium"
+                        >
+                          {tag}
+                        </span>
+                      ))}
+                    </div>
+
+                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                      {post.date ? (
+                        <Link href={safeHref}>{post.title}</Link>
+                      ) : (
+                        <span>{post.title}</span>
+                      )}
+                    </h3>
+
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                      {post.excerpt}
+                    </p>
+
+                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-500">
+                      <time dateTime={post.date}>
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'long',
+                          day: 'numeric',
+                        })}
+                      </time>
+                      {post.date ? (
+                        <Link
+                          href={safeHref}
+                          className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
+                        >
+                          Read more →
+                        </Link>
+                      ) : null}
+                    </div>
                   </div>
-
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
-                    {post.date ? (
-                      <Link
-                        href={`/blog/${post.slug.split('.').pop() || 'en'}/${post.date.slice(0, 4)}/${post.date.slice(5, 7)}/${post.slug.replace(/\.[a-z]{2}$/, '')}`}
-                      >
-                        {post.title}
-                      </Link>
-                    ) : (
-                      <span>{post.title}</span>
-                    )}
-                  </h3>
-
-                  <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
-                    {post.excerpt}
-                  </p>
-
-                  <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-500">
-                    <time dateTime={post.date}>
-                      {new Date(post.date).toLocaleDateString('en-US', {
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
-                    </time>
-                    {post.date ? (
-                      <Link
-                        href={`/blog/${post.slug.split('.').pop() || 'en'}/${post.date.slice(0, 4)}/${post.date.slice(5, 7)}/${post.slug.replace(/\.[a-z]{2}$/, '')}`}
-                        className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
-                      >
-                        Read more →
-                      </Link>
-                    ) : null}
-                  </div>
-                </div>
-              </article>
-            ))}
+                </article>
+              )
+            })}
           </div>
 
           <div className="text-center">
