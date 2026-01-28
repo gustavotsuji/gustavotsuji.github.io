@@ -1,12 +1,10 @@
 ---
-title: 'PostgreSQL Table Partitioning: Performance at Scale'
+title: 'PostgreSQLのスケーリング：テーブルパーティショニングによるパフォーマンスボトルネックの解消'
 date: '2024-01-10'
 excerpt: '数十億件のレコードを効率的に処理するための高度なパーティショニング戦略。本番システムにおける実例とパフォーマンスベンチマークを紹介します。'
 tags: ['PostgreSQL', 'Database', 'Performance', 'Scalability']
 author: 'Gustavo Tsuji'
 ---
-
-# PostgreSQLのスケーリング：テーブルパーティショニングによるパフォーマンスボトルネックの解消
 
 大量のデータを扱うエンジニアなら誰もが知っていることですが、ある時点でテーブルのサイズがその代償を求め始めます。クエリは遅くなり、インデックスは巨大化し、メンテナンス作業がデータベース全体に過負荷をかけるようになります。
 

@@ -1,5 +1,23 @@
 #!/bin/sh
 
+# Debug helper: if HUSKY_DEBUG=true the script will re-exec under bash -x
+if [ "${HUSKY_DEBUG:-false}" = "true" ]; then
+  # Avoid re-exec loop: only re-exec once and mark with HUSKY_DEBUG_REEXEC
+  if [ "${HUSKY_DEBUG_REEXEC:-false}" != "true" ]; then
+    if command -v bash >/dev/null 2>&1; then
+      echo "🔧 HUSKY_DEBUG=true — reexecutando hook em modo debug (bash -x)"
+      # mark that we've re-exec'd so this block won't run again
+      export HUSKY_DEBUG_REEXEC=true
+      exec bash -x "$0" "$@"
+    else
+      echo "🔧 HUSKY_DEBUG=true, mas 'bash' não encontrado — ativando set -x"
+      set -x
+    fi
+  else
+    echo "🔧 HUSKY_DEBUG já reexecutado — continuando execução normal"
+  fi
+fi
+
 # Carrega config local se existir
 CONFIG_FILE=".husky.user.config"
 if [ -f "$CONFIG_FILE" ]; then
@@ -113,6 +131,36 @@ fi
 
 echo "✅ Pre-push concluído! (Configure .husky.user.config para ativar mais verificações)"
 
+# SEO / Lighthouse (LHCI)
+if [ "${HUSKY_RUN_SEO:-false}" = "true" ]; then
+  echo "🔹 Executando auditoria SEO (Lighthouse + LHCI)..."
+  # Build and start server in background
+  if yarn run seo >/dev/null 2>&1; then
+    yarn run seo
+  else
+    # Fallback to stepwise run if the combined script isn't used
+    yarn seo:build >/dev/null 2>&1 || true
+    (yarn seo:start >/dev/null 2>&1 &) 
+    PID=$!
+    npx wait-on http://localhost:3000 || {
+      echo "❌ Não foi possível aguardar o servidor na porta 3000. Abortando SEO check."
+      kill $PID || true
+      exit 1
+    }
+    npx lhci autorun --config=lhci.config.js
+    LHCI_EXIT=$?
+    kill $PID || true
+    if [ $LHCI_EXIT -ne 0 ]; then
+      echo "❌ Auditoria SEO falhou. Push abortado."
+      exit 1
+    else
+      echo "✅ Auditoria SEO passou."
+    fi
+  fi
+else
+  echo "🟡 Auditoria SEO desabilitada (ative com HUSKY_RUN_SEO=true)."
+fi
+
 # SonarQube scan
 if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
   echo "🔹 Executando SonarQube code quality scan..."
@@ -185,13 +233,34 @@ if [ "${HUSKY_RUN_SONAR_SCAN:-false}" = "true" ]; then
   
   # Run scan
   echo "📊 Analisando código..."
+  # Ensure coverage file exists; if missing, run tests to generate coverage
+  if [ ! -f coverage/lcov.info ]; then
+    echo "ℹ️  coverage/lcov.info not found — running tests to generate coverage..."
+    if command -v yarn >/dev/null 2>&1; then
+      yarn test --coverage --silent || { echo "❌ Tests failed generating coverage. Push abortado."; exit 1; }
+    elif command -v npm >/dev/null 2>&1; then
+      npm test -- --coverage --silent || { echo "❌ Tests failed generating coverage. Push abortado."; exit 1; }
+    else
+      echo "⚠️  No yarn or npm available to run tests. Ensure coverage exists at coverage/lcov.info";
+      exit 1
+    fi
+  fi
+
+  # Run scanner container, explicitly passing project key and login and setting platform for Mac/ARM hosts
+  # Also provide LCOV path so Sonar ingests the JavaScript/TypeScript coverage report
   SCAN_OUTPUT=$(docker run \
     --rm \
+    --platform linux/amd64 \
     --network sonar-network \
     -e SONAR_HOST_URL="${SONAR_HOST_URL:-http://sonarqube:9000}" \
     -e SONAR_TOKEN="$SONAR_TOKEN" \
+    -e SONAR_PROJECT_KEY="$SONAR_PROJECT_KEY" \
     -v "$(pwd):/usr/src" \
-    sonarsource/sonar-scanner-cli 2>&1)
+    sonarsource/sonar-scanner-cli \
+    -Dsonar.projectKey="${SONAR_PROJECT_KEY}" \
+    -Dsonar.host.url="${SONAR_HOST_URL:-http://sonarqube:9000}" \
+    -Dsonar.login="${SONAR_TOKEN}" \
+    -Dsonar.javascript.lcov.reportPaths=coverage/lcov.info 2>&1)
   
   SCAN_EXIT_CODE=$?
   

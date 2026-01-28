@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://gustavotsuji.github.io/</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/about</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/en/2024/02/circuit-breakers-nodejs</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/en/2024/03/optimizing-aws-costs</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/en/2024/01/postgresql-partitioning</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/ja/2024/01/postgresql-partitioning</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/pt/2024/01/postgresql-partitioning</loc>
+  </url>
+</urlset>

@@ -1,12 +1,10 @@
 ---
-title: 'PostgreSQL Table Partitioning: Performance at Scale'
+title: 'Escalando o PostgreSQL: Como o particionamento de tabelas resolve gargalos de performance'
 date: '2024-01-10'
 excerpt: 'Estratégias avançadas de particionamento para processar bilhões de registros com eficiência. Exemplos práticos e benchmarks de desempenho de sistemas em produção.'
 tags: ['PostgreSQL', 'Database', 'Performance', 'Scalability']
 author: 'Gustavo Tsuji'
 ---
-
-# Escalonando o PostgreSQL: Como o particionamento de tabelas resolve gargalos de performance
 
 Quem trabalha com grandes volumes de dados sabe que, em algum momento, o tamanho das tabelas começa a cobrar seu preço. Consultas ficam lentas, índices se tornam gigantescos e operações de manutenção podem sobrecarregar o banco de dados.
 

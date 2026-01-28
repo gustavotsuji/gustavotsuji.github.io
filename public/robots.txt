@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://gustavotsuji.github.io/sitemap.xml
