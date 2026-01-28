@@ -77,3 +77,50 @@ describe('BlogPostPage (unit)', () => {
     }
   })
 })
+
+describe('resolveFeaturedImage helper', () => {
+  const publicOptimized = path.join(process.cwd(), 'public', 'optimized')
+  beforeAll(() => {
+    if (!fs.existsSync(publicOptimized)) fs.mkdirSync(publicOptimized, { recursive: true })
+  })
+  afterAll(() => {
+    const files = ['img.avif', 'sample.webp']
+    files.forEach((f) => {
+      const p = path.join(publicOptimized, f)
+      if (fs.existsSync(p)) fs.unlinkSync(p)
+    })
+  })
+
+  // import the helper from the page module (already compiled in test env)
+  const { resolveFeaturedImage } = require('../[slug]/page')
+
+  it('returns undefined for undefined input', () => {
+    expect(resolveFeaturedImage(undefined)).toBeUndefined()
+  })
+
+  it('returns absolute URLs unchanged', () => {
+    const url = 'https://example.com/image.png'
+    expect(resolveFeaturedImage(url)).toBe(url)
+  })
+
+  it('prefers avif when present', () => {
+    const avif = path.join(publicOptimized, 'img.avif')
+    fs.writeFileSync(avif, 'avif')
+    const result = resolveFeaturedImage('/images/img.png', 'https://site.test')
+    expect(result).toBe('https://site.test/optimized/img.avif')
+    fs.unlinkSync(avif)
+  })
+
+  it('falls back to webp if avif missing', () => {
+    const webp = path.join(publicOptimized, 'sample.webp')
+    fs.writeFileSync(webp, 'webp')
+    const result = resolveFeaturedImage('/images/sample.png', 'https://site.test')
+    expect(result).toBe('https://site.test/optimized/sample.webp')
+    fs.unlinkSync(webp)
+  })
+
+  it('falls back to original if no optimized present', () => {
+    const result = resolveFeaturedImage('/images/missing.png', 'https://site.test')
+    expect(result).toBe('https://site.test/images/missing.png')
+  })
+})

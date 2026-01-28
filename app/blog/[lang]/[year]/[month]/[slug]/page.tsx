@@ -33,6 +33,28 @@ type Params = {
   slug: string
 }
 
+// Helper made exportable for unit testing: resolve featured image path
+export function resolveFeaturedImage(imgPath: string | undefined, baseUrl?: string) {
+  if (!imgPath) return undefined
+  // if already absolute, return as-is
+  if (/^https?:\/\//.test(imgPath)) return imgPath
+
+  const basename = path.basename(imgPath)
+  const optimizedAvif = `optimized/${basename.replace(path.extname(basename), '.avif')}`
+  const optimizedWebp = `optimized/${basename.replace(path.extname(basename), '.webp')}`
+
+  const avifPath = path.join(process.cwd(), 'public', optimizedAvif)
+  const webpPath = path.join(process.cwd(), 'public', optimizedWebp)
+
+  const base = baseUrl || process.env.NEXT_PUBLIC_SITE_URL || 'https://gustavotsuji.github.io'
+
+  if (fs.existsSync(avifPath)) return `${base}/${optimizedAvif}`
+  if (fs.existsSync(webpPath)) return `${base}/${optimizedWebp}`
+
+  // fallback to original image (assume it's served under site root)
+  return `${base}${imgPath}`
+}
+
 export default async function BlogPostPage(props: { params: Params | Promise<Params> }) {
   // Next App Router may provide `params` as a Promise in some runtime modes;
   // unwrap it before accessing properties as the framework requires.

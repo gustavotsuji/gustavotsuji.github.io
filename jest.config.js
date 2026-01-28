@@ -11,6 +11,7 @@ const customJestConfig = {
   testEnvironment: 'jest-environment-jsdom',
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/$1',
+    '^react-markdown$': '<rootDir>/__mocks__/react-markdown.js',
   },
   collectCoverageFrom: [
     // Ensure new components/pages/libs are included in coverage
