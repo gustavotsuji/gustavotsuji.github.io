@@ -25,6 +25,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className="scroll-smooth">
+      <head>
+        {/* Global language metadata to help user agents and TTS */}
+        <meta httpEquiv="Content-Language" content="en" />
+        <meta name="language" content="en" />
+      </head>
       <body className={`${inter.className} bg-gray-50`}>
         {/* Preconnects for fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
