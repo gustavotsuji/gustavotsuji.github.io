@@ -114,12 +114,17 @@ export default async function BlogPostPage(props: { params: Params | Promise<Par
     mainEntityOfPage: { '@type': 'WebPage', '@id': postUrl },
     image: featuredImageUrl || undefined,
   }
+  // determine text direction from language (defaults to ltr)
+  const dir = ['ar', 'he', 'fa', 'ur'].includes(lang) ? 'rtl' : 'ltr'
 
   return (
     <>
       {/* Head meta */}
       <head>
         <title>{data.title}</title>
+        {/* Inform the language of the page for user agents and TTS */}
+        <meta httpEquiv="Content-Language" content={lang} />
+        <meta name="language" content={lang} />
         <meta name="description" content={data.excerpt || ''} />
         <link rel="canonical" href={postUrl} />
         {/* hreflang alternatives - adjust languages you support */}
@@ -148,7 +153,7 @@ export default async function BlogPostPage(props: { params: Params | Promise<Par
       {featuredImageUrl && <link rel="preload" as="image" href={featuredImageUrl} />}
 
       {/* use the site header-aware utility so padding/scroll-margin track the header height */}
-      <article className="prose mx-auto with-header">
+      <article lang={lang} dir={dir} className="prose mx-auto with-header">
         <h1>{data.title}</h1>
         <p className="text-sm text-gray-500 mb-4">
           {data.date} • {data.author}
