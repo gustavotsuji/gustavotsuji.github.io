@@ -1,4 +1,3 @@
-```markdown
 ---
 title: 'Zero Downtime and Cloud Savings: How Blue/Green Deployment on RDS Saved Our Budget'
 date: '2026-01-26'
@@ -83,4 +82,3 @@ Using Blue/Green turned a risky, critical maintenance into a repeatable, safe pr
 ---
 
 _This article is based on real learnings about database migrations and cloud cost optimization._
-```
