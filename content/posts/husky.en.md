@@ -6,8 +6,6 @@ tags: ['Husky', 'Git', 'CI/CD', 'Shift-Left', 'DevOps', 'Quality Assurance']
 author: 'Gustavo Tsuji'
 ---
 
-# Stop Breaking the Pipeline: How "Shift-Left" and Husky Can Save Your Day (and the Company's Budget)
-
 Who hasn't been there: you finish a feature, open the Pull Request and anxiously wait for the green check from the pipeline. Ten minutes later, the CI fails. Why? A simple lint error or a Sonar validation that could have been fixed in seconds on your machine.
 
 Beyond frustration, this causes many CI runs (GitHub Actions or similar), increasing costs and wasting compute resources. Worse: every trivial fix requires a new push, restarting the pipeline and invalidating approvals already given in the Code Review.

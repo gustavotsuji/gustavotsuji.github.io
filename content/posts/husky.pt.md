@@ -6,8 +6,6 @@ tags: ['Husky', 'Git', 'CI/CD', 'Shift-Left', 'DevOps', 'Quality Assurance']
 author: 'Gustavo Tsuji'
 ---
 
-# Pare de quebrar o Pipeline: Como o "Shift-Left" e o Husky podem salvar o seu dia (e o orçamento da empresa)
-
 Quem nunca passou por isso: você finaliza uma feature, abre o Pull Request e espera ansiosamente pelo _green check_ do pipeline. Dez minutos depois, o CI falha. Motivo? Um erro simples de lint ou uma validação do Sonar que poderia ter sido resolvida em segundos na sua máquina.
 
 Além da frustração, isso gera um alto volume de execuções no GitHub Actions (ou similar), elevando custos e desperdiçando recursos computacionais. Pior ainda: cada correção trivial exige um novo push, reiniciando a esteira e invalidando aprovações já obtidas no Code Review.
