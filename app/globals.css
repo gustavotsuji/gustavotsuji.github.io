@@ -194,6 +194,11 @@ a {
   quotes: "\201C""\201D""\2018""\2019";
 }
 
+/* Callout variant for TL;DR / Quickstart / Resources
+   Use blockquotes in markdown to create these callouts. They will receive
+   a soft background, left accent and padding to visually separate them. */
+
+
 .prose blockquote p:first-of-type::before {
   content: open-quote;
 }
@@ -289,6 +294,9 @@ a {
     color: #9ca3af;
     border-left-color: #3b82f6;
   }
+
+  /* Dark-mode adjustments for callouts: subtle tint + lighter accent */
+  /* callout styles removed per user request */
 
   .prose hr {
     border-color: #374151;

@@ -1,5 +1,5 @@
-import fs from 'fs'
-import path from 'path'
+import fs from 'node:fs'
+import path from 'node:path'
 import matter from 'gray-matter'
 // Gera todos os caminhos possíveis para exportação estática
 export async function generateStaticParams() {
@@ -25,6 +25,7 @@ import React from 'react'
 import ReactMarkdown from 'react-markdown'
 import MarkdownImage from '@/components/MarkdownImage'
 import type { Components } from 'react-markdown'
+import type { Metadata } from 'next'
 
 type Params = {
   lang: string
@@ -55,6 +56,60 @@ export function resolveFeaturedImage(imgPath: string | undefined, baseUrl?: stri
   return `${base}${imgPath}`
 }
 
+// Per-page metadata for the App Router (avoids rendering <head> inside the component)
+export async function generateMetadata({
+  params,
+}: {
+  params: Params | Promise<Params>
+}): Promise<Metadata> {
+  try {
+    // `params` may be a Promise in some Next.js runtime modes; unwrap it.
+    const { lang, year, month, slug } = await params
+    const fileName = `${slug}.${lang}.md`
+    const filePath = path.join(process.cwd(), 'content', 'posts', fileName)
+    if (!fs.existsSync(filePath)) return {}
+    const fileContent = fs.readFileSync(filePath, 'utf8')
+    const { data } = matter(fileContent)
+
+    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gustavotsuji.github.io'
+    const postUrl = `${baseUrl}/blog/${lang}/${year}/${month}/${slug}`
+    const featuredImageUrl = resolveFeaturedImage(data.image)
+
+    const title = data.title || ''
+    const description = data.excerpt || data.description || ''
+
+    return {
+      title,
+      description,
+      alternates: {
+        canonical: postUrl,
+        languages: {
+          [lang]: postUrl,
+        },
+      },
+      openGraph: {
+        title,
+        description,
+        url: postUrl,
+        type: 'article',
+        publishedTime: data.date,
+        images: featuredImageUrl ? [{ url: featuredImageUrl }] : undefined,
+      },
+      twitter: {
+        card: 'summary_large_image',
+        title,
+        description,
+        images: featuredImageUrl ? [featuredImageUrl] : undefined,
+      },
+    }
+  } catch (e) {
+    // Log the error for diagnostics and return empty metadata so the page still renders
+
+    console.error('generateMetadata error:', e)
+    return {}
+  }
+}
+
 export default async function BlogPostPage(props: { params: Params | Promise<Params> }) {
   // Next App Router may provide `params` as a Promise in some runtime modes;
   // unwrap it before accessing properties as the framework requires.
@@ -78,30 +133,8 @@ export default async function BlogPostPage(props: { params: Params | Promise<Par
     notFound()
   }
 
-  // metadata for head (App Router supports generateMetadata as a separate export,
-  // but here we return per-page metadata via in-component Metadata API by constructing head tags)
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://gustavotsuji.github.io'
   const postUrl = `${baseUrl}/blog/${lang}/${year}/${month}/${slug}`
-  // Prefer optimized versions (avif/webp) under public/optimized when available
-  const resolveFeaturedImage = (imgPath: string | undefined) => {
-    if (!imgPath) return undefined
-    // if already absolute, return as-is
-    if (/^https?:\/\//.test(imgPath)) return imgPath
-
-    const basename = path.basename(imgPath)
-    const optimizedAvif = `optimized/${basename.replace(path.extname(basename), '.avif')}`
-    const optimizedWebp = `optimized/${basename.replace(path.extname(basename), '.webp')}`
-
-    const avifPath = path.join(process.cwd(), 'public', optimizedAvif)
-    const webpPath = path.join(process.cwd(), 'public', optimizedWebp)
-
-    if (fs.existsSync(avifPath)) return `${baseUrl}/${optimizedAvif}`
-    if (fs.existsSync(webpPath)) return `${baseUrl}/${optimizedWebp}`
-
-    // fallback to original image (assume it's served under site root)
-    return `${baseUrl}${imgPath}`
-  }
-
   const featuredImageUrl = resolveFeaturedImage(data.image)
 
   const jsonLd = {
@@ -119,30 +152,6 @@ export default async function BlogPostPage(props: { params: Params | Promise<Par
 
   return (
     <>
-      {/* Head meta */}
-      <head>
-        <title>{data.title}</title>
-        {/* Inform the language of the page for user agents and TTS */}
-        <meta httpEquiv="Content-Language" content={lang} />
-        <meta name="language" content={lang} />
-        <meta name="description" content={data.excerpt || ''} />
-        <link rel="canonical" href={postUrl} />
-        {/* hreflang alternatives - adjust languages you support */}
-        <link rel="alternate" hrefLang={lang} href={postUrl} />
-        <link rel="alternate" hrefLang="x-default" href={postUrl} />
-
-        {/* Open Graph */}
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={data.title} />
-        <meta property="og:description" content={data.excerpt || ''} />
-        {featuredImageUrl && <meta property="og:image" content={featuredImageUrl} />}
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content={data.title} />
-        <meta name="twitter:description" content={data.excerpt || ''} />
-      </head>
-
       {/* JSON-LD */}
       <script
         type="application/ld+json"
@@ -158,10 +167,39 @@ export default async function BlogPostPage(props: { params: Params | Promise<Par
         <p className="text-sm text-gray-500 mb-4">
           {data.date} • {data.author}
         </p>
-        <ReactMarkdown components={{ img: MarkdownImage as unknown as Components['img'] }}>
+        <ReactMarkdown
+          components={{
+            img: MarkdownImage as unknown as Components['img'],
+            div: DivRenderer,
+          }}
+        >
           {content}
         </ReactMarkdown>
       </article>
     </>
+  )
+}
+
+// Top-level renderer moved out of the React component to satisfy lint rules
+type DivRendererProps = React.HTMLAttributes<HTMLDivElement> & { node?: unknown }
+
+function DivRenderer(props: DivRendererProps) {
+  const { className, children, ...rest } = props
+  const classes = (className || '').split(/\s+/)
+  if (classes.includes('callout')) {
+    // Render as a semantic container when markdown contains callout HTML
+    // (we intentionally render a plain div so styling from `.callout` in CSS applies)
+    return (
+      <div className={className} {...(rest as React.HTMLAttributes<HTMLDivElement>)}>
+        {children}
+      </div>
+    )
+  }
+
+  // default div rendering
+  return (
+    <div className={className} {...(rest as React.HTMLAttributes<HTMLDivElement>)}>
+      {children}
+    </div>
   )
 }
