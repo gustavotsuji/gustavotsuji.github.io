@@ -10,7 +10,25 @@
     <loc>https://gustavotsuji.github.io/about</loc>
   </url>
   <url>
+    <loc>https://gustavotsuji.github.io/blog/en/2026/01/blue-green-rds</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/ja/2026/01/blue-green-rds</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/pt/2026/01/blue-green-rds</loc>
+  </url>
+  <url>
     <loc>https://gustavotsuji.github.io/blog/en/2024/02/circuit-breakers-nodejs</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/en/2026/01/husky</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/ja/2026/01/husky</loc>
+  </url>
+  <url>
+    <loc>https://gustavotsuji.github.io/blog/pt/2026/01/husky</loc>
   </url>
   <url>
     <loc>https://gustavotsuji.github.io/blog/en/2024/03/optimizing-aws-costs</loc>
