@@ -8,12 +8,6 @@ author: 'Gustavo Tsuji'
 
 # Zero Downtime e Economia na Nuvem: Como o Blue/Green Deployment no RDS salvou nosso orçamento
 
-TL;DR
-
-- Usamos Blue/Green Deployment no AWS RDS para migrar e downsizar um PostgreSQL com zero downtime percep­tível.
-- Resultado: redução de custos estimada em $425/mês; requisito: janela de baixa atividade, snapshots e testes de integridade.
-- Pré-requisitos: snapshot manual, validar extensões (ex.: PostGIS), checar TTL de DNS e estratégia de reconexão para pools.
-
 Quem trabalha com bancos de dados em produção conhece o frio na barriga de realizar manutenções críticas. Recentemente, nos deparamos com um cenário comum, mas desafiador: precisávamos atualizar e redimensionar um banco de dados PostgreSQL vital, que recebia centenas de operações por minuto, sem impactar a experiência do usuário.
 
 O cenário era o seguinte: nossa base de dados (o _taffarel_) estava subutilizada. Análises mostraram que poderíamos reduzir a CPU pela metade, migrando de uma instância `r6g.4xlarge` para `x2g.2xlarge`, gerando uma **economia mensal de $425**.
