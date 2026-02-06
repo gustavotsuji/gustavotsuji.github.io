@@ -3,14 +3,16 @@ export default function Contact() {
     <section id="contact" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="container mx-auto px-4">
         <div className="max-w-3xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-8">Get In Touch</h2>
+          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-8">
+            Get In Touch
+          </h2>
 
-          <p className="text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto px-4">
             I'm always interested in discussing new opportunities, challenging projects, or
             potential collaborations. Feel free to connect with me!
           </p>
 
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-6">
+          <div className="flex flex-col sm:flex-row justify-center items-stretch gap-6 max-w-lg mx-auto">
             <a
               href="https://www.linkedin.com/in/gustavo-tsuji-7100462b"
               target="_blank"

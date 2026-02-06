@@ -15,43 +15,39 @@ export default function BlogPreviewClient({
   setLang,
 }: BlogPreviewClientProps) {
   const languages = [
-    { code: 'pt', label: 'Português' },
-    { code: 'en', label: 'English' },
-    { code: 'es', label: 'Español' },
-    { code: 'ja', label: '日本語' },
-    { code: 'fr', label: 'Français' },
+    { code: 'pt', label: 'Português', short: 'PT' },
+    { code: 'en', label: 'English', short: 'EN' },
+    { code: 'es', label: 'Español', short: 'ES' },
+    { code: 'ja', label: '日本語', short: 'JA' },
+    { code: 'fr', label: 'Français', short: 'FR' },
   ]
 
   return (
     <section id="blog" className="py-20 bg-white dark:bg-gray-900">
       <div className="container mx-auto px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="flex justify-end mb-6">
+          <div className="mb-6 -mx-4 px-4 sm:mx-0 sm:px-0">
             {setLang && (
-              <div className="flex gap-2">
-                {languages.map((l) => (
-                  <button
-                    key={l.code}
-                    aria-pressed={selectedLang === l.code}
-                    className={`px-3 py-1 rounded text-sm font-medium border transition-colors ${selectedLang === l.code ? 'bg-primary-600 text-white border-primary-600' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700 hover:bg-primary-100 dark:hover:bg-primary-900/30'}`}
-                    onClick={() => setLang?.(l.code)}
-                  >
-                    {l.label}
-                  </button>
-                ))}
+              <div className="overflow-x-auto pb-2 scrollbar-hide">
+                <div className="flex gap-2 justify-start sm:justify-end min-w-max sm:min-w-0">
+                  {languages.map((l) => (
+                    <button
+                      key={l.code}
+                      aria-pressed={selectedLang === l.code}
+                      aria-label={l.label}
+                      className={`px-3 py-2 rounded text-sm font-medium border transition-colors whitespace-nowrap flex-shrink-0 ${selectedLang === l.code ? 'bg-primary-600 text-white border-primary-600' : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700 hover:bg-primary-100 dark:hover:bg-primary-900/30'}`}
+                      onClick={() => setLang?.(l.code)}
+                    >
+                      <span className="hidden sm:inline">{l.label}</span>
+                      <span className="sm:hidden">{l.short}</span>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
           </div>
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-              Latest Articles
-            </h2>
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              Thoughts on software engineering, cloud architecture, and technical leadership
-            </p>
-          </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+          <div className="space-y-6 mb-12">
             {posts.map((post) => {
               const dateIso =
                 typeof post.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(post.date)
@@ -75,21 +71,33 @@ export default function BlogPreviewClient({
               return (
                 <article
                   key={post.slug}
-                  className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
+                  className="bg-gray-50 dark:bg-gray-800 rounded-lg overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1 border border-transparent hover:border-primary-200 dark:hover:border-primary-800"
                 >
                   <div className="p-6">
-                    <div className="flex flex-wrap gap-2 mb-3">
-                      {post.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium"
-                        >
-                          {tag}
-                        </span>
-                      ))}
+                    <div className="flex items-start justify-between gap-4 mb-3">
+                      <div className="flex flex-wrap gap-2 flex-1">
+                        {post.tags.map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 bg-primary-100 dark:bg-primary-900/30 text-primary-700 dark:text-primary-300 rounded text-xs font-medium"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      <time
+                        dateTime={post.date}
+                        className="text-sm text-gray-500 dark:text-gray-400 whitespace-nowrap"
+                      >
+                        {new Date(post.date).toLocaleDateString('en-US', {
+                          year: 'numeric',
+                          month: 'short',
+                          day: 'numeric',
+                        })}
+                      </time>
                     </div>
 
-                    <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
                       {post.date ? (
                         <Link href={safeHref}>{post.title}</Link>
                       ) : (
@@ -97,24 +105,30 @@ export default function BlogPreviewClient({
                       )}
                     </h3>
 
-                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">
+                    <p className="text-gray-600 dark:text-gray-400 mb-4 line-clamp-2 text-base">
                       {post.excerpt}
                     </p>
 
-                    <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-500">
-                      <time dateTime={post.date}>
-                        {new Date(post.date).toLocaleDateString('en-US', {
-                          year: 'numeric',
-                          month: 'long',
-                          day: 'numeric',
-                        })}
-                      </time>
+                    <div className="flex items-center justify-end">
                       {post.date ? (
                         <Link
                           href={safeHref}
-                          className="text-primary-600 dark:text-primary-400 hover:underline font-medium"
+                          className="text-primary-600 dark:text-primary-400 hover:underline font-medium inline-flex items-center gap-1"
                         >
-                          Read more →
+                          Read more
+                          <svg
+                            className="w-4 h-4"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth={2}
+                              d="M9 5l7 7-7 7"
+                            />
+                          </svg>
                         </Link>
                       ) : null}
                     </div>
