@@ -23,6 +23,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f9fafb !important;
   color: #111827 !important;
+  overflow-x: hidden;
+}
+
+/* Prevent horizontal overflow globally */
+html {
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 /* Custom scrollbar */
@@ -41,11 +52,6 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
-}
-
-/* Smooth scrolling */
-html {
-  scroll-behavior: smooth;
 }
 
 /* Header height variable and utility
@@ -83,6 +89,31 @@ a {
   max-width: 65ch;
   color: #4b5563;
   line-height: 1.75;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  width: 100%;
+}
+
+/* Ensure prose doesn't overflow on small screens */
+@media (max-width: 640px) {
+  .prose {
+    max-width: 100%;
+  }
+  
+  .prose h1 {
+    font-size: 1.875rem; /* 30px instead of 2.25em */
+    line-height: 2.25rem;
+  }
+  
+  .prose h2 {
+    font-size: 1.5rem; /* 24px instead of 1.875em */
+    line-height: 2rem;
+  }
+  
+  .prose h3 {
+    font-size: 1.25rem; /* 20px instead of 1.5em */
+    line-height: 1.75rem;
+  }
 }
 
 .prose p {
@@ -147,6 +178,18 @@ a {
   overflow-x: auto;
   margin-top: 1.75em;
   margin-bottom: 1.75em;
+  max-width: 100%;
+}
+
+/* Mobile adjustments for code blocks */
+@media (max-width: 640px) {
+  .prose pre {
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+    padding: 0.75rem;
+    font-size: 0.875rem;
+  }
 }
 
 .prose code {
@@ -181,6 +224,21 @@ a {
   margin-bottom: 2em;
   border-radius: 0.5rem;
   box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  height: auto;
+}
+
+/* Mobile image adjustments */
+@media (max-width: 640px) {
+  .prose img {
+    margin-top: 1.5em;
+    margin-bottom: 1.5em;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    border-radius: 0;
+    width: calc(100% + 2rem);
+    max-width: calc(100% + 2rem);
+  }
 }
 
 .prose blockquote {
@@ -231,6 +289,22 @@ a {
   text-align: left;
   margin-top: 2em;
   margin-bottom: 2em;
+  overflow-x: auto;
+  display: block;
+}
+
+/* Mobile table adjustments */
+@media (max-width: 640px) {
+  .prose table {
+    font-size: 0.875rem;
+    margin-left: -1rem;
+    margin-right: -1rem;
+  }
+  
+  .prose thead th,
+  .prose tbody td {
+    padding: 0.5rem;
+  }
 }
 
 .prose thead {
@@ -329,4 +403,15 @@ a {
 
 .animate-fade-in {
   animation: fade-in 0.6s ease-out;
+}
+
+/* Hide scrollbar utility for language selector */
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

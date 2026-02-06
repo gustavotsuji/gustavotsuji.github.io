@@ -82,6 +82,9 @@
     ]
   },
   "resolutions": {
-    "tmp": "0.2.5"
+    "tmp": "0.2.5",
+    "glob": "^11.0.0",
+    "rimraf": "^6.0.0",
+    "whatwg-encoding": "^3.1.1"
   }
 }
