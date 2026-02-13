@@ -13,6 +13,7 @@ const customJestConfig = {
     '^@/(.*)$': '<rootDir>/$1',
     '^react-markdown$': '<rootDir>/__mocks__/react-markdown.js',
   },
+  coverageProvider: 'v8',
   collectCoverageFrom: [
     // Ensure new components/pages/libs are included in coverage
     'components/HeaderClient.{ts,tsx}',
