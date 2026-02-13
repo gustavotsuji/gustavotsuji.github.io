@@ -9,7 +9,9 @@ interface Language {
 
 interface LanguageSelectorProps {
   readonly selectedLang?: string
-  readonly onSelectLang?: React.Dispatch<React.SetStateAction<string>>
+  // Handler that accepts language code and updates the language
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  readonly onSelectLang?: any
 }
 
 const LANGUAGES: Language[] = [
