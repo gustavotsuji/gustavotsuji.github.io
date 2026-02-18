@@ -16,6 +16,8 @@ export interface Post {
   content: string
 }
 
+const isPost = (post: Post | null): post is Post => post !== null
+
 export function getAllPosts(): Post[] {
   if (!fs.existsSync(postsDirectory)) {
     return []
@@ -64,7 +66,7 @@ export function getAllPosts(): Post[] {
         content,
       }
     })
-    .filter(Boolean)
+    .filter(isPost)
 
   // Sort posts by date (newest first)
   return allPosts.sort((a, b) => {
