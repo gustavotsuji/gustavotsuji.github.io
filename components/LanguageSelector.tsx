@@ -9,9 +9,8 @@ interface Language {
 
 interface LanguageSelectorProps {
   readonly selectedLang?: string
-  // Handler that accepts language code and updates the language
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  readonly onSelectLang?: any
+  // Handler that accepts the language code and updates the selection
+  readonly onSelectLang?: React.Dispatch<string>
 }
 
 const LANGUAGES: Language[] = [
@@ -33,7 +32,7 @@ export default function LanguageSelector({ selectedLang, onSelectLang }: Languag
             key={lang.code}
             aria-pressed={selectedLang === lang.code}
             aria-label={lang.label}
-            className={`px-3 py-2 rounded text-sm font-medium border transition-colors whitespace-nowrap flex-shrink-0 ${
+            className={`px-3 py-2 rounded text-sm font-medium border transition-colors whitespace-nowrap shrink-0 ${
               selectedLang === lang.code
                 ? 'bg-primary-600 text-white border-primary-600'
                 : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700 hover:bg-primary-100 dark:hover:bg-primary-900/30'

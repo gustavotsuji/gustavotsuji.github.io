@@ -12,7 +12,9 @@ export async function generateStaticParams() {
       if (!slugMatch) return null
       const slug = slugMatch[1]
       const lang = slugMatch[2]
-      const fileContent = fs.readFileSync(path.join(postsDir, file), 'utf8')
+      const fullPath = path.join(postsDir, file)
+      if (!fs.existsSync(fullPath)) return null
+      const fileContent = fs.readFileSync(fullPath, 'utf8')
       const { data } = matter(fileContent)
       if (!data.date) return null
       const [year, month] = data.date.split('-')

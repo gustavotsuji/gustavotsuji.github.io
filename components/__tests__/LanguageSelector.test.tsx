@@ -89,7 +89,7 @@ describe('LanguageSelector', () => {
     render(<LanguageSelector selectedLang="en" onSelectLang={mockOnSelectLang} />)
 
     const ptButton = screen.getByRole('button', { name: /português/i })
-    const ptLabel = ptButton.querySelector('.hidden.sm\\:inline')
+    const ptLabel = ptButton.querySelector(String.raw`.hidden.sm\:inline`)
 
     expect(ptLabel).toHaveTextContent('Português')
   })
@@ -106,9 +106,9 @@ describe('LanguageSelector', () => {
   })
 
   it('supports both callback and dispatch function handlers', () => {
-    const dispatchMock = jest.fn()
+    const dispatchMock: React.Dispatch<string> = jest.fn()
 
-    render(<LanguageSelector selectedLang="en" onSelectLang={dispatchMock as any} />)
+    render(<LanguageSelector selectedLang="en" onSelectLang={dispatchMock} />)
 
     const jaButton = screen.getByRole('button', { name: /日本語/i })
     fireEvent.click(jaButton)

@@ -2,7 +2,7 @@ import Link from 'next/link'
 import type { Post } from '@/lib/posts'
 
 interface BlogPostCardProps {
-  post: Post
+  readonly post: Post
 }
 
 const getPostHref = (post: Post): string | null => {
