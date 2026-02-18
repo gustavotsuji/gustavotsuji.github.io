@@ -24,7 +24,7 @@ export function getAllPosts(): Post[] {
   }
 
   const fileNames = fs.readdirSync(postsDirectory)
-  const allPosts = fileNames
+  const postsOrNull = fileNames
     .filter((fileName) => fileName.endsWith('.md'))
     .map((fileName) => {
       const slug = fileName.replace(/\.md$/, '')
@@ -66,7 +66,8 @@ export function getAllPosts(): Post[] {
         content,
       }
     })
-    .filter(isPost)
+
+  const allPosts = postsOrNull.filter(isPost) as Post[]
 
   // Sort posts by date (newest first)
   return allPosts.sort((a, b) => {
