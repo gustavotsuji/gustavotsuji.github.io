@@ -27,6 +27,9 @@ export function getAllPosts(): Post[] {
     .map((fileName) => {
       const slug = fileName.replace(/\.md$/, '')
       const fullPath = path.join(postsDirectory, fileName)
+      if (!fs.existsSync(fullPath)) {
+        return null
+      }
       const fileContents = fs.readFileSync(fullPath, 'utf8')
       const { data, content } = matter(fileContents)
 
@@ -61,6 +64,7 @@ export function getAllPosts(): Post[] {
         content,
       }
     })
+    .filter((post): post is Post => Boolean(post))
 
   // Sort posts by date (newest first)
   return allPosts.sort((a, b) => {
