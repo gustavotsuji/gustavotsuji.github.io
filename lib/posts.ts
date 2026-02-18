@@ -16,7 +16,7 @@ export interface Post {
   content: string
 }
 
-const isPost = (post: Post | null): post is Post => Boolean(post)
+const isPost = (post: Post | null): post is Post => post !== null
 
 export function getAllPosts(): Post[] {
   if (!fs.existsSync(postsDirectory)) {
