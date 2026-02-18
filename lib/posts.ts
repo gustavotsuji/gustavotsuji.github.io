@@ -64,7 +64,7 @@ export function getAllPosts(): Post[] {
         content,
       }
     })
-    .filter((post): post is Post => Boolean(post))
+    .filter(Boolean)
 
   // Sort posts by date (newest first)
   return allPosts.sort((a, b) => {
