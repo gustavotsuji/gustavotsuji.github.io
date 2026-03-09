@@ -41,7 +41,7 @@
   "devDependencies": {
     "@commitlint/cli": "^20.3.1",
     "@commitlint/config-conventional": "^20.3.1",
-    "@eslint/eslintrc": "^3.3.4",
+    "@eslint/eslintrc": "^3.3.5",
     "@lhci/cli": "^0.15.1",
     "@next/bundle-analyzer": "^16.1.6",
     "@tailwindcss/postcss": "^4.2.1",
