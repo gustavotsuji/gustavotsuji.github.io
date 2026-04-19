@@ -31,10 +31,10 @@
     "glob": "^13.0.6",
     "gray-matter": "^4.0.3",
     "minimatch": "10.2.5",
-    "next": "16.2.2",
+    "next": "^16.2.4",
     "next-mdx-remote": "6.0.0",
-    "react": "^19.2.3",
-    "react-dom": "^19.2.3",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^16.1.1",
     "rimraf": "^6.0.0"
@@ -44,21 +44,21 @@
     "@commitlint/config-conventional": "20.5.0",
     "@eslint/eslintrc": "3.3.5",
     "@lhci/cli": "^0.15.1",
-    "@next/bundle-analyzer": "16.2.2",
+    "@next/bundle-analyzer": "16.2.4",
     "@tailwindcss/postcss": "4.2.2",
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
-    "@types/node": "25.5.2",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.2.8",
     "@types/react-dom": "^19.2.3",
-    "@typescript-eslint/eslint-plugin": "8.58.0",
-    "@typescript-eslint/parser": "8.58.0",
-    "autoprefixer": "^10.4.27",
+    "@typescript-eslint/eslint-plugin": "^8.58.2",
+    "@typescript-eslint/parser": "^8.58.2",
+    "autoprefixer": "^10.5.0",
     "eslint": "9.39.4",
-    "eslint-config-next": "16.2.2",
+    "eslint-config-next": "16.2.4",
     "eslint-config-prettier": "^10.1.8",
     "gh-pages": "^6.3.0",
     "http-server": "^14.1.1",
@@ -66,11 +66,11 @@
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "lint-staged": "16.4.0",
-    "postcss": "^8.5.6",
-    "prettier": "^3.8.0",
+    "postcss": "^8.5.10",
+    "prettier": "^3.8.3",
     "tailwindcss": "4.2.2",
     "typescript": "^5.3.3",
-    "wait-on": "^9.0.3"
+    "wait-on": "^9.0.5"
   },
   "optionalDependencies": {
     "sharp": "^0.34.5"
@@ -95,6 +95,8 @@
     "brace-expansion": "^2.0.3",
     "whatwg-encoding": "^3.1.1",
     "minimatch": "^9.0.7",
-    "yauzl": "^3.2.1"
+    "yauzl": "^3.2.1",
+    "basic-ftp": "^5.3.0",
+    "follow-redirects": "^1.16.0"
   }
 }
