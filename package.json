@@ -27,7 +27,7 @@
   "dependencies": {
     "@tailwindcss/typography": "^0.5.19",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "date-fns": "^4.1.0",
+    "date-fns": "^4.2.1",
     "glob": "^13.0.6",
     "gray-matter": "^4.0.3",
     "minimatch": "10.2.5",
