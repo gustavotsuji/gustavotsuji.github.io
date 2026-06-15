@@ -25,7 +25,7 @@
     "postbuild": "node scripts/generate-sitemap.js"
   },
   "dependencies": {
-    "@tailwindcss/typography": "^0.5.19",
+    "@tailwindcss/typography": "^0.5.20",
     "@types/react-syntax-highlighter": "^15.5.13",
     "date-fns": "^4.1.0",
     "glob": "^13.0.6",
@@ -66,9 +66,9 @@
     "jest": "30.3.0",
     "jest-environment-jsdom": "30.3.0",
     "lint-staged": "16.4.0",
-    "postcss": "^8.5.10",
+    "postcss": "^8.5.15",
     "prettier": "^3.8.3",
-    "tailwindcss": "4.2.2",
+    "tailwindcss": "4.3.1",
     "typescript": "^5.3.3",
     "wait-on": "^9.0.5"
   },
