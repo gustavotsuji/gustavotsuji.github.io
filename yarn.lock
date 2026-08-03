@@ -2630,10 +2630,10 @@ basic-auth@^2.0.1:
   dependencies:
     safe-buffer "5.1.2"
 
-basic-ftp@^5.0.2, basic-ftp@^5.3.0:
-  version "5.3.1"
-  resolved "https://registry.yarnpkg.com/basic-ftp/-/basic-ftp-5.3.1.tgz#3148ee9af43c0522514a4f973fecb1d3cbb6d71e"
-  integrity sha512-bopVNp6ugyA150DDuZfPFdt1KZ5a94ZDiwX4hMgZDzF+GttD80lEy8kj98kbyhLXnPvhtIo93mdnLIjpCAeeOw==
+basic-ftp@^5.0.2, basic-ftp@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/basic-ftp/-/basic-ftp-6.0.2.tgz#0c085e2c87ce4a93a50a8350fab1db589743458f"
+  integrity sha512-R6+2Z0XWky9zW2iGyUC8OYG91rwSU+zWS1Iiai9lC31vC1nuHOUbBMeOG5yv5+oZOqnqKvggVkE+UbAoJWWuAg==
 
 body-parser@~1.20.5:
   version "1.20.6"
