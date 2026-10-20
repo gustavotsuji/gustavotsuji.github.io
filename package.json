@@ -102,6 +102,6 @@
     "minimatch": "^9.0.7",
     "yauzl": "^3.2.1",
     "basic-ftp": "^6.0.2",
-    "follow-redirects": "^1.16.0"
+    "follow-redirects": "^1.16.1"
   }
 }
